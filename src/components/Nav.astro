@@ -1,0 +1,92 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="cv2-nav">
+  <a href="/" class="cv2-nav-brand">
+    <div class="cv2-logo">M</div>
+    MogooStudio
+  </a>
+  <div class="cv2-nav-links">
+    <a href="/#minimalist-breakout" class:list={[{ active: currentPath === '/' }]}>Games</a>
+    <a href="/about" class:list={[{ active: currentPath === '/about' || currentPath === '/about/' }]}>About Us</a>
+    <a href="/support" class:list={[{ active: currentPath === '/support' || currentPath === '/support/' }]}>Support</a>
+  </div>
+</nav>
+
+<style>
+  .cv2-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #eee;
+  }
+
+  .cv2-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+    color: #222;
+  }
+
+  .cv2-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: #F2455C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    box-shadow: 0 4px 10px rgba(242,69,92,.35);
+    flex-shrink: 0;
+  }
+
+  .cv2-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .cv2-nav-links a {
+    font-family: "Poppins", sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #555;
+    letter-spacing: .2px;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color .2s;
+  }
+
+  .cv2-nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 2px;
+    background: #F2455C;
+    border-radius: 2px;
+    transition: width .25s;
+  }
+
+  .cv2-nav-links a:hover,
+  .cv2-nav-links a.active { color: #222; }
+  .cv2-nav-links a:hover::after,
+  .cv2-nav-links a.active::after { width: 100%; }
+
+  @media (max-width: 760px) {
+    .cv2-nav-links { display: none; }
+  }
+</style>

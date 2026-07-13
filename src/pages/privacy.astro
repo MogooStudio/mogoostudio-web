@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy Policy" description="MogooStudio Privacy Policy.">
+  <section class="page-hero">
+    <h1 class="page-title">Privacy Policy</h1>
+    <p class="updated">Last updated: June 1, 2026</p>
+  </section>
+
+  <section class="legal-body">
+    <div>
+      <h2>1. Scope</h2>
+      <p>This Privacy Policy explains how minimalistbreakout ("the Game", "we", "us", or "our") handles information when you use the Game.</p>
+      <p>By using the Game, you acknowledge that you have read and understood this Privacy Policy.</p>
+
+      <h2>2. Information We Collect</h2>
+      <p>minimalistbreakout is an offline single-player game. The current version does not include advertising SDKs, analytics SDKs, third-party login, cloud saves, online leaderboards, payment SDKs, or other third-party SDKs used to collect user data.</p>
+      <p>During normal gameplay, we do not actively collect, upload, share, or sell your personal information. The Game may store the following data locally on your device:</p>
+      <ul>
+        <li>Game progress, level records, high scores, and game settings.</li>
+        <li>Basic app data required for the Game to run on your device, such as app version and device environment information. This information is not actively uploaded by us.</li>
+        <li>Support information, only if you choose to contact us directly, such as your email address, issue description, and communication history.</li>
+      </ul>
+
+      <h2>3. How We Use Information</h2>
+      <p>We may use information only for the following purposes:</p>
+      <ul>
+        <li>To provide, maintain, and improve the Game experience.</li>
+        <li>To save game progress, high scores, and settings locally on your device.</li>
+        <li>To respond to support requests or feedback that you voluntarily send to us.</li>
+        <li>To comply with applicable laws, regulations, legal processes, or lawful government requests.</li>
+      </ul>
+
+      <h2>4. Third-Party Services</h2>
+      <p>The current version of minimalistbreakout does not use third-party advertising services, analytics services, third-party login services, payment services, cloud save services, or online leaderboard services.</p>
+      <p>If a future version adds any third-party service that may process user data, we will update this Privacy Policy and, where required by applicable law, request your consent.</p>
+
+      <h2>5. Sharing and Disclosure</h2>
+      <p>We do not sell your personal information. We may disclose information only when:</p>
+      <ul>
+        <li>You give us explicit permission.</li>
+        <li>It is necessary to respond to a support request that you initiated.</li>
+        <li>It is required by applicable law, regulation, court order, legal process, or lawful government request.</li>
+        <li>It is necessary to protect the rights, property, or safety of users, the public, or mogoostudio.</li>
+      </ul>
+
+      <h2>6. Data Storage and Security</h2>
+      <p>Game progress and settings are stored locally on your device. Because the current version does not provide accounts, cloud saves, or online services, we do not store your game progress on our servers.</p>
+      <p>If you contact us for support, we will keep your communication only as long as necessary to respond to your request and comply with legal obligations.</p>
+
+      <h2>7. Children's Privacy</h2>
+      <p>We do not knowingly collect personal information from children. If you are a minor, please use the Game with the consent and guidance of a parent or legal guardian.</p>
+      <p>If a parent or guardian believes that a child has provided us with personal information, please contact us. We will take reasonable steps to delete such information where required by applicable law.</p>
+
+      <h2>8. Your Choices and Rights</h2>
+      <p>Depending on your location, you may have the right to:</p>
+      <ul>
+        <li>Request access to, correction of, or deletion of information you provided to us.</li>
+        <li>Withdraw consent where processing is based on consent.</li>
+        <li>Delete local game data by uninstalling the Game or clearing the app data through your device settings.</li>
+      </ul>
+      <p>Since the current version does not provide an account system, cloud saves, or online services, we cannot identify individual players or retrieve locally stored game progress from your device.</p>
+
+      <h2>9. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in the Game, legal requirements, or operational needs. The updated policy will be posted on this page and will become effective when published.</p>
+
+      <h2>10. Contact Us</h2>
+      <p>If you have any questions, requests, or concerns about this Privacy Policy, please contact us at:</p>
+      <p>Email: <a href="mailto:mogoostudio@outlook.com">mogoostudio@outlook.com</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 72px 40px 56px;
+    text-align: center;
+    background: #f8f8f8;
+  }
+
+  .page-title {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #222;
+    margin-bottom: 12px;
+  }
+
+  .updated {
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    color: #999;
+  }
+
+  .legal-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+
+  .legal-body h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #222;
+    margin-top: 40px;
+    margin-bottom: 12px;
+  }
+
+  .legal-body h2:first-child { margin-top: 0; }
+
+  .legal-body p,
+  .legal-body li {
+    font-family: "Poppins", sans-serif;
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  .legal-body ul {
+    padding-left: 20px;
+    margin: 8px 0 16px;
+  }
+
+  .legal-body li { margin-bottom: 6px; }
+
+  .legal-body a { color: #F2455C; }
+  .legal-body a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .legal-body { padding: 40px 24px 60px; }
+  }
+</style>

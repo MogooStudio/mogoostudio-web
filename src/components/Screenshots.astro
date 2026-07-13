@@ -1,0 +1,97 @@
+---
+interface Props {
+  color: string;
+  screenshots?: string[];
+}
+
+const { color, screenshots = [] } = Astro.props;
+---
+
+<div class="cv2-shots-wrap">
+  <div class="cv2-shots">
+    {[0,1,2,3,4,5].map((i) => (
+      <div
+        class="cv2-shot"
+        style={`background:${color}${['55','77','99','cc','99','77'][i]};`}
+      >
+        {screenshots[i]
+          ? <img src={screenshots[i]} alt={`Screenshot ${i+1}`} loading="lazy" />
+          : <div class="ph">&#9654;</div>
+        }
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.cv2-shots').forEach((strip) => {
+    const cards = Array.from(strip.querySelectorAll<HTMLElement>('.cv2-shot'));
+
+    function activate(idx: number) {
+      cards.forEach((card, i) => {
+        const d = i - idx;
+        if (d === 0) card.setAttribute('data-card-state', 'focused');
+        else if (d === -1) card.setAttribute('data-card-state', 'neighbor-left');
+        else if (d === 1) card.setAttribute('data-card-state', 'neighbor-right');
+        else card.removeAttribute('data-card-state');
+      });
+    }
+
+    activate(2);
+    cards.forEach((card, i) => card.addEventListener('mouseenter', () => activate(i)));
+    strip.addEventListener('mouseleave', () => activate(2));
+  });
+</script>
+
+<style>
+  .cv2-shots-wrap { overflow: hidden; }
+
+  .cv2-shots {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 90px 70px 100px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .cv2-shots::-webkit-scrollbar { display: none; }
+
+  .cv2-shot {
+    flex: 0 0 140px;
+    height: 240px;
+    border-radius: 20px;
+    cursor: pointer;
+    opacity: .7;
+    transform: scale(.96);
+    transition: transform .35s cubic-bezier(.22,.68,0,1.2), opacity .25s, box-shadow .25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cv2-shot img { width: 100%; height: 100%; object-fit: cover; }
+
+  .ph { font-size: 28px; color: rgba(255,255,255,.55); }
+
+  .cv2-shot[data-card-state='focused'] {
+    opacity: 1 !important;
+    transform: scale(1.09) translateY(-12px) !important;
+    z-index: 5;
+    box-shadow: 0 20px 50px rgba(0,0,0,.18);
+  }
+
+  .cv2-shot[data-card-state='neighbor-right'] {
+    opacity: .85 !important;
+    transform: translateX(12px) rotate(2.5deg) !important;
+    z-index: 4;
+  }
+
+  .cv2-shot[data-card-state='neighbor-left'] {
+    opacity: .85 !important;
+    transform: translateX(-12px) rotate(-2.5deg) !important;
+    z-index: 4;
+  }
+</style>

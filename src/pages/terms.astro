@@ -1,0 +1,97 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Terms of Service" description="MogooStudio Terms of Service.">
+  <section class="page-hero">
+    <h1 class="page-title">Terms of Service</h1>
+    <p class="updated">Last updated: June 1, 2026</p>
+  </section>
+
+  <section class="legal-body">
+    <div>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By downloading, installing, or using any MogooStudio app, you agree to be bound by these Terms of Service.</p>
+
+      <h2>2. License to Use</h2>
+      <p>We grant you a personal, non-exclusive, non-transferable, revocable license to use our apps for your own personal, non-commercial purposes.</p>
+
+      <h2>3. Acceptable Use</h2>
+      <p>You agree not to reverse engineer, decompile, modify, or redistribute any part of our apps, or use them for any unlawful purpose.</p>
+
+      <h2>4. Intellectual Property</h2>
+      <p>All content, graphics, code, and trademarks within our apps are owned by MogooStudio or its licensors and are protected by intellectual property laws.</p>
+
+      <h2>5. No Warranty</h2>
+      <p>Our apps are provided "as is" without warranties of any kind, express or implied, including but not limited to fitness for a particular purpose.</p>
+
+      <h2>6. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, MogooStudio shall not be liable for any indirect, incidental, or consequential damages arising from your use of our apps.</p>
+
+      <h2>7. Updates and Changes</h2>
+      <p>We may update, modify, or discontinue any app or feature at any time without prior notice.</p>
+
+      <h2>8. Termination</h2>
+      <p>We reserve the right to terminate or suspend access to our apps if you violate these Terms.</p>
+
+      <h2>9. Governing Law</h2>
+      <p>These Terms are governed by applicable local law without regard to conflict-of-law principles.</p>
+
+      <h2>10. Contact Us</h2>
+      <p>Questions about these Terms? Reach out at <a href="mailto:mogoostudio@outlook.com">mogoostudio@outlook.com</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 72px 40px 56px;
+    text-align: center;
+    background: #f8f8f8;
+  }
+
+  .page-title {
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #222;
+    margin-bottom: 12px;
+  }
+
+  .updated {
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    color: #999;
+  }
+
+  .legal-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+
+  .legal-body h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #222;
+    margin-top: 40px;
+    margin-bottom: 12px;
+  }
+
+  .legal-body h2:first-child { margin-top: 0; }
+
+  .legal-body p,
+  .legal-body li {
+    font-family: "Poppins", sans-serif;
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  .legal-body a { color: #F2455C; }
+  .legal-body a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .legal-body { padding: 40px 24px 60px; }
+  }
+</style>

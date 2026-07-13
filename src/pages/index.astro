@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GameBlock from '../components/GameBlock.astro';
+---
+
+<BaseLayout title="Home" description="MogooStudio — Independent mobile game studio making small, satisfying games.">
+  <section class="cv2-hero">
+    <div class="cv2-blob cv2-blob-yellow"></div>
+    <div class="cv2-blob cv2-blob-teal"></div>
+    <div class="cv2-hero-inner">
+      <h1>
+        Small games.<br />
+        <span class="accent">Big fun.</span>
+      </h1>
+      <div class="cv2-num-strip">
+        <div class="cv2-num-item">
+          <span class="n">2</span>
+          <span class="l">Games</span>
+        </div>
+        <div class="cv2-num-sep"></div>
+        <div class="cv2-num-item">
+          <span class="n">1</span>
+          <span class="l">Studio</span>
+        </div>
+        <div class="cv2-num-sep"></div>
+        <div class="cv2-num-item">
+          <span class="n">∞</span>
+          <span class="l">Taps</span>
+        </div>
+      </div>
+      <div class="cv2-scroll-hint" id="scrollHint">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 6v16M7 16l7 7 7-7" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <GameBlock
+    id="minimalist-breakout"
+    variant="g1"
+    title="Minimalist Breakout"
+    description="A clean, distraction-free take on the timeless breakout formula. Pure gameplay, zero clutter. Built for mobile from the ground up."
+    accentColor="#29C4D9"
+    badgeActive={true}
+    appStoreUrl="https://apps.apple.com/us/app/minimalist-breakout/id6776583255"
+    icon="/icons/minimalist-breakout.png"
+    screenshots={[
+      '/screenshots/minimalist-breakout/1.png',
+      '/screenshots/minimalist-breakout/2.png',
+      '/screenshots/minimalist-breakout/3.png',
+      '/screenshots/minimalist-breakout/4.png',
+      '/screenshots/minimalist-breakout/5.png',
+      '/screenshots/minimalist-breakout/6.png',
+    ]}
+  />
+
+  <GameBlock
+    id="flappy-ball"
+    variant="g2"
+    title="Flappy Ball"
+    description="Dodge, weave, and soar through an ever-changing world. Easy to learn, impossible to put down. Coming to iOS & Android."
+    accentColor="#F2455C"
+    badgeActive={false}
+    icon="/icons/flappy-ball.png"
+    screenshots={[
+      '/screenshots/flappy-ball/01-menu.png',
+      '/screenshots/flappy-ball/02-gameplay.png',
+      '/screenshots/flappy-ball/03-combo.png',
+      '/screenshots/flappy-ball/04-skins.png',
+      '/screenshots/flappy-ball/05-wheel.png',
+      '/screenshots/flappy-ball/06-result.png',
+    ]}
+  />
+</BaseLayout>
+
+<style>
+  .cv2-hero {
+    position: relative;
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 60px 32px;
+  }
+
+  .cv2-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .45;
+    pointer-events: none;
+  }
+
+  .cv2-blob-yellow {
+    width: 420px; height: 420px;
+    background: #FFC93C;
+    top: -120px; left: -120px;
+  }
+
+  .cv2-blob-teal {
+    width: 380px; height: 380px;
+    background: #29C4D9;
+    top: -80px; right: -100px;
+    opacity: .35;
+  }
+
+  .cv2-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    max-width: 720px;
+  }
+
+  .cv2-hero-eyebrow {
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #888;
+    border: 1px solid #eee;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: rgba(255,255,255,.7);
+  }
+
+  .cv2-hero-inner h1 {
+    font-size: clamp(52px, 9vw, 96px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: #222;
+  }
+
+  .cv2-hero-inner h1 .accent { color: #F2455C; }
+
+  .cv2-hero-sub {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: #666;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  .cv2-num-strip {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255,255,255,.75);
+    border: 1px solid #eee;
+    border-radius: 20px;
+    padding: 20px 40px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    margin-top: 40px;
+  }
+
+  .cv2-num-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 32px;
+  }
+
+  .cv2-num-item .n {
+    font-size: 40px;
+    font-weight: 800;
+    color: #222;
+    line-height: 1;
+  }
+
+  .cv2-num-item .l {
+    font-family: "Poppins", sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .cv2-num-sep {
+    width: 1px;
+    height: 44px;
+    background: #eee;
+  }
+
+  .cv2-scroll-hint {
+    margin-top: 12px;
+    animation: cv2-bob 2s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes cv2-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  @media (max-width: 640px) {
+    .cv2-num-strip { padding: 16px 20px; }
+    .cv2-num-item { padding: 0 16px; }
+    .cv2-num-item .n { font-size: 30px; }
+  }
+</style>
+
+<script>
+  function smoothScrollTo(y: number, dur = 1100) {
+    const start = window.scrollY;
+    const diff = y - start;
+    let t0: number | null = null;
+    const ease = (t: number) =>
+      t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+    const step = (ts: number) => {
+      if (!t0) t0 = ts;
+      const p = Math.min((ts - t0) / dur, 1);
+      window.scrollTo(0, start + diff * ease(p));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const hint = document.getElementById('scrollHint');
+  if (hint) {
+    hint.addEventListener('click', () => {
+      const target = document.getElementById('minimalist-breakout');
+      if (target) smoothScrollTo(target.getBoundingClientRect().top + window.scrollY);
+    });
+  }
+</script>
