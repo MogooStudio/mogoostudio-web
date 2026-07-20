@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GameBlock from '../components/GameBlock.astro';
 ---
 
-<BaseLayout title="Home" description="MogooStudio — Independent mobile game studio making small, satisfying games.">
+<BaseLayout title="MogooStudio | Small games. Big fun." description="MogooStudio — Independent mobile game studio making small, satisfying games." rawTitle>
   <section class="cv2-hero">
     <div class="cv2-blob cv2-blob-yellow"></div>
     <div class="cv2-blob cv2-blob-teal"></div>
@@ -58,7 +58,7 @@ import GameBlock from '../components/GameBlock.astro';
   <GameBlock
     id="flappy-ball"
     variant="g2"
-    title="Flappy Ball"
+    title="Flappy Ball Hop"
     description="Dodge, weave, and soar through an ever-changing world. Easy to learn, impossible to put down. Coming to iOS & Android."
     accentColor="#F2455C"
     badgeActive={false}
@@ -72,6 +72,33 @@ import GameBlock from '../components/GameBlock.astro';
       '/screenshots/flappy-ball/06-result.png',
     ]}
   />
+
+  <section class="studio-section reveal">
+    <div class="studio-inner">
+      <div class="studio-header">
+        <span class="studio-eyebrow">Our Philosophy</span>
+        <h2>How we build games</h2>
+        <p>Small team, strong opinions. We care about the experience, not the metrics.</p>
+      </div>
+      <div class="studio-cards">
+        <div class="studio-card reveal">
+          <span class="card-num">01</span>
+          <h3>No energy systems</h3>
+          <p>Play as long as you want. No timers, no gates, no "come back in 4 hours." Just the game.</p>
+        </div>
+        <div class="studio-card reveal">
+          <span class="card-num">02</span>
+          <h3>Clean mechanics, polished to a shine</h3>
+          <p>One great mechanic beats ten mediocre ones. We iterate until it feels right.</p>
+        </div>
+        <div class="studio-card reveal">
+          <span class="card-num">03</span>
+          <h3>Ship small. Improve fast.</h3>
+          <p>We release when it's fun, not when it's feature-complete. Then we listen and keep going.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -114,11 +141,11 @@ import GameBlock from '../components/GameBlock.astro';
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    max-width: 720px;
+    max-width: 900px;
   }
 
   .cv2-hero-eyebrow {
-    font-family: "Poppins", sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 1.8px;
@@ -141,7 +168,7 @@ import GameBlock from '../components/GameBlock.astro';
   .cv2-hero-inner h1 .accent { color: #F2455C; }
 
   .cv2-hero-sub {
-    font-family: "Poppins", sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 16px;
     color: #666;
     line-height: 1.7;
@@ -177,7 +204,7 @@ import GameBlock from '../components/GameBlock.astro';
   }
 
   .cv2-num-item .l {
-    font-family: "Poppins", sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 11.5px;
     font-weight: 600;
     letter-spacing: .5px;
@@ -207,6 +234,109 @@ import GameBlock from '../components/GameBlock.astro';
     .cv2-num-item { padding: 0 16px; }
     .cv2-num-item .n { font-size: 30px; }
   }
+
+  .studio-section {
+    padding: 96px clamp(32px, 6vw, 100px);
+    background: var(--bg-light);
+  }
+
+  .studio-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .studio-header {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto 56px;
+  }
+
+  .studio-eyebrow {
+    display: inline-block;
+    font-family: "Nunito", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+
+  .studio-header h2 {
+    font-size: clamp(30px, 4.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .studio-header p {
+    font-family: "Nunito", sans-serif;
+    font-size: 15.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .studio-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .studio-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    transition: transform .25s, box-shadow .25s;
+  }
+
+  .studio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0,0,0,.08);
+  }
+
+  .card-num {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--red);
+    background: rgba(242,69,92,.1);
+    padding: 5px 12px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+
+  .studio-card h3 {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .studio-card p {
+    font-family: "Nunito", sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 860px) {
+    .studio-cards { grid-template-columns: 1fr; }
+    .studio-section { padding: 72px 24px; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
 
 <script>
@@ -232,4 +362,16 @@ import GameBlock from '../components/GameBlock.astro';
       if (target) smoothScrollTo(target.getBoundingClientRect().top + window.scrollY);
     });
   }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).style.transitionDelay = `${i * 80}ms`;
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>

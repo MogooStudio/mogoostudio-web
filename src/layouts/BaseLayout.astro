@@ -5,9 +5,11 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  rawTitle?: boolean;
 }
 
-const { title, description = 'MogooStudio — Independent mobile game studio.' } = Astro.props;
+const { title, description = 'MogooStudio — Independent mobile game studio.', rawTitle = false } = Astro.props;
+const pageTitle = rawTitle ? title : `${title} | MogooStudio`;
 ---
 
 <!DOCTYPE html>
@@ -16,10 +18,11 @@ const { title, description = 'MogooStudio — Independent mobile game studio.' }
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <title>{title} | MogooStudio</title>
+  <title>{pageTitle}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
   <Nav />
@@ -38,17 +41,18 @@ const { title, description = 'MogooStudio — Independent mobile game studio.' }
     --muted: #666;
     --border: #eee;
     --bg-light: #f8f8f8;
-    --nav-h: 63px;
+    --nav-h: 72px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: "Baloo 2", "Varela Round", "Segoe UI Rounded", sans-serif;
+    font-family: "Nunito", "Segoe UI Rounded", sans-serif;
     color: var(--text);
     background: #fff;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    padding-top: var(--nav-h);
   }
 
   a { color: inherit; text-decoration: none; }

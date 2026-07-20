@@ -8,12 +8,22 @@
         <div class="cv2-logo">M</div>
         <div class="name">MogooStudio</div>
       </div>
-      <p>An independent mobile game studio making small, satisfying games.</p>
+      <div class="cv2-footer-socials">
+        <a href="https://x.com/mogoostudio" target="_blank" rel="noopener" aria-label="X" class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.9l-5.4-7-6.2 7H1.3l7.7-8.8L1 2h7l4.9 6.4L18.9 2z"/></svg>
+        </a>
+        <a href="https://instagram.com/mogoostudio" target="_blank" rel="noopener" aria-label="Instagram" class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="https://youtube.com/@mogoostudio" target="_blank" rel="noopener" aria-label="YouTube" class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 6.2c-.2-1-1-1.8-2-2C18.7 3.7 12 3.7 12 3.7s-6.7 0-8.5.5c-1 .2-1.8 1-2 2C1 8 1 12 1 12s0 4 .5 5.8c.2 1 1 1.8 2 2 1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5c1-.2 1.8-1 2-2 .5-1.8.5-5.8.5-5.8s0-4-.5-5.8zM9.8 15.5V8.5l6 3.5-6 3.5z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="cv2-footer-col">
       <div class="hdr">Games</div>
       <a href="/#minimalist-breakout">Minimalist Breakout</a>
-      <a href="/#flappy-ball">Flappy Ball</a>
+      <a href="/#flappy-ball">Flappy Ball Hop</a>
     </div>
     <div class="cv2-footer-col">
       <div class="hdr">Studio</div>
@@ -22,13 +32,18 @@
     </div>
   </div>
   <div class="cv2-footer-bottom">
-    <span>© 2026 MogooStudio. All rights reserved.</span>
+    <span id="cv2Copyright">© 2026 MogooStudio. All rights reserved.</span>
     <div class="cv2-footer-legal">
       <a href="/privacy">Privacy Policy</a>
       <a href="/terms">Terms of Service</a>
     </div>
   </div>
 </footer>
+
+<script>
+  const el = document.getElementById('cv2Copyright');
+  if (el) el.textContent = `© ${new Date().getFullYear()} MogooStudio. All rights reserved.`;
+</script>
 
 <style>
   .cv2-footer {
@@ -56,51 +71,68 @@
   }
 
   .cv2-logo {
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
     background: #F2455C;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     font-weight: 800;
-    font-size: 15px;
+    font-size: 20px;
     flex-shrink: 0;
   }
 
   .cv2-footer-brand .name {
     font-weight: 800;
-    font-size: 18px;
-    margin-bottom: 8px;
+    font-size: 22px;
+    margin-bottom: 0;
   }
 
-  .cv2-footer-brand p {
-    font-family: "Poppins", sans-serif;
-    font-size: 13px;
-    color: #999;
-    line-height: 1.6;
-    margin: 0;
+  .cv2-footer-socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #252525;
+    border: 1px solid #333;
+    color: #ccc;
+    transition: color .2s, border-color .2s, background .2s;
+  }
+
+  .social-icon:hover {
+    color: #fff;
+    border-color: #F2455C;
+    background: #2a2a2a;
   }
 
   .cv2-footer-col { min-width: 140px; }
 
   .cv2-footer-col .hdr {
-    font-family: "Poppins", sans-serif;
-    font-size: 12px;
+    font-family: "Nunito", sans-serif;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: #777;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .cv2-footer-col a {
     display: block;
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
     color: #ddd;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     transition: color .2s;
   }
 
@@ -118,17 +150,17 @@
     gap: 12px;
   }
 
-  .cv2-footer-bottom span {
-    font-family: "Poppins", sans-serif;
-    font-size: 12.5px;
-    color: #777;
+  #cv2Copyright {
+    font-family: "Nunito", sans-serif;
+    font-size: 15px;
+    color: #999;
   }
 
   .cv2-footer-legal { display: flex; gap: 24px; }
 
   .cv2-footer-legal a {
-    font-family: "Poppins", sans-serif;
-    font-size: 12.5px;
+    font-family: "Nunito", sans-serif;
+    font-size: 15px;
     color: #999;
     transition: color .2s;
   }

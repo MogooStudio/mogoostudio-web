@@ -2,91 +2,239 @@
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="cv2-nav">
-  <a href="/" class="cv2-nav-brand">
-    <div class="cv2-logo">M</div>
-    MogooStudio
-  </a>
-  <div class="cv2-nav-links">
-    <a href="/#minimalist-breakout" class:list={[{ active: currentPath === '/' }]}>Games</a>
-    <a href="/about" class:list={[{ active: currentPath === '/about' || currentPath === '/about/' }]}>About Us</a>
-    <a href="/support" class:list={[{ active: currentPath === '/support' || currentPath === '/support/' }]}>Support</a>
+<header class="cv2-header" id="cv2Header">
+  <div class="cv2-container">
+    <a href="/" class="cv2-nav-brand">
+      <div class="cv2-logo">M</div>
+      <span class="brand-text">Mogoo<span class="accent">Studio</span></span>
+    </a>
+
+    <nav class="cv2-nav-links" aria-label="Primary">
+      <a href="/#minimalist-breakout" class:list={[{ active: currentPath === '/' }]}>Games</a>
+      <a href="/about" class:list={[{ active: currentPath === '/about' || currentPath === '/about/' }]}>About Us</a>
+      <a href="/support" class:list={[{ active: currentPath === '/support' || currentPath === '/support/' }]}>Support</a>
+      <a href="/#minimalist-breakout" class="cv2-cta">Play now</a>
+    </nav>
+
+    <button class="cv2-burger" id="cv2Burger" aria-label="Open menu" aria-expanded="false">
+      <svg class="menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
   </div>
-</nav>
+
+  <nav class="cv2-mobile-menu" id="cv2MobileMenu" aria-label="Mobile">
+    <a href="/#minimalist-breakout">Games</a>
+    <a href="/about">About Us</a>
+    <a href="/support">Support</a>
+    <a href="/#minimalist-breakout" class="cv2-cta-mobile">Play now</a>
+  </nav>
+</header>
 
 <style>
-  .cv2-nav {
-    position: sticky;
-    top: 0;
-    z-index: 10;
+  .cv2-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    border-bottom: 1px solid transparent;
+    transition: background .3s, border-color .3s, backdrop-filter .3s;
+  }
+
+  .cv2-header.scrolled,
+  .cv2-header.menu-open {
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(0,0,0,.08);
+  }
+
+  .cv2-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 28px;
-    background: rgba(255,255,255,.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid #eee;
+    height: 72px;
   }
 
   .cv2-nav-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: -0.3px;
-    color: #222;
+    gap: 12px;
   }
 
   .cv2-logo {
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
+    width: 38px; height: 38px;
+    border-radius: 11px;
     background: #F2455C;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     font-weight: 800;
-    font-size: 15px;
+    font-size: 19px;
     box-shadow: 0 4px 10px rgba(242,69,92,.35);
     flex-shrink: 0;
   }
 
+  .brand-text {
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -.3px;
+    color: #222;
+  }
+
+  .brand-text .accent { color: #F2455C; }
+
   .cv2-nav-links {
+    display: none;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cv2-nav-links a:not(.cv2-cta) {
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #666;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: background .2s, color .2s;
+  }
+
+  .cv2-nav-links a:not(.cv2-cta):hover {
+    background: rgba(0,0,0,.05);
+    color: #222;
+  }
+
+  .cv2-nav-links a:not(.cv2-cta).active {
+    color: #222;
+  }
+
+  .cv2-cta {
+    margin-left: 8px;
+    background: #F2455C;
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 9px 22px;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(242,69,92,.35);
+    transition: transform .2s;
+  }
+
+  .cv2-cta:hover {
+    color: #fff;
+    transform: scale(1.04);
+  }
+
+  .cv2-cta:active { transform: scale(.97); }
+
+  .cv2-burger {
     display: flex;
     align-items: center;
-    gap: 30px;
+    justify-content: center;
+    width: 40px; height: 40px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: #222;
+    cursor: pointer;
+    transition: background .2s;
   }
 
-  .cv2-nav-links a {
-    font-family: "Poppins", sans-serif;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #555;
-    letter-spacing: .2px;
-    position: relative;
-    padding-bottom: 3px;
-    transition: color .2s;
+  .cv2-burger:hover { background: rgba(0,0,0,.05); }
+
+  .cv2-burger .close-icon { display: none; }
+  .cv2-header.menu-open .cv2-burger .menu-icon { display: none; }
+  .cv2-header.menu-open .cv2-burger .close-icon { display: block; }
+
+  .cv2-mobile-menu {
+    display: none;
+    flex-direction: column;
+    padding: 0 20px 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease, padding .3s ease;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid transparent;
   }
 
-  .cv2-nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: 0;
-    width: 0; height: 2px;
-    background: #F2455C;
-    border-radius: 2px;
-    transition: width .25s;
+  .cv2-header.menu-open .cv2-mobile-menu {
+    max-height: 320px;
+    padding: 8px 20px 20px;
+    border-top-color: rgba(0,0,0,.07);
   }
 
-  .cv2-nav-links a:hover,
-  .cv2-nav-links a.active { color: #222; }
-  .cv2-nav-links a:hover::after,
-  .cv2-nav-links a.active::after { width: 100%; }
+  .cv2-mobile-menu a:not(.cv2-cta-mobile) {
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+    padding: 12px;
+    border-radius: 12px;
+    transition: background .2s;
+  }
 
-  @media (max-width: 760px) {
-    .cv2-nav-links { display: none; }
+  .cv2-mobile-menu a:not(.cv2-cta-mobile):hover {
+    background: rgba(0,0,0,.05);
+  }
+
+  .cv2-cta-mobile {
+    display: block;
+    margin-top: 8px;
+    background: #222;
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .cv2-nav-links { display: flex; }
+    .cv2-burger { display: none; }
+  }
+
+  @media (max-width: 767px) {
+    .cv2-mobile-menu { display: flex; }
   }
 </style>
+
+<script>
+  const header = document.getElementById('cv2Header');
+  const burger = document.getElementById('cv2Burger');
+
+  function updateScroll() {
+    if (!header) return;
+    header.classList.toggle('scrolled', window.scrollY > 8);
+  }
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+
+  if (burger && header) {
+    burger.addEventListener('click', () => {
+      const open = header.classList.toggle('menu-open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  document.querySelectorAll('#cv2MobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      header?.classList.remove('menu-open');
+      burger?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
