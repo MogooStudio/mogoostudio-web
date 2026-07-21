@@ -1,19 +1,49 @@
 ---
+import { useTranslations, getLocalizedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
+interface Props {
+  currentLang: keyof typeof languages;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
 const currentPath = Astro.url.pathname;
 ---
 
 <header class="cv2-header" id="cv2Header">
   <div class="cv2-container">
-    <a href="/" class="cv2-nav-brand">
+    <a href={getLocalizedPath("/", currentLang)} class="cv2-nav-brand">
       <div class="cv2-logo">M</div>
       <span class="brand-text">Mogoo<span class="accent">Studio</span></span>
     </a>
 
     <nav class="cv2-nav-links" aria-label="Primary">
-      <a href="/#minimalist-breakout" class:list={[{ active: currentPath === '/' }]}>Games</a>
-      <a href="/about" class:list={[{ active: currentPath === '/about' || currentPath === '/about/' }]}>About Us</a>
-      <a href="/support" class:list={[{ active: currentPath === '/support' || currentPath === '/support/' }]}>Support</a>
-      <a href="/#minimalist-breakout" class="cv2-cta">Play now</a>
+      <a href={getLocalizedPath("/#minimalist-breakout", currentLang)} class:list={[{ active: currentPath === '/' || currentPath === `/${currentLang}` || currentPath === `/${currentLang}/` }]}>{t('nav.games')}</a>
+      <a href={getLocalizedPath("/about", currentLang)} class:list={[{ active: currentPath.includes('/about') }]}>{t('nav.about')}</a>
+      <a href={getLocalizedPath("/support", currentLang)} class:list={[{ active: currentPath.includes('/support') }]}>{t('nav.support')}</a>
+
+      <div class="lang-switcher">
+        <button class="lang-btn" id="langBtn" aria-label="Language" aria-expanded="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="lang-text">{languages[currentLang]}</span>
+          <svg class="lang-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          {Object.entries(languages).map(([code, name]) => (
+            <a
+              href={code === 'en' ? currentPath.replace(/^\/(zh-cn|zh-tw)/, '') || '/' : `/${code}${currentPath.replace(/^\/(zh-cn|zh-tw)/, '')}`}
+              class:list={['lang-option', { active: code === currentLang }]}
+            >
+              {name}
+            </a>
+          ))}
+        </div>
+      </div>
     </nav>
 
     <button class="cv2-burger" id="cv2Burger" aria-label="Open menu" aria-expanded="false">
@@ -30,10 +60,19 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <nav class="cv2-mobile-menu" id="cv2MobileMenu" aria-label="Mobile">
-    <a href="/#minimalist-breakout">Games</a>
-    <a href="/about">About Us</a>
-    <a href="/support">Support</a>
-    <a href="/#minimalist-breakout" class="cv2-cta-mobile">Play now</a>
+    <a href={getLocalizedPath("/#minimalist-breakout", currentLang)}>{t('nav.games')}</a>
+    <a href={getLocalizedPath("/about", currentLang)}>{t('nav.about')}</a>
+    <a href={getLocalizedPath("/support", currentLang)}>{t('nav.support')}</a>
+    <div class="mobile-lang-list">
+      {Object.entries(languages).map(([code, name]) => (
+        <a
+          href={code === 'en' ? currentPath.replace(/^\/(zh-cn|zh-tw)/, '') || '/' : `/${code}${currentPath.replace(/^\/(zh-cn|zh-tw)/, '')}`}
+          class:list={['mobile-lang-option', { active: code === currentLang }]}
+        >
+          {name}
+        </a>
+      ))}
+    </div>
   </nav>
 </header>
 
@@ -138,6 +177,91 @@ const currentPath = Astro.url.pathname;
 
   .cv2-cta:active { transform: scale(.97); }
 
+  .lang-switcher {
+    position: relative;
+    margin-left: 4px;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: none;
+    border: none;
+    border-radius: 50px;
+    font-family: "Nunito", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+
+  .lang-btn:hover {
+    background: rgba(0,0,0,.05);
+    color: #222;
+  }
+
+  .lang-arrow {
+    transition: transform .2s;
+  }
+
+  .lang-btn[aria-expanded="true"] .lang-arrow {
+    transform: rotate(180deg);
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+    z-index: 100;
+  }
+
+  .lang-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .lang-option {
+    display: block;
+    padding: 10px 16px;
+    font-family: "Nunito", sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #555;
+    transition: background .2s, color .2s;
+  }
+
+  .lang-option:first-child {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .lang-option:last-child {
+    border-radius: 0 0 12px 12px;
+  }
+
+  .lang-option:hover {
+    background: rgba(0,0,0,.04);
+    color: #222;
+  }
+
+  .lang-option.active {
+    background: rgba(242,69,92,.08);
+    color: #F2455C;
+    font-weight: 700;
+  }
+
   .cv2-burger {
     display: flex;
     align-items: center;
@@ -203,6 +327,32 @@ const currentPath = Astro.url.pathname;
     text-align: center;
   }
 
+  .mobile-lang-list {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,.08);
+  }
+
+  .mobile-lang-option {
+    flex: 1;
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background .2s, color .2s;
+  }
+
+  .mobile-lang-option.active {
+    background: rgba(242,69,92,.1);
+    color: #F2455C;
+    font-weight: 700;
+  }
+
   @media (min-width: 768px) {
     .cv2-nav-links { display: flex; }
     .cv2-burger { display: none; }
@@ -216,6 +366,8 @@ const currentPath = Astro.url.pathname;
 <script>
   const header = document.getElementById('cv2Header');
   const burger = document.getElementById('cv2Burger');
+  const langBtn = document.getElementById('langBtn');
+  const langMenu = document.getElementById('langMenu');
 
   function updateScroll() {
     if (!header) return;
@@ -228,6 +380,23 @@ const currentPath = Astro.url.pathname;
     burger.addEventListener('click', () => {
       const open = header.classList.toggle('menu-open');
       burger.setAttribute('aria-expanded', String(open));
+      if (langMenu) langMenu.classList.remove('open');
+      if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  if (langBtn && langMenu) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = langMenu.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!langBtn.contains(e.target as Node) && !langMenu.contains(e.target as Node)) {
+        langMenu.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
     });
   }
 

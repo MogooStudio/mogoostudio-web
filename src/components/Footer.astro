@@ -1,4 +1,13 @@
 ---
+import { useTranslations, getLocalizedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
+interface Props {
+  currentLang: keyof typeof languages;
+}
+
+const { currentLang } = Astro.props;
+const t = useTranslations(currentLang);
 ---
 
 <footer class="cv2-footer">
@@ -21,28 +30,31 @@
       </div>
     </div>
     <div class="cv2-footer-col">
-      <div class="hdr">Games</div>
-      <a href="/#minimalist-breakout">Minimalist Breakout</a>
-      <a href="/#flappy-ball">Flappy Ball Hop</a>
+      <div class="hdr">{t('footer.games')}</div>
+      <a href={getLocalizedPath("/#minimalist-breakout", currentLang)}>Minimalist Breakout</a>
+      <a href={getLocalizedPath("/#flappy-ball", currentLang)}>Flappy Ball Hop</a>
     </div>
     <div class="cv2-footer-col">
-      <div class="hdr">Studio</div>
-      <a href="/about">About Us</a>
-      <a href="/support">Support</a>
+      <div class="hdr">{t('footer.studio')}</div>
+      <a href={getLocalizedPath("/about", currentLang)}>{t('footer.about')}</a>
+      <a href={getLocalizedPath("/support", currentLang)}>{t('footer.support')}</a>
     </div>
   </div>
   <div class="cv2-footer-bottom">
-    <span id="cv2Copyright">© 2026 MogooStudio. All rights reserved.</span>
+    <span id="cv2Copyright" data-suffix={t('footer.copyright')}>© 2026 MogooStudio. {t('footer.copyright')}</span>
     <div class="cv2-footer-legal">
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Service</a>
+      <a href={getLocalizedPath("/privacy", currentLang)}>{t('footer.privacy')}</a>
+      <a href={getLocalizedPath("/terms", currentLang)}>{t('footer.terms')}</a>
     </div>
   </div>
 </footer>
 
 <script>
   const el = document.getElementById('cv2Copyright');
-  if (el) el.textContent = `© ${new Date().getFullYear()} MogooStudio. All rights reserved.`;
+  if (el) {
+    const suffix = el.dataset.suffix ?? 'All rights reserved.';
+    el.textContent = `© ${new Date().getFullYear()} MogooStudio. ${suffix}`;
+  }
 </script>
 
 <style>
