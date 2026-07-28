@@ -1,7 +1,10 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   color: string;
-  screenshots?: string[];
+  screenshots?: ImageMetadata[];
 }
 
 const { color, screenshots = [] } = Astro.props;
@@ -15,7 +18,7 @@ const { color, screenshots = [] } = Astro.props;
         style={`background:${color}${['55','77','99','cc','99','77'][i]};`}
       >
         {screenshots[i]
-          ? <img src={screenshots[i]} alt={`Screenshot ${i+1}`} loading="lazy" />
+          ? <Image src={screenshots[i]} alt={`Screenshot ${i+1}`} width={140} height={240} densities={[1, 2]} loading="lazy" />
           : <div class="ph">&#9654;</div>
         }
       </div>

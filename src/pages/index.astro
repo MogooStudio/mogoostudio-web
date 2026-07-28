@@ -2,6 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GameBlock from '../components/GameBlock.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import minimalistIcon from '../assets/icons/minimalist-breakout.png';
+import flappyIcon from '../assets/icons/flappy-ball.png';
+import minimalist1 from '../assets/screenshots/minimalist-breakout/1.png';
+import minimalist2 from '../assets/screenshots/minimalist-breakout/2.png';
+import minimalist3 from '../assets/screenshots/minimalist-breakout/3.png';
+import minimalist4 from '../assets/screenshots/minimalist-breakout/4.png';
+import minimalist5 from '../assets/screenshots/minimalist-breakout/5.png';
+import minimalist6 from '../assets/screenshots/minimalist-breakout/6.png';
+import flappy1 from '../assets/screenshots/flappy-ball/01-menu.png';
+import flappy2 from '../assets/screenshots/flappy-ball/02-gameplay.png';
+import flappy3 from '../assets/screenshots/flappy-ball/03-combo.png';
+import flappy4 from '../assets/screenshots/flappy-ball/04-skins.png';
+import flappy5 from '../assets/screenshots/flappy-ball/05-wheel.png';
+import flappy6 from '../assets/screenshots/flappy-ball/06-result.png';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -49,15 +63,8 @@ const t = useTranslations(lang);
     accentColor="#29C4D9"
     badgeActive={true}
     appStoreUrl="https://apps.apple.com/us/app/minimalist-breakout/id6776583255"
-    icon="/icons/minimalist-breakout.png"
-    screenshots={[
-      '/screenshots/minimalist-breakout/1.png',
-      '/screenshots/minimalist-breakout/2.png',
-      '/screenshots/minimalist-breakout/3.png',
-      '/screenshots/minimalist-breakout/4.png',
-      '/screenshots/minimalist-breakout/5.png',
-      '/screenshots/minimalist-breakout/6.png',
-    ]}
+    icon={minimalistIcon}
+    screenshots={[minimalist1, minimalist2, minimalist3, minimalist4, minimalist5, minimalist6]}
   />
 
   <GameBlock
@@ -68,15 +75,8 @@ const t = useTranslations(lang);
     description={t('game.flappy.desc')}
     accentColor="#F2455C"
     badgeActive={false}
-    icon="/icons/flappy-ball.png"
-    screenshots={[
-      '/screenshots/flappy-ball/01-menu.png',
-      '/screenshots/flappy-ball/02-gameplay.png',
-      '/screenshots/flappy-ball/03-combo.png',
-      '/screenshots/flappy-ball/04-skins.png',
-      '/screenshots/flappy-ball/05-wheel.png',
-      '/screenshots/flappy-ball/06-result.png',
-    ]}
+    icon={flappyIcon}
+    screenshots={[flappy1, flappy2, flappy3, flappy4, flappy5, flappy6]}
   />
 
   <section class="studio-section reveal">
