@@ -18,6 +18,8 @@ const htmlLang = lang === 'zh-cn' ? 'zh-CN' : lang === 'zh-tw' ? 'zh-TW' : 'en';
 
 const pathWithoutLocale = Astro.url.pathname.replace(/^\/(zh-cn|zh-tw)/, '') || '/';
 const hreflangMap: Record<string, string> = { en: 'en', 'zh-cn': 'zh-Hans', 'zh-tw': 'zh-Hant' };
+const ogLocaleMap: Record<string, string> = { en: 'en_US', 'zh-cn': 'zh_CN', 'zh-tw': 'zh_TW' };
+const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -28,11 +30,20 @@ const hreflangMap: Record<string, string> = { en: 'en', 'zh-cn': 'zh-Hans', 'zh-
   <meta name="description" content={description} />
   <title>{pageTitle}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="canonical" href={new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.site)} />
+  <link rel="canonical" href={canonicalUrl} />
   {Object.keys(languages).map((code) => (
     <link rel="alternate" hreflang={hreflangMap[code]} href={new URL(getLocalizedPath(pathWithoutLocale, code), Astro.site)} />
   ))}
   <link rel="alternate" hreflang="x-default" href={new URL(pathWithoutLocale, Astro.site)} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MogooStudio" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:locale" content={ogLocaleMap[lang]} />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={description} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
