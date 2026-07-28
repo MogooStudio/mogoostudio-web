@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={t('terms.title')} description="MogooStudio Terms of Service.">
+<BaseLayout title={t('terms.title')} description={t('meta.terms')}>
   <section class="page-hero">
     <h1 class="page-title">{t('terms.title')}</h1>
     <p class="updated">{t('terms.updated')}</p>
@@ -14,35 +14,35 @@ const t = useTranslations(lang);
 
   <section class="legal-body">
     <div>
-      <h2>1. Acceptance of Terms</h2>
-      <p>By downloading, installing, or using any MogooStudio app, you agree to be bound by these Terms of Service.</p>
+      <h2>{t('terms.s1.h')}</h2>
+      <p>{t('terms.s1.p1')}</p>
 
-      <h2>2. License to Use</h2>
-      <p>We grant you a personal, non-exclusive, non-transferable, revocable license to use our apps for your own personal, non-commercial purposes.</p>
+      <h2>{t('terms.s2.h')}</h2>
+      <p>{t('terms.s2.p1')}</p>
 
-      <h2>3. Acceptable Use</h2>
-      <p>You agree not to reverse engineer, decompile, modify, or redistribute any part of our apps, or use them for any unlawful purpose.</p>
+      <h2>{t('terms.s3.h')}</h2>
+      <p>{t('terms.s3.p1')}</p>
 
-      <h2>4. Intellectual Property</h2>
-      <p>All content, graphics, code, and trademarks within our apps are owned by MogooStudio or its licensors and are protected by intellectual property laws.</p>
+      <h2>{t('terms.s4.h')}</h2>
+      <p>{t('terms.s4.p1')}</p>
 
-      <h2>5. No Warranty</h2>
-      <p>Our apps are provided "as is" without warranties of any kind, express or implied, including but not limited to fitness for a particular purpose.</p>
+      <h2>{t('terms.s5.h')}</h2>
+      <p>{t('terms.s5.p1')}</p>
 
-      <h2>6. Limitation of Liability</h2>
-      <p>To the fullest extent permitted by law, MogooStudio shall not be liable for any indirect, incidental, or consequential damages arising from your use of our apps.</p>
+      <h2>{t('terms.s6.h')}</h2>
+      <p>{t('terms.s6.p1')}</p>
 
-      <h2>7. Updates and Changes</h2>
-      <p>We may update, modify, or discontinue any app or feature at any time without prior notice.</p>
+      <h2>{t('terms.s7.h')}</h2>
+      <p>{t('terms.s7.p1')}</p>
 
-      <h2>8. Termination</h2>
-      <p>We reserve the right to terminate or suspend access to our apps if you violate these Terms.</p>
+      <h2>{t('terms.s8.h')}</h2>
+      <p>{t('terms.s8.p1')}</p>
 
-      <h2>9. Governing Law</h2>
-      <p>These Terms are governed by applicable local law without regard to conflict-of-law principles.</p>
+      <h2>{t('terms.s9.h')}</h2>
+      <p>{t('terms.s9.p1')}</p>
 
-      <h2>10. Contact Us</h2>
-      <p>Questions about these Terms? Reach out at <a href="mailto:mogoostudio@outlook.com">mogoostudio@outlook.com</a>.</p>
+      <h2>{t('terms.s10.h')}</h2>
+      <p>{t('terms.s10.p1')} <a href="mailto:mogoostudio@outlook.com">mogoostudio@outlook.com</a>.</p>
     </div>
   </section>
 </BaseLayout>

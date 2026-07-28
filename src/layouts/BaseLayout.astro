@@ -1,7 +1,8 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -9,10 +10,14 @@ interface Props {
   rawTitle?: boolean;
 }
 
-const { title, description = 'MogooStudio — Independent mobile game studio.', rawTitle = false } = Astro.props;
-const pageTitle = rawTitle ? title : `${title} | MogooStudio`;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { title, description = t('meta.index'), rawTitle = false } = Astro.props;
+const pageTitle = rawTitle ? title : `${title} | MogooStudio`;
 const htmlLang = lang === 'zh-cn' ? 'zh-CN' : lang === 'zh-tw' ? 'zh-TW' : 'en';
+
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(zh-cn|zh-tw)/, '') || '/';
+const hreflangMap: Record<string, string> = { en: 'en', 'zh-cn': 'zh-Hans', 'zh-tw': 'zh-Hant' };
 ---
 
 <!DOCTYPE html>
@@ -23,6 +28,11 @@ const htmlLang = lang === 'zh-cn' ? 'zh-CN' : lang === 'zh-tw' ? 'zh-TW' : 'en';
   <meta name="description" content={description} />
   <title>{pageTitle}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.site)} />
+  {Object.keys(languages).map((code) => (
+    <link rel="alternate" hreflang={hreflangMap[code]} href={new URL(getLocalizedPath(pathWithoutLocale, code), Astro.site)} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={new URL(pathWithoutLocale, Astro.site)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />

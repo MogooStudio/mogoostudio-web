@@ -7,7 +7,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title="MogooStudio | Small games. Big fun." description="MogooStudio — Independent mobile game studio making small, satisfying games." rawTitle>
+<BaseLayout title="MogooStudio | Small games. Big fun." description={t('meta.index')} rawTitle>
   <section class="cv2-hero">
     <div class="cv2-blob cv2-blob-yellow"></div>
     <div class="cv2-blob cv2-blob-teal"></div>
@@ -42,6 +42,7 @@ const t = useTranslations(lang);
 
   <GameBlock
     id="minimalist-breakout"
+    currentLang={lang}
     variant="g1"
     title={t('game.minimalist.title')}
     description={t('game.minimalist.desc')}
@@ -61,6 +62,7 @@ const t = useTranslations(lang);
 
   <GameBlock
     id="flappy-ball"
+    currentLang={lang}
     variant="g2"
     title={t('game.flappy.title')}
     description={t('game.flappy.desc')}

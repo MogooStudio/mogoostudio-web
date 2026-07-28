@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={t('privacy.title')} description="MogooStudio Privacy Policy.">
+<BaseLayout title={t('privacy.title')} description={t('meta.privacy')}>
   <section class="page-hero">
     <h1 class="page-title">{t('privacy.title')}</h1>
     <p class="updated">{t('privacy.updated')}</p>
@@ -14,63 +14,63 @@ const t = useTranslations(lang);
 
   <section class="legal-body">
     <div>
-      <h2>1. Scope</h2>
-      <p>This Privacy Policy explains how minimalistbreakout ("the Game", "we", "us", or "our") handles information when you use the Game.</p>
-      <p>By using the Game, you acknowledge that you have read and understood this Privacy Policy.</p>
+      <h2>{t('privacy.s1.h')}</h2>
+      <p>{t('privacy.s1.p1')}</p>
+      <p>{t('privacy.s1.p2')}</p>
 
-      <h2>2. Information We Collect</h2>
-      <p>minimalistbreakout is an offline single-player game. The current version does not include advertising SDKs, analytics SDKs, third-party login, cloud saves, online leaderboards, payment SDKs, or other third-party SDKs used to collect user data.</p>
-      <p>During normal gameplay, we do not actively collect, upload, share, or sell your personal information. The Game may store the following data locally on your device:</p>
+      <h2>{t('privacy.s2.h')}</h2>
+      <p>{t('privacy.s2.p1')}</p>
+      <p>{t('privacy.s2.p2')}</p>
       <ul>
-        <li>Game progress, level records, high scores, and game settings.</li>
-        <li>Basic app data required for the Game to run on your device, such as app version and device environment information. This information is not actively uploaded by us.</li>
-        <li>Support information, only if you choose to contact us directly, such as your email address, issue description, and communication history.</li>
+        <li>{t('privacy.s2.li1')}</li>
+        <li>{t('privacy.s2.li2')}</li>
+        <li>{t('privacy.s2.li3')}</li>
       </ul>
 
-      <h2>3. How We Use Information</h2>
-      <p>We may use information only for the following purposes:</p>
+      <h2>{t('privacy.s3.h')}</h2>
+      <p>{t('privacy.s3.p1')}</p>
       <ul>
-        <li>To provide, maintain, and improve the Game experience.</li>
-        <li>To save game progress, high scores, and settings locally on your device.</li>
-        <li>To respond to support requests or feedback that you voluntarily send to us.</li>
-        <li>To comply with applicable laws, regulations, legal processes, or lawful government requests.</li>
+        <li>{t('privacy.s3.li1')}</li>
+        <li>{t('privacy.s3.li2')}</li>
+        <li>{t('privacy.s3.li3')}</li>
+        <li>{t('privacy.s3.li4')}</li>
       </ul>
 
-      <h2>4. Third-Party Services</h2>
-      <p>The current version of minimalistbreakout does not use third-party advertising services, analytics services, third-party login services, payment services, cloud save services, or online leaderboard services.</p>
-      <p>If a future version adds any third-party service that may process user data, we will update this Privacy Policy and, where required by applicable law, request your consent.</p>
+      <h2>{t('privacy.s4.h')}</h2>
+      <p>{t('privacy.s4.p1')}</p>
+      <p>{t('privacy.s4.p2')}</p>
 
-      <h2>5. Sharing and Disclosure</h2>
-      <p>We do not sell your personal information. We may disclose information only when:</p>
+      <h2>{t('privacy.s5.h')}</h2>
+      <p>{t('privacy.s5.p1')}</p>
       <ul>
-        <li>You give us explicit permission.</li>
-        <li>It is necessary to respond to a support request that you initiated.</li>
-        <li>It is required by applicable law, regulation, court order, legal process, or lawful government request.</li>
-        <li>It is necessary to protect the rights, property, or safety of users, the public, or mogoostudio.</li>
+        <li>{t('privacy.s5.li1')}</li>
+        <li>{t('privacy.s5.li2')}</li>
+        <li>{t('privacy.s5.li3')}</li>
+        <li>{t('privacy.s5.li4')}</li>
       </ul>
 
-      <h2>6. Data Storage and Security</h2>
-      <p>Game progress and settings are stored locally on your device. Because the current version does not provide accounts, cloud saves, or online services, we do not store your game progress on our servers.</p>
-      <p>If you contact us for support, we will keep your communication only as long as necessary to respond to your request and comply with legal obligations.</p>
+      <h2>{t('privacy.s6.h')}</h2>
+      <p>{t('privacy.s6.p1')}</p>
+      <p>{t('privacy.s6.p2')}</p>
 
-      <h2>7. Children's Privacy</h2>
-      <p>We do not knowingly collect personal information from children. If you are a minor, please use the Game with the consent and guidance of a parent or legal guardian.</p>
-      <p>If a parent or guardian believes that a child has provided us with personal information, please contact us. We will take reasonable steps to delete such information where required by applicable law.</p>
+      <h2>{t('privacy.s7.h')}</h2>
+      <p>{t('privacy.s7.p1')}</p>
+      <p>{t('privacy.s7.p2')}</p>
 
-      <h2>8. Your Choices and Rights</h2>
-      <p>Depending on your location, you may have the right to:</p>
+      <h2>{t('privacy.s8.h')}</h2>
+      <p>{t('privacy.s8.p1')}</p>
       <ul>
-        <li>Request access to, correction of, or deletion of information you provided to us.</li>
-        <li>Withdraw consent where processing is based on consent.</li>
-        <li>Delete local game data by uninstalling the Game or clearing the app data through your device settings.</li>
+        <li>{t('privacy.s8.li1')}</li>
+        <li>{t('privacy.s8.li2')}</li>
+        <li>{t('privacy.s8.li3')}</li>
       </ul>
-      <p>Since the current version does not provide an account system, cloud saves, or online services, we cannot identify individual players or retrieve locally stored game progress from your device.</p>
+      <p>{t('privacy.s8.p2')}</p>
 
-      <h2>9. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time to reflect changes in the Game, legal requirements, or operational needs. The updated policy will be posted on this page and will become effective when published.</p>
+      <h2>{t('privacy.s9.h')}</h2>
+      <p>{t('privacy.s9.p1')}</p>
 
-      <h2>10. Contact Us</h2>
-      <p>If you have any questions, requests, or concerns about this Privacy Policy, please contact us at:</p>
+      <h2>{t('privacy.s10.h')}</h2>
+      <p>{t('privacy.s10.p1')}</p>
       <p>Email: <a href="mailto:mogoostudio@outlook.com">mogoostudio@outlook.com</a></p>
     </div>
   </section>

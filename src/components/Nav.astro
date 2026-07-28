@@ -18,13 +18,13 @@ const currentPath = Astro.url.pathname;
       <span class="brand-text">Mogoo<span class="accent">Studio</span></span>
     </a>
 
-    <nav class="cv2-nav-links" aria-label="Primary">
+    <nav class="cv2-nav-links" aria-label={t('nav.ariaPrimary')}>
       <a href={getLocalizedPath("/#minimalist-breakout", currentLang)} class:list={[{ active: currentPath === '/' || currentPath === `/${currentLang}` || currentPath === `/${currentLang}/` }]}>{t('nav.games')}</a>
       <a href={getLocalizedPath("/about", currentLang)} class:list={[{ active: currentPath.includes('/about') }]}>{t('nav.about')}</a>
       <a href={getLocalizedPath("/support", currentLang)} class:list={[{ active: currentPath.includes('/support') }]}>{t('nav.support')}</a>
 
       <div class="lang-switcher">
-        <button class="lang-btn" id="langBtn" aria-label="Language" aria-expanded="false">
+        <button class="lang-btn" id="langBtn" aria-label={t('nav.ariaLanguage')} aria-expanded="false">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
@@ -46,7 +46,7 @@ const currentPath = Astro.url.pathname;
       </div>
     </nav>
 
-    <button class="cv2-burger" id="cv2Burger" aria-label="Open menu" aria-expanded="false">
+    <button class="cv2-burger" id="cv2Burger" aria-label={t('nav.ariaOpenMenu')} aria-expanded="false">
       <svg class="menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -59,7 +59,7 @@ const currentPath = Astro.url.pathname;
     </button>
   </div>
 
-  <nav class="cv2-mobile-menu" id="cv2MobileMenu" aria-label="Mobile">
+  <nav class="cv2-mobile-menu" id="cv2MobileMenu" aria-label={t('nav.ariaMobile')}>
     <a href={getLocalizedPath("/#minimalist-breakout", currentLang)}>{t('nav.games')}</a>
     <a href={getLocalizedPath("/about", currentLang)}>{t('nav.about')}</a>
     <a href={getLocalizedPath("/support", currentLang)}>{t('nav.support')}</a>
