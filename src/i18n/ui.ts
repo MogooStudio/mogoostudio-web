@@ -190,8 +190,8 @@ export const ui = {
     'nav.ariaMobile': 'Mobile',
 
     // Game tags & badge
-    'game.tag.puzzle': 'Puzzle',
-    'game.tag.arcade': 'Arcade',
+    'game.tag.brickBreaker': 'Brick Breaker',
+    'game.tag.casual': 'Casual',
     'game.badge.download': 'Download on the',
     'game.badge.comingSoon': 'Coming Soon',
   },
@@ -378,8 +378,8 @@ export const ui = {
     'nav.ariaMobile': '移动端菜单',
 
     // Game tags & badge
-    'game.tag.puzzle': '解谜',
-    'game.tag.arcade': '街机',
+    'game.tag.brickBreaker': '打砖块',
+    'game.tag.casual': '休闲',
     'game.badge.download': '现在下载',
     'game.badge.comingSoon': '即将推出',
   },
@@ -566,8 +566,8 @@ export const ui = {
     'nav.ariaMobile': '行動選單',
 
     // Game tags & badge
-    'game.tag.puzzle': '解謎',
-    'game.tag.arcade': '街機',
+    'game.tag.brickBreaker': '打磚塊',
+    'game.tag.casual': '休閒',
     'game.badge.download': '立即下載',
     'game.badge.comingSoon': '即將推出',
   },
