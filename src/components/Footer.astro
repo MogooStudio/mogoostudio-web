@@ -31,8 +31,8 @@ const t = useTranslations(currentLang);
     </div>
     <div class="cv2-footer-col">
       <div class="hdr">{t('footer.games')}</div>
-      <a href={getLocalizedPath("/#minimalist-breakout", currentLang)}>Minimalist Breakout</a>
-      <a href={getLocalizedPath("/#flappy-ball", currentLang)}>Flappy Ball Hop</a>
+      <a href={getLocalizedPath("/#minimalist-breakout", currentLang)} data-analytics-event="game_interest" data-game-id="minimalist-breakout" data-placement="footer">Minimalist Breakout</a>
+      <a href={getLocalizedPath("/#flappy-ball", currentLang)} data-analytics-event="game_interest" data-game-id="flappy-ball" data-placement="footer">Flappy Ball Hop</a>
     </div>
     <div class="cv2-footer-col">
       <div class="hdr">{t('footer.studio')}</div>

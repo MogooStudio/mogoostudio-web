@@ -1,0 +1,50 @@
+<script>
+  import { installGameTracking } from '../lib/game-analytics';
+
+  // 这是网页公开使用的项目 Key，不是具有后台管理权限的个人 API key。
+  // 保留默认配置，确保远程静态构建也能接入；环境变量可覆盖，空值可关闭。
+  const key = (import.meta.env.PUBLIC_POSTHOG_KEY ?? 'phc_v6FKwbYGm53WeffZBHHQwZ9Zm46pRhWrzEcJUgQxp6eV').trim();
+  const apiHost = (import.meta.env.PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com').trim();
+  // 只在已配置的生产域名启用，避免本地开发和预览访问混入正式报表。
+  if (import.meta.env.PROD && key && apiHost && location.hostname === 'mogoostudio.com') {
+    import('posthog-js').then(({ default: posthog }) => {
+      posthog.init(key, {
+        api_host: apiHost,
+        cookieless_mode: 'always',
+        person_profiles: 'never',
+        autocapture: false,
+        capture_pageview: false,
+        capture_pageleave: false,
+        capture_dead_clicks: false,
+        capture_heatmaps: false,
+        capture_performance: false,
+        capture_exceptions: false,
+        disable_session_recording: true,
+        disable_surveys: true,
+        advanced_disable_flags: true,
+        respect_dnt: true,
+        before_send: (event) => {
+          if (!event) return null;
+          // 不上传 URL 查询参数和片段，避免链接中的任意内容进入统计。
+          for (const field of ['$current_url', '$referrer', '$initial_current_url', '$initial_referrer']) {
+            if (typeof event.properties[field] === 'string') {
+              try {
+                const url = new URL(event.properties[field]);
+                event.properties[field] = url.origin + url.pathname;
+              } catch { delete event.properties[field]; }
+            }
+          }
+          return event;
+        },
+        loaded: (client) => {
+          client.capture('$pageview', { language: document.documentElement.lang, page_path: location.pathname });
+        },
+      });
+      installGameTracking((event, properties) => {
+        posthog.capture(event, properties, { transport: 'sendBeacon', send_instantly: true });
+      });
+    }).catch(() => {
+      // 统计加载失败时，游戏展示与商店跳转仍正常工作。
+    });
+  }
+</script>

@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import PostHog from '../components/PostHog.astro';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
 import { languages } from '../i18n/ui';
 
@@ -52,6 +53,7 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
   <Nav currentLang={lang} />
   <slot />
   <Footer currentLang={lang} />
+  <PostHog />
 </body>
 </html>
 

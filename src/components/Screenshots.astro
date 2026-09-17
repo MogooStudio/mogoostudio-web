@@ -3,11 +3,12 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
+  gameId: string;
   color: string;
   screenshots?: ImageMetadata[];
 }
 
-const { color, screenshots = [] } = Astro.props;
+const { color, screenshots = [], gameId } = Astro.props;
 ---
 
 <div class="cv2-shots-wrap">
@@ -15,6 +16,10 @@ const { color, screenshots = [] } = Astro.props;
     {[0,1,2,3,4,5].map((i) => (
       <div
         class="cv2-shot"
+        data-analytics-event="game_interest"
+        data-game-id={gameId}
+        data-placement="screenshot"
+        data-screenshot-index={i + 1}
         style={`background:${color}${['55','77','99','cc','99','77'][i]};`}
       >
         {screenshots[i]

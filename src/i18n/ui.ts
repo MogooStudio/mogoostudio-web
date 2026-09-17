@@ -82,7 +82,13 @@ export const ui = {
 
     // Privacy & Terms pages
     'privacy.title': 'Privacy Policy',
-    'privacy.updated': 'Last updated: August 19, 2026',
+    'privacy.updated': 'Last updated: September 17, 2026',
+    'privacy.website.h': '12. Website Analytics',
+    'privacy.website.p1': 'This section applies to mogoostudio.com, separately from analytics inside our Apps. The website uses Cloudflare Web Analytics to measure aggregate traffic and page performance.',
+    'privacy.website.p2': 'When enabled, PostHog records page views, game-title visibility, screenshot and game-link clicks, and App Store link clicks, together with the game, page language, path, and interaction location. These events help us understand interest in our games. An App Store click does not establish that a game was downloaded or installed.',
+    'privacy.website.p3': 'Our PostHog integration uses cookieless mode: it does not store analytics cookies or identifiers in local or session storage, create person profiles, or record sessions. PostHog estimates visitors using a server-generated hash; network requests convey technical information such as IP address and browser information to the provider. We remove query strings and fragments from the URL fields described in our integration. Website analytics providers and their privacy information:',
+    'privacy.website.cloudflare': 'Cloudflare privacy policy',
+    'privacy.website.posthog': 'PostHog privacy policy',
     'privacy.s1.h': '1. Scope',
     'privacy.s1.p1': 'This Privacy Policy explains how MogooStudio ("we", "us", or "our") handles information when you use our games, apps, and related support services (collectively, the "Apps").',
     'privacy.s1.p2': 'Data practices vary by App and version. Advertising and tracking sections apply only to an App version that actually includes the described services. Consent to advertising personalization or tracking is requested separately where required.',
@@ -270,7 +276,13 @@ export const ui = {
 
     // Privacy & Terms pages
     'privacy.title': '隐私政策',
-    'privacy.updated': '最后更新：2026 年 8 月 19 日',
+    'privacy.updated': '最后更新：2026 年 9 月 17 日',
+    'privacy.website.h': '12. 官网访问统计',
+    'privacy.website.p1': '本节适用于 mogoostudio.com 官网，与应用内的统计服务分别说明。官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能。',
+    'privacy.website.p2': '启用后，PostHog 会记录页面浏览、游戏标题曝光、截图和游戏链接点击，以及 App Store 链接点击，并附带游戏、页面语言、路径和交互位置。这些事件用于了解访客对游戏的关注情况。点击 App Store 链接不代表实际下载或安装了游戏。',
+    'privacy.website.p3': '我们的 PostHog 接入采用无 Cookie 模式：不在 Cookie、本地存储或会话存储中保存统计标识，不创建个人档案，也不录制会话。PostHog 使用服务器生成的哈希估算访客；网络请求会向服务商传递 IP 地址、浏览器信息等技术信息。我们会从接入中指定的 URL 字段移除查询参数与片段。网站统计服务商及其隐私说明：',
+    'privacy.website.cloudflare': 'Cloudflare 隐私政策',
+    'privacy.website.posthog': 'PostHog 隐私政策',
     'privacy.s1.h': '1. 适用范围',
     'privacy.s1.p1': '本隐私政策说明 MogooStudio（“我们”）在您使用我们的游戏、应用及相关支持服务（统称“应用”）时如何处理信息。',
     'privacy.s1.p2': '不同应用和版本的数据实践可能不同。广告和跟踪相关章节仅适用于实际包含所述服务的应用版本。对于广告个性化或跟踪，我们会在法律要求时另行征求您的同意。',
@@ -458,7 +470,13 @@ export const ui = {
 
     // Privacy & Terms pages
     'privacy.title': '隱私政策',
-    'privacy.updated': '最後更新：2026 年 8 月 19 日',
+    'privacy.updated': '最後更新：2026 年 9 月 17 日',
+    'privacy.website.h': '12. 官網瀏覽統計',
+    'privacy.website.p1': '本節適用於 mogoostudio.com 官網，與應用程式內的統計服務分別說明。官網使用 Cloudflare Web Analytics 統計彙總瀏覽量與頁面效能。',
+    'privacy.website.p2': '啟用後，PostHog 會記錄頁面瀏覽、遊戲標題曝光、截圖與遊戲連結點擊，以及 App Store 連結點擊，並附帶遊戲、頁面語言、路徑與互動位置。這些事件用於了解訪客對遊戲的關注情況。點擊 App Store 連結不代表實際下載或安裝了遊戲。',
+    'privacy.website.p3': '我們的 PostHog 接入採用無 Cookie 模式：不在 Cookie、本機儲存或工作階段儲存中保存統計識別碼，不建立個人檔案，也不錄製工作階段。PostHog 使用伺服器產生的雜湊估算訪客；網路請求會向服務商傳遞 IP 位址、瀏覽器資訊等技術資訊。我們會從接入中指定的 URL 欄位移除查詢參數與片段。網站統計服務商及其隱私說明：',
+    'privacy.website.cloudflare': 'Cloudflare 隱私政策',
+    'privacy.website.posthog': 'PostHog 隱私政策',
     'privacy.s1.h': '1. 適用範圍',
     'privacy.s1.p1': '本隱私政策說明 MogooStudio（「我們」）在您使用我們的遊戲、應用程式及相關支援服務（統稱「應用程式」）時如何處理資訊。',
     'privacy.s1.p2': '不同應用程式和版本的資料實務可能不同。廣告和追蹤相關章節僅適用於實際包含所述服務的應用程式版本。對於廣告個人化或追蹤，我們會在法律要求時另行徵求您的同意。',
