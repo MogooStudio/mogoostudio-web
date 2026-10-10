@@ -3,11 +3,16 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
+    "check": "astro check",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
   "dependencies": {
     "astro": "^7.1.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }

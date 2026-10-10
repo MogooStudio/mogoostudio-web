@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { homeCopy } from '../i18n/home';
+import { studioCopy } from '../i18n/studio';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const copy = studioCopy[lang];
+const answerParts = t('support.faq.a1').split('support@mogoostudio.com');
+const questions = [
+  { q: t('support.faq.q1'), a: t('support.faq.a1') },
+  { q: copy.faq2, a: copy.answer2 },
+  { q: t('support.faq.q3'), a: t('support.faq.a3') },
+  { q: t('support.faq.q4'), a: t('support.faq.a4') },
+];
+---
+<BaseLayout title={homeCopy[lang].support} description={copy.supportIntro}>
+  <main id="main" class="studio-page support-page">
+    <header class="inner-hero">
+      <p class="eyebrow">{copy.supportLabel}</p>
+      <h1 class="display-type">{copy.supportTitle.map(line => <span>{line}</span>)}</h1>
+      <p class="inner-intro">{copy.supportIntro}</p>
+      <a class="pill-link" href="mailto:support@mogoostudio.com">{copy.email} <span aria-hidden="true">↗</span></a>
+    </header>
+    <div class="support-grid">
+      <section class="studio-faq" aria-labelledby="faq-title">
+        <h2 id="faq-title" class="display-type">{t('support.faq.title')}</h2>
+        {questions.map((item, index) => <details class="studio-question" open={index === 0}>
+          <summary>{item.q}<span aria-hidden="true" class="faq-toggle">+</span></summary>
+          <div class="studio-answer"><p>{index === 0 && answerParts.length > 1 ? <>{answerParts[0]}<a href="mailto:support@mogoostudio.com">support@mogoostudio.com</a>{answerParts[1]}</> : item.a}</p></div>
+        </details>)}
+      </section>
+      <aside class="support-note">
+        <span class="note-icon" aria-hidden="true">✳</span>
+        <h2>{copy.reportTitle}</h2>
+        <ol>{copy.reportItems.map(item => <li>{item}</li>)}</ol>
+        <a class="text-link" href="mailto:support@mogoostudio.com">support@mogoostudio.com <span aria-hidden="true">↗</span></a>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>

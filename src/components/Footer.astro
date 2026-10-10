@@ -1,15 +1,32 @@
 ---
 import { useTranslations, getLocalizedPath } from '../i18n/utils';
 import { languages } from '../i18n/ui';
+import { homeCopy } from '../i18n/home';
 
 interface Props {
   currentLang: keyof typeof languages;
+  playground?: boolean;
 }
 
-const { currentLang } = Astro.props;
+const { currentLang, playground = false } = Astro.props;
 const t = useTranslations(currentLang);
+const copy = homeCopy[currentLang];
 ---
 
+{playground ? <footer class="playground-footer">
+  <h2 class="display-type">{copy.statement}</h2>
+  <div class="playground-footer-row">
+    <a class="playground-footer-brand" href={getLocalizedPath('/', currentLang)}><span class="playground-footer-mark" aria-hidden="true">M</span>MogooStudio</a>
+    <nav class="playground-footer-links" aria-label={currentLang === 'en' ? 'Footer' : currentLang === 'zh-tw' ? '頁尾導覽' : '页尾导航'}>
+      <a href={getLocalizedPath('/about', currentLang)}>{copy.about}</a>
+      <a href={getLocalizedPath('/support', currentLang)}>{copy.support}</a>
+      <a href={getLocalizedPath('/privacy', currentLang)}>{copy.privacy}</a>
+      <a href={getLocalizedPath('/terms', currentLang)}>{copy.terms}</a>
+    </nav>
+    <a class="playground-footer-email" href="mailto:support@mogoostudio.com">support@mogoostudio.com</a>
+    <span class="playground-footer-copyright">© {new Date().getFullYear()} MogooStudio</span>
+  </div>
+</footer> : <>
 <footer class="cv2-footer">
   <div class="cv2-footer-top">
     <div class="cv2-footer-brand">
@@ -48,6 +65,7 @@ const t = useTranslations(currentLang);
     </div>
   </div>
 </footer>
+</>}
 
 <script>
   const el = document.getElementById('cv2Copyright');

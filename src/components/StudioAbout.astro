@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StudioValueIcon from './StudioValueIcon.astro';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
+import { homeCopy } from '../i18n/home';
+import { studioCopy } from '../i18n/studio';
+import hero from '../assets/home/playground-still-life.png';
+const lang = getLangFromUrl(Astro.url);
+const copy = studioCopy[lang];
+const home = homeCopy[lang];
+---
+<BaseLayout title={home.about} description={copy.aboutLead}>
+  <main id="main" class="studio-page about-page">
+    <header class="inner-hero">
+      <p class="eyebrow">{copy.aboutLabel}</p>
+      <h1 class="display-type">{copy.aboutTitle.map(line => <span>{line}</span>)}</h1>
+    </header>
+    <section class="about-story" aria-label={copy.aboutLabel}>
+      <div class="story-copy">
+        <p class="story-lead">{copy.aboutLead}</p>
+        <p>{copy.aboutBody}</p>
+        <p>{copy.aboutNote}</p>
+        <a class="text-link" href={getLocalizedPath('/#works', lang)}>{home.explore} <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="studio-still-life" aria-hidden="true"><Image src={hero} alt="" widths={[1280, 2241]} sizes="100vw" format="webp" quality={90} loading="eager" /></div>
+    </section>
+    <section class="about-principles" aria-label={home.philosophy}>
+      {home.values.map((value, index) => <div class={`principle principle-${index}`}><StudioValueIcon index={index} /><h2>{value.title}</h2><p>{value.body}</p></div>)}
+    </section>
+    <section class="hello-block">
+      <h2 class="display-type">{copy.contactTitle}</h2>
+      <p>{copy.contactBody}</p>
+      <a class="pill-link" href="mailto:support@mogoostudio.com">support@mogoostudio.com <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PrivacyContent from './PrivacyContent.astro';
+import TermsContent from './TermsContent.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { studioCopy } from '../i18n/studio';
+interface Props { kind: 'privacy' | 'terms' }
+const { kind } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const copy = studioCopy[lang];
+const headings = kind === 'privacy'
+  ? ['privacy.s1.h','privacy.s2.h','privacy.s3.h','privacy.s4.h','privacy.s5.h','privacy.s6.h','privacy.s7.h','privacy.s8.h','privacy.s9.h','privacy.s10.h','privacy.s11.h','privacy.website.h'] as const
+  : ['terms.s1.h','terms.s2.h','terms.s3.h','terms.s4.h','terms.s5.h','terms.s6.h','terms.s7.h','terms.s8.h','terms.s9.h','terms.s10.h','terms.s11.h','terms.s12.h'] as const;
+---
+<BaseLayout title={t(`${kind}.title`)} description={t(`meta.${kind}`)}>
+  <main id="main" class="studio-page legal-page">
+    <header class="inner-hero" id="top">
+      <p class="eyebrow">{copy.legalLabel}</p>
+      <h1 class="display-type">{t(`${kind}.title`)}</h1>
+      <p class="legal-updated">{t(`${kind}.updated`)}</p>
+    </header>
+    <div class="legal-grid">
+      <aside class="legal-sidebar">
+        <nav aria-label={copy.contents}>
+          <h2>{copy.contents}</h2>
+          <ol>{headings.map((key, index) => <li><a href={`#section-${index + 1}`}>{t(key).replace(/^\d+[.、．]?\s*/, '')}</a></li>)}</ol>
+        </nav>
+      </aside>
+      <article class="legal-article">
+        {kind === 'privacy' ? <PrivacyContent /> : <TermsContent />}
+        <a class="text-link back-top" href="#top">{copy.backTop} <span aria-hidden="true">↑</span></a>
+      </article>
+    </div>
+  </main>
+</BaseLayout>

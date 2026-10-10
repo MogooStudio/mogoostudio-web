@@ -1,13 +1,16 @@
 ---
 import { useTranslations, getLocalizedPath } from '../i18n/utils';
 import { languages } from '../i18n/ui';
+import { homeCopy } from '../i18n/home';
 
 interface Props {
   currentLang: keyof typeof languages;
+  playground?: boolean;
 }
 
-const { currentLang } = Astro.props;
+const { currentLang, playground = false } = Astro.props;
 const t = useTranslations(currentLang);
+const copy = homeCopy[currentLang];
 const currentPath = Astro.url.pathname;
 ---
 
@@ -19,12 +22,12 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <nav class="cv2-nav-links" aria-label={t('nav.ariaPrimary')}>
-      <a href={getLocalizedPath("/#minimalist-breakout", currentLang)} class:list={[{ active: currentPath === '/' || currentPath === `/${currentLang}` || currentPath === `/${currentLang}/` }]}>{t('nav.games')}</a>
-      <a href={getLocalizedPath("/about", currentLang)} class:list={[{ active: currentPath.includes('/about') }]}>{t('nav.about')}</a>
-      <a href={getLocalizedPath("/support", currentLang)} class:list={[{ active: currentPath.includes('/support') }]}>{t('nav.support')}</a>
+      <a href={getLocalizedPath("/#works", currentLang)} class:list={[{ active: currentPath === '/' || currentPath === `/${currentLang}` || currentPath === `/${currentLang}/` }]}>{copy.works}</a>
+      <a href={getLocalizedPath("/about", currentLang)} class:list={[{ active: currentPath.includes('/about') }]}>{playground ? copy.about : t('nav.about')}</a>
+      <a href={getLocalizedPath("/support", currentLang)} class:list={[{ active: currentPath.includes('/support') }]}>{playground ? copy.support : t('nav.support')}</a>
 
       <div class="lang-switcher">
-        <button class="lang-btn" id="langBtn" aria-label={t('nav.ariaLanguage')} aria-expanded="false">
+        <button class="lang-btn" id="langBtn" aria-label={t('nav.ariaLanguage')} aria-expanded="false" aria-controls="langMenu">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
@@ -46,7 +49,7 @@ const currentPath = Astro.url.pathname;
       </div>
     </nav>
 
-    <button class="cv2-burger" id="cv2Burger" aria-label={t('nav.ariaOpenMenu')} aria-expanded="false">
+    <button class="cv2-burger" id="cv2Burger" aria-label={t('nav.ariaOpenMenu')} aria-expanded="false" aria-controls="cv2MobileMenu">
       <svg class="menu-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -60,9 +63,9 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <nav class="cv2-mobile-menu" id="cv2MobileMenu" aria-label={t('nav.ariaMobile')}>
-    <a href={getLocalizedPath("/#minimalist-breakout", currentLang)}>{t('nav.games')}</a>
-    <a href={getLocalizedPath("/about", currentLang)}>{t('nav.about')}</a>
-    <a href={getLocalizedPath("/support", currentLang)}>{t('nav.support')}</a>
+    <a href={getLocalizedPath("/#works", currentLang)}>{copy.works}</a>
+    <a href={getLocalizedPath("/about", currentLang)}>{playground ? copy.about : t('nav.about')}</a>
+    <a href={getLocalizedPath("/support", currentLang)}>{playground ? copy.support : t('nav.support')}</a>
     <div class="mobile-lang-list">
       {Object.entries(languages).map(([code, name]) => (
         <a
@@ -405,5 +408,26 @@ const currentPath = Astro.url.pathname;
       header?.classList.remove('menu-open');
       burger?.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (langMenu?.classList.contains('open')) {
+      langMenu.classList.remove('open');
+      langBtn?.setAttribute('aria-expanded', 'false');
+      langBtn?.focus();
+    }
+    if (header?.classList.contains('menu-open')) {
+      header.classList.remove('menu-open');
+      burger?.setAttribute('aria-expanded', 'false');
+      burger?.focus();
+    }
+  });
+
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
+    if (event.matches) {
+      header?.classList.remove('menu-open');
+      burger?.setAttribute('aria-expanded', 'false');
+    }
   });
 </script>

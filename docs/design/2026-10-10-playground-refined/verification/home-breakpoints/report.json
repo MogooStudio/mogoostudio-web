@@ -1,0 +1,23 @@
+[
+  {
+    "file": "page-320x740.png",
+    "state": null,
+    "size": "320x740",
+    "zoom": 1,
+    "issues": []
+  },
+  {
+    "file": "page-768x900.png",
+    "state": null,
+    "size": "768x900",
+    "zoom": 1,
+    "issues": []
+  },
+  {
+    "file": "page-1440x1000.png",
+    "state": null,
+    "size": "1440x1000",
+    "zoom": 1,
+    "issues": []
+  }
+]

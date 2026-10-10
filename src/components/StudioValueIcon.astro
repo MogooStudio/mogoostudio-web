@@ -1,0 +1,9 @@
+---
+interface Props { index: number }
+const { index } = Astro.props;
+---
+<svg class:list={['value-icon', `value-icon-${index}`]} viewBox="0 0 64 64" aria-hidden="true">
+  {index === 0 && <path d="M36 3c-1-2-4-2-6 0L9 32c-2 3 0 6 3 6h15l-4 22c0 3 3 4 5 2l27-34c2-3 0-6-3-6H36l3-15c0-2-1-3-3-4Z" />}
+  {index === 1 && <path d="M32 57 7 33C-8 17 11-3 26 9l6 5 6-5c15-12 34 8 19 24L32 57Z" />}
+  {index === 2 && <path d="M28 5c2-5 6-5 8 0l6 15 17 1c5 0 6 4 2 7L48 39l5 17c1 5-2 7-6 4L32 50 17 60c-4 3-7 1-6-4l5-17L3 28c-4-3-3-7 2-7l17-1 6-15Z" />}
+</svg>

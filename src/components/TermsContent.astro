@@ -1,0 +1,45 @@
+---
+import { getLangFromUrl, getLocalizedPath, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const privacyPath = getLocalizedPath('/privacy/', lang);
+---
+<h2 id="section-1">{t('terms.s1.h')}</h2>
+      <p>{t('terms.s1.p1')}</p>
+      <p>{t('terms.s1.p2')}</p>
+
+      <h2 id="section-2">{t('terms.s2.h')}</h2>
+      <p>{t('terms.s2.p1')}</p>
+
+      <h2 id="section-3">{t('terms.s3.h')}</h2>
+      <p>{t('terms.s3.p1')}</p>
+
+      <h2 id="section-4">{t('terms.s4.h')}</h2>
+      <p>{t('terms.s4.p1')}</p>
+
+      <h2 id="section-5">{t('terms.s5.h')}</h2>
+      <p>{t('terms.s5.p1')} <a href={privacyPath}>{t('terms.s5.privacyLink')}</a>{lang === 'en' ? '.' : '。'}</p>
+
+      <h2 id="section-6">{t('terms.s6.h')}</h2>
+      <p>{t('terms.s6.p1')}</p>
+      <p>{t('terms.s6.p2')}</p>
+      <p>{t('terms.s6.p3')}</p>
+      <p>{t('terms.s6.p4')}</p>
+
+      <h2 id="section-7">{t('terms.s7.h')}</h2>
+      <p>{t('terms.s7.p1')}</p>
+
+      <h2 id="section-8">{t('terms.s8.h')}</h2>
+      <p>{t('terms.s8.p1')}</p>
+
+      <h2 id="section-9">{t('terms.s9.h')}</h2>
+      <p>{t('terms.s9.p1')}</p>
+
+      <h2 id="section-10">{t('terms.s10.h')}</h2>
+      <p>{t('terms.s10.p1')}</p>
+
+      <h2 id="section-11">{t('terms.s11.h')}</h2>
+      <p>{t('terms.s11.p1')}</p>
+
+      <h2 id="section-12">{t('terms.s12.h')}</h2>
+      <p>{t('terms.s12.p1')} <a href="mailto:support@mogoostudio.com">support@mogoostudio.com</a>{lang === 'en' ? '.' : '。'}</p>

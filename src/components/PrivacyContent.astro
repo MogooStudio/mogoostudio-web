@@ -1,0 +1,96 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+<h2 id="section-1">{t('privacy.s1.h')}</h2>
+      <p>{t('privacy.s1.p1')}</p>
+      <p>{t('privacy.s1.p2')}</p>
+
+      <h2 id="section-2">{t('privacy.s2.h')}</h2>
+      <p>{t('privacy.s2.p1')}</p>
+      <ul>
+        <li>{t('privacy.s2.app1')}</li>
+        <li>{t('privacy.s2.app2')}</li>
+        <li>{t('privacy.s2.app3')}</li>
+        <li>{t('privacy.s2.app4')}</li>
+      </ul>
+      <p>{t('privacy.s2.p2')}</p>
+      <ul>
+        <li>{t('privacy.s2.li1')}</li>
+        <li>{t('privacy.s2.li2')}</li>
+        <li>{t('privacy.s2.li3')}</li>
+        <li>{t('privacy.s2.li4')}</li>
+      </ul>
+      <p>{t('privacy.s2.analyticsP')}</p>
+      <ul>
+        <li>{t('privacy.s2.analyticsLi1')}</li>
+        <li>{t('privacy.s2.analyticsLi2')}</li>
+        <li>{t('privacy.s2.analyticsLi3')}</li>
+        <li>{t('privacy.s2.analyticsLi4')}</li>
+      </ul>
+      <p>{t('privacy.s2.p3')}</p>
+
+      <h2 id="section-3">{t('privacy.s3.h')}</h2>
+      <p>{t('privacy.s3.p1')}</p>
+      <ul>
+        <li>{t('privacy.s3.li1')}</li>
+        <li>{t('privacy.s3.li2')}</li>
+        <li>{t('privacy.s3.li3')}</li>
+        <li>{t('privacy.s3.li4')}</li>
+        <li>{t('privacy.s3.li5')}</li>
+        <li>{t('privacy.s3.li6')}</li>
+      </ul>
+
+      <h2 id="section-4">{t('privacy.s4.h')}</h2>
+      <p>{t('privacy.s4.p1')}</p>
+      <p>{t('privacy.s4.p2')}</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy">{t('privacy.s4.googlePrivacy')}</a></li>
+        <li><a href="https://policies.google.com/technologies/partner-sites">{t('privacy.s4.googlePartners')}</a></li>
+      </ul>
+      <p>{t('privacy.s4.p3')}</p>
+      <ul>
+        <li><a href="https://gameanalytics.com/privacy/">{t('privacy.s4.gameAnalyticsPrivacy')}</a></li>
+      </ul>
+
+      <h2 id="section-5">{t('privacy.s5.h')}</h2>
+      <p>{t('privacy.s5.p1')}</p>
+      <p>{t('privacy.s5.p2')}</p>
+      <p>{t('privacy.s5.p3')}</p>
+
+      <h2 id="section-6">{t('privacy.s6.h')}</h2>
+      <p>{t('privacy.s6.p1')}</p>
+      <p>{t('privacy.s6.p2')}</p>
+      <p>{t('privacy.s6.p3')}</p>
+
+      <h2 id="section-7">{t('privacy.s7.h')}</h2>
+      <p>{t('privacy.s7.p1')}</p>
+      <p>{t('privacy.s7.p2')}</p>
+      <p>{t('privacy.s7.p3')}</p>
+
+      <h2 id="section-8">{t('privacy.s8.h')}</h2>
+      <p>{t('privacy.s8.p1')}</p>
+      <p>{t('privacy.s8.p2')}</p>
+
+      <h2 id="section-9">{t('privacy.s9.h')}</h2>
+      <p>{t('privacy.s9.p1')}</p>
+      <ul>
+        <li>{t('privacy.s9.li1')}</li>
+        <li>{t('privacy.s9.li2')}</li>
+        <li>{t('privacy.s9.li3')}</li>
+        <li>{t('privacy.s9.li4')}</li>
+      </ul>
+      <p>{t('privacy.s9.p2')}</p>
+
+      <h2 id="section-10">{t('privacy.s10.h')}</h2>
+      <p>{t('privacy.s10.p1')}</p>
+
+      <h2 id="section-11">{t('privacy.s11.h')}</h2>
+      <p>{t('privacy.s11.p1')}</p>
+      <p>Email: <a href="mailto:support@mogoostudio.com">support@mogoostudio.com</a></p>
+      <h2 id="section-12">{t('privacy.website.h')}</h2>
+      <p>{t('privacy.website.p1')}</p>
+      <ul>
+        <li><a href="https://www.cloudflare.com/privacypolicy/">{t('privacy.website.cloudflare')}</a></li>
+      </ul>

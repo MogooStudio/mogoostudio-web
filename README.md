@@ -1,6 +1,6 @@
 # MogooStudio 官网
 
-[MogooStudio](https://mogoostudio.com) 独立手游工作室的静态官网，用于展示游戏作品、工作室信息，并提供技术支持、隐私政策与服务条款。
+[MogooStudio](https://mogoostudio.com) 独立工作室的静态官网，用于展示软件、应用与游戏作品、工作室信息，并提供技术支持、隐私政策与服务条款。
 
 ## 当前内容
 
@@ -33,6 +33,8 @@ npm run dev
 | 命令 | 用途 |
 | --- | --- |
 | `npm run dev` | 启动本地开发服务器 |
+| `npm run check` | 检查 Astro 与 TypeScript 类型 |
+| `node scripts/verify-site.mjs` | 开发服务器运行时检查 15 个页面、站内链接和法律原文保留 |
 | `npm run build` | 构建生产版本到 `dist/` |
 | `npm run preview` | 本地预览生产构建 |
 
@@ -46,7 +48,7 @@ npm run dev
 | 隐私政策 | `/privacy/` | `/zh-cn/privacy/` | `/zh-tw/privacy/` |
 | 服务条款 | `/terms/` | `/zh-cn/terms/` | `/zh-tw/terms/` |
 
-翻译文案集中维护在 `src/i18n/ui.ts`，路径与语言识别逻辑位于 `src/i18n/utils.ts`。新增页面时，需要同步补齐三种语言的路由，并更新 `src/pages/sitemap-index.xml.ts` 中的页面列表。
+翻译文案维护在 `src/i18n/ui.ts`（原有文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页），路径与语言识别逻辑位于 `src/i18n/utils.ts`。新增页面时，需要同步补齐三种语言的路由，并更新 `src/pages/sitemap-index.xml.ts` 中的页面列表。
 
 ## 项目结构
 

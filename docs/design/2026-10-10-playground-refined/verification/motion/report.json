@@ -1,0 +1,117 @@
+[
+  {
+    "file": "motion-probe",
+    "state": null,
+    "size": "1024x900",
+    "zoom": 1,
+    "motion": {
+      "load": {
+        "elements": 3,
+        "loops": 0,
+        "maxMove": 12,
+        "maxSize": 0,
+        "maxOpacity": 1,
+        "top": [
+          {
+            "el": "div.hero-copy",
+            "move": 10,
+            "size": 0,
+            "opacity": 1,
+            "loop": false,
+            "sources": [
+              "waapi"
+            ]
+          },
+          {
+            "el": "article#minimalist-breakout.product.product-breakout",
+            "move": 12,
+            "size": 0,
+            "opacity": 0.25,
+            "loop": false,
+            "sources": [
+              "waapi"
+            ]
+          },
+          {
+            "el": "article#flappy-ball.product.product-flappy",
+            "move": 12,
+            "size": 0,
+            "opacity": 0.25,
+            "loop": false,
+            "sources": [
+              "waapi"
+            ]
+          }
+        ]
+      },
+      "steps": {
+        "elements": 3,
+        "loops": 0,
+        "maxMove": 4,
+        "maxSize": 0,
+        "maxOpacity": 0.34,
+        "top": [
+          {
+            "el": "div.values-row",
+            "move": 0,
+            "size": 0,
+            "opacity": 0.34,
+            "loop": false,
+            "sources": [
+              "waapi"
+            ]
+          },
+          {
+            "el": "svg",
+            "move": 4,
+            "size": 0,
+            "opacity": 0,
+            "loop": false,
+            "sources": [
+              "transition:transform"
+            ]
+          },
+          {
+            "el": "a.explore-button",
+            "move": 2,
+            "size": 0,
+            "opacity": 0,
+            "loop": false,
+            "sources": [
+              "transition:transform",
+              "transition:background-color"
+            ]
+          }
+        ]
+      },
+      "hero": {
+        "elements": 0,
+        "loops": 0,
+        "maxMove": 0,
+        "maxSize": 0,
+        "maxOpacity": 0,
+        "top": [],
+        "layers": 0
+      },
+      "scroll": {
+        "elements": 0,
+        "loops": 0,
+        "maxMove": 0,
+        "maxSize": 0,
+        "maxOpacity": 0,
+        "top": [],
+        "scrollable": true
+      }
+    },
+    "issues": [
+      "滚动：没有检测到随滚动出现的变化；落地页、品牌页、发布页和展览页需要一段滚动叙事"
+    ]
+  },
+  {
+    "file": "page.png",
+    "state": null,
+    "size": "1024x900",
+    "zoom": 1,
+    "issues": []
+  }
+]
