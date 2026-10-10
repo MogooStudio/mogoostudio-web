@@ -44,7 +44,6 @@ html[lang=en] body.playground .display-type{font-family:Nunito,sans-serif;font-w
 .pinyiye-brand{display:flex;align-items:center;gap:calc(14 * var(--u));margin-bottom:calc(13 * var(--u))}
 .pinyiye-brand img{width:calc(50 * var(--u));height:calc(50 * var(--u));border-radius:calc(12 * var(--u))}
 .pinyiye-brand h3{margin:0;font-size:calc(36 * var(--u));letter-spacing:0;line-height:1.2}
-.pinyiye-tagline{font-size:calc(24 * var(--u));font-weight:900;line-height:1.45;margin-bottom:calc(10 * var(--u));text-wrap:balance}
 .pinyiye-info .product-description{max-width:430px;min-height:0;margin-bottom:calc(12 * var(--u));color:#314637}
 .pinyiye-features{display:flex;flex-wrap:wrap;gap:6px 16px;list-style:none;padding:0;margin:0 0 calc(17 * var(--u));font-size:max(13px,calc(13 * var(--u)));line-height:1.5;color:#314637}
 .pinyiye-features li::before{content:'·';margin-right:6px;font-weight:900}
@@ -56,7 +55,6 @@ html[lang=en] body.playground .display-type{font-family:Nunito,sans-serif;font-w
 .pinyiye-preview:active{transform:scale(.97)}
 .pinyiye-preview span{transition:transform .18s}
 .pinyiye-preview:hover span{transform:translate(2px,-2px)}
-.pinyiye-release{font-size:13px;line-height:1.6;color:#435347;margin-top:10px}
 .product-artwork{width:100%;height:calc(340 * var(--u));align-self:center;border:0;padding:0;background:transparent;position:relative;cursor:zoom-in;border-radius:calc(24 * var(--u))}
 .phone-art{display:block;position:relative;width:100%;height:100%;overflow:hidden;border-radius:calc(24 * var(--u));box-shadow:0 5px 8px #33241814}
 .phone-art img{position:absolute;max-width:none;width:568.888889%;height:auto;left:-41.666667%;top:-217.941176%;pointer-events:none}
@@ -155,7 +153,6 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
   .pinyiye-info{padding:0}
   .pinyiye-brand h3{font-size:32px;margin:0}
   .pinyiye-brand img{width:48px;height:48px}
-  .pinyiye-tagline{font-size:22px;margin-bottom:10px}
   .pinyiye-info .product-description{text-wrap:pretty;font-size:14px;margin-bottom:12px}
   .pinyiye-features{margin-bottom:16px;gap:5px 12px}
   .pinyiye-meta .product-type,.pinyiye-meta .product-status{font-size:13px;padding:8px 13px}
@@ -183,7 +180,7 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
   html[lang=en] .product-description{font-size:13px}
 }
 @media(max-width:359px){.product{gap:13px;padding:20px 14px;grid-template-columns:42% 1fr}.product-info h3{font-size:24px}.product-description{font-size:12px}.app-store-button strong{font-size:13px}.hero-copy h1{font-size:37px}.hero-intro{padding:0}.playground-footer-links{gap:17px}}
-@media(max-width:359px){.product-pinyiye{grid-template-columns:minmax(0,1fr);padding:24px 18px;gap:24px}.pinyiye-brand h3{font-size:30px}.pinyiye-tagline{font-size:21px}}
+@media(max-width:359px){.product-pinyiye{grid-template-columns:minmax(0,1fr);padding:24px 18px;gap:24px}.pinyiye-brand h3{font-size:30px}}
 @media(prefers-reduced-motion:reduce){.playground *, .playground *::before, .playground *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 @media(min-width:768px){html:not([lang=en]) .hero-copy h1{transform:translateX(calc(36 * var(--u)))}}
@@ -193,7 +190,6 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
   .product-pinyiye{padding:24px 30px;gap:30px;min-height:350px}
   .pinyiye-artwork{height:300px}
   .pinyiye-brand h3{font-size:30px;margin:0}
-  .pinyiye-tagline{font-size:21px}
   .pinyiye-info .product-description{font-size:14px;line-height:1.65}
   body.playground .cv2-nav-links a:not(.cv2-cta),body.playground .lang-btn{font-size:13px}
   .product-description{font-size:14px;line-height:1.55;margin-bottom:9px}

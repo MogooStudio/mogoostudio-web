@@ -55,12 +55,10 @@ const galleries = [
           </button>
           <div class="product-info pinyiye-info">
             <div class="pinyiye-brand"><Image src={pinyiyeIcon} alt="" width={112} format="webp" loading="lazy" /><h3 id="pinyiye-title">{copy.pinyiye.name}</h3></div>
-            <p class="pinyiye-tagline">{copy.pinyiye.tagline}</p>
-            <p class="product-description">{copy.pinyiye.description}</p>
+            <p class="product-description">{copy.pinyiye.tagline} {copy.pinyiye.description}</p>
             <ul class="pinyiye-features">{copy.pinyiye.features.map(feature => <li>{feature}</li>)}</ul>
             <div class="pinyiye-meta"><span class="product-type">{copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
             <button type="button" class="pinyiye-preview" data-gallery="gallery-pinyiye" aria-haspopup="dialog">{copy.pinyiye.preview}<span aria-hidden="true">↗</span></button>
-            <p class="pinyiye-release">{copy.pinyiye.release}</p>
           </div>
         </article>
         {games.map(game => (
