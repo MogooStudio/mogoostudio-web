@@ -7,6 +7,11 @@ import { getLangFromUrl } from '../i18n/utils';
 import { homeCopy } from '../i18n/home';
 import hero from '../assets/home/playground-still-life.png';
 import approvedArtwork from '../assets/home/approved-artwork.png';
+import pinyiyeIcon from '../assets/pinyiye/icon.png';
+import pinyiyeEditor from '../assets/pinyiye/editor.png';
+import pinyiyeExport from '../assets/pinyiye/export.png';
+import pinyiyeWeekend from '../assets/pinyiye/weekend.jpg';
+import pinyiyeSunshine from '../assets/pinyiye/sunshine.jpg';
 
 const lang = getLangFromUrl(Astro.url);
 const copy = homeCopy[lang];
@@ -15,6 +20,15 @@ const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/scre
 const games = [
   { id: 'minimalist-breakout', title: 'Minimalist Breakout', lines: ['Minimalist', 'Breakout'], description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
   { id: 'flappy-ball', title: 'Flappy Ball Hop', lines: ['Flappy', 'Ball Hop'], description: copy.flappy, platform: null, available: false, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/flappy-ball/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
+];
+const galleries = [
+  { id: 'pinyiye', title: copy.pinyiye.name, screenshots: [
+    { src: pinyiyeEditor, alt: copy.pinyiye.editorAlt },
+    { src: pinyiyeWeekend, alt: copy.pinyiye.weekendAlt },
+    { src: pinyiyeSunshine, alt: copy.pinyiye.sunshineAlt },
+    { src: pinyiyeExport, alt: copy.pinyiye.exportAlt },
+  ] },
+  ...games.map(game => ({ ...game, screenshots: game.screenshots.map((src, index) => ({ src, alt: `${game.title} ${index + 1}` })) })),
 ];
 ---
 
@@ -32,6 +46,23 @@ const games = [
     <section id="works" class="selected-work" aria-labelledby="works-title">
       <h2 id="works-title" class="display-type">{copy.selected}</h2>
       <div class="products">
+        <article id="pinyiye" class="product product-pinyiye" aria-labelledby="pinyiye-title">
+          <button type="button" class="pinyiye-artwork" data-gallery="gallery-pinyiye" aria-label={`${copy.pinyiye.name} — ${copy.screenshot}`} aria-haspopup="dialog">
+            <span class="pinyiye-print pinyiye-print-weekend"><Image src={pinyiyeWeekend} alt="" width={360} format="webp" loading="lazy" /></span>
+            <span class="pinyiye-print pinyiye-print-sunshine"><Image src={pinyiyeSunshine} alt="" width={360} format="webp" loading="lazy" /></span>
+            <span class="pinyiye-phone"><Image src={pinyiyeEditor} alt={copy.pinyiye.editorAlt} width={440} format="webp" loading="lazy" /></span>
+            <span class="artwork-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          </button>
+          <div class="product-info pinyiye-info">
+            <div class="pinyiye-brand"><Image src={pinyiyeIcon} alt="" width={112} format="webp" loading="lazy" /><h3 id="pinyiye-title">{copy.pinyiye.name}</h3></div>
+            <p class="pinyiye-tagline">{copy.pinyiye.tagline}</p>
+            <p class="product-description">{copy.pinyiye.description}</p>
+            <ul class="pinyiye-features">{copy.pinyiye.features.map(feature => <li>{feature}</li>)}</ul>
+            <div class="pinyiye-meta"><span class="product-type">{copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
+            <button type="button" class="pinyiye-preview" data-gallery="gallery-pinyiye" aria-haspopup="dialog">{copy.pinyiye.preview}<span aria-hidden="true">↗</span></button>
+            <p class="pinyiye-release">{copy.pinyiye.release}</p>
+          </div>
+        </article>
         {games.map(game => (
           <article id={game.id} class:list={['product', game.available ? 'product-breakout' : 'product-flappy']}>
             <button type="button" class="product-artwork" data-gallery={`gallery-${game.id}`} aria-label={`${game.title} — ${copy.screenshot}`} aria-haspopup="dialog">
@@ -65,10 +96,10 @@ const games = [
     </section>
   </main>
 
-  {games.map(game => <dialog id={`gallery-${game.id}`} class="screenshot-dialog" aria-label={`${game.title} — ${copy.screenshot}`}>
-    <div class="gallery-header"><h2>{game.title}</h2><button type="button" class="gallery-close" aria-label={copy.close}>×</button></div>
-    <div class="gallery-slides">{game.screenshots.map((src, index) => <figure hidden={index !== 0}><Image src={src} alt={`${game.title} ${index + 1}`} width={440} format="webp" loading="lazy" /></figure>)}</div>
-    <div class="gallery-controls"><button type="button" class="gallery-previous" aria-label={copy.previous}>←</button><span class="gallery-counter" aria-live="polite">1 / {game.screenshots.length}</span><button type="button" class="gallery-next" aria-label={copy.next}>→</button></div>
+  {galleries.map(gallery => <dialog id={`gallery-${gallery.id}`} class="screenshot-dialog" aria-label={`${gallery.title} — ${copy.screenshot}`}>
+    <div class="gallery-header"><h2>{gallery.title}</h2><button type="button" class="gallery-close" aria-label={copy.close}>×</button></div>
+    <div class="gallery-slides">{gallery.screenshots.map(({ src, alt }, index) => <figure hidden={index !== 0}><Image src={src} alt={alt} width={440} format="webp" loading="lazy" /></figure>)}</div>
+    <div class="gallery-controls"><button type="button" class="gallery-previous" aria-label={copy.previous}>←</button><span class="gallery-counter" aria-live="polite">1 / {gallery.screenshots.length}</span><button type="button" class="gallery-next" aria-label={copy.next}>→</button></div>
   </dialog>)}
 </BaseLayout>
 
@@ -90,9 +121,9 @@ const games = [
     document.querySelectorAll('.product, .values-row').forEach(el => observer.observe(el));
   }
 
-  document.querySelectorAll<HTMLButtonElement>('[data-gallery]').forEach(trigger => {
-    const dialog = document.getElementById(trigger.dataset.gallery ?? '') as HTMLDialogElement | null;
-    if (!dialog) return;
+  document.querySelectorAll<HTMLDialogElement>('.screenshot-dialog').forEach(dialog => {
+    const triggers = [...document.querySelectorAll<HTMLButtonElement>(`[data-gallery="${dialog.id}"]`)];
+    let activeTrigger: HTMLButtonElement | undefined;
     const slides = [...dialog.querySelectorAll<HTMLElement>('figure')];
     const previous = dialog.querySelector<HTMLButtonElement>('.gallery-previous')!;
     const next = dialog.querySelector<HTMLButtonElement>('.gallery-next')!;
@@ -105,15 +136,16 @@ const games = [
       next.disabled = current === slides.length - 1;
       counter.textContent = `${current + 1} / ${slides.length}`;
     }
-    trigger.addEventListener('click', () => {
+    triggers.forEach(trigger => trigger.addEventListener('click', () => {
+      activeTrigger = trigger;
       display(0);
       dialog.showModal();
       document.body.classList.add('gallery-open');
-    });
+    }));
     previous.addEventListener('click', () => display(current - 1));
     next.addEventListener('click', () => display(current + 1));
     dialog.querySelector('.gallery-close')?.addEventListener('click', () => dialog.close());
-    dialog.addEventListener('close', () => { document.body.classList.remove('gallery-open'); trigger.focus({ preventScroll: true }); });
+    dialog.addEventListener('close', () => { document.body.classList.remove('gallery-open'); activeTrigger?.focus({ preventScroll: true }); });
     dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
     dialog.addEventListener('keydown', event => {
       if (event.key === 'ArrowRight') { event.preventDefault(); display(current + 1); }

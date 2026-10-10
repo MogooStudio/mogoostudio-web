@@ -5,6 +5,7 @@
 ## 当前内容
 
 - 展示《Minimalist Breakout》和《Flappy Ball Hop》的介绍、图标与游戏截图
+- 首页展示微信小程序「拼一页」的品牌头像、实际编辑界面与拼图成品；当前状态为已提审、审核中
 - 提供英语、简体中文和繁体中文页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
 - 内置响应式布局、语言切换、SEO 元信息、Canonical、`hreflang`、站点地图与爬虫规则
@@ -73,9 +74,13 @@ npm run dev
 - 隐私政策、服务条款、第三方 SDK 或支持邮箱发生变化时，必须同步更新所有语言版本
 - 提交前至少执行一次 `npm run build`
 
+「拼一页」文案位于 `src/i18n/home.ts` 的 `pinyiye` 字段，展示素材位于 `src/assets/pinyiye/`，来源为本地 `photo-collage-mini-program` 项目的已选头像 v16、原生编辑/导出截图和实际模板导出成品。审核通过且正式发布后，再同步更新三种语言的状态并接入正式小程序码或访问链接。
+
 ## 部署
 
 站点在 `astro.config.mjs` 中配置为静态输出，生产域名为 `https://mogoostudio.com`。运行 `npm run build` 后，将 `dist/` 目录部署到任意静态托管服务即可。
+
+当前托管为 Cloudflare Pages，项目 `mogoostudio-web` 与 GitHub 仓库关联；推送 `main` 后可通过对应提交的 Cloudflare Pages 检查核对部署结果，最后检查正式域名上的页面。
 
 ## 网站统计
 
