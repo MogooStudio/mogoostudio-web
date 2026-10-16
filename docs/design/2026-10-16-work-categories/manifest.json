@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "lang": "zh",
+  "project": "MogooStudio · 精选作品分类导航",
+  "brief": "仅设计预览，网站源码未接入分类。全部4 / 游戏3 / 小程序1。进入单张视图可点击分类、切换桌面与窄屏。",
+  "round": "分类导航方案 01",
+  "candidates": [
+    {
+      "id": "baseline",
+      "name": "当前作品区",
+      "concept": "当前居中标题与纵向作品排列，用于对照导航加入前的空间。",
+      "kind": "image",
+      "source": "baseline/page.png",
+      "baseline": true,
+      "traits": [
+        "当前页面截图"
+      ],
+      "typography": "PlaygroundDisplay / Nunito",
+      "palette": [
+        "#fffcf6",
+        "#101113",
+        "#ff4260"
+      ]
+    },
+    {
+      "id": "a",
+      "name": "A · 居中胶囊",
+      "concept": "标题下方一条连续胶囊，选中底板随分类移动。",
+      "traits": [
+        "延续圆润品牌",
+        "默认推荐",
+        "标题保持居中"
+      ],
+      "kind": "html",
+      "source": "a.html",
+      "interactive": true,
+      "typography": "中文标题 PlaygroundDisplay；分类 Nunito / Microsoft YaHei 900；正文16px",
+      "palette": [
+        "#fffcf6",
+        "#101113",
+        "#ff4260",
+        "#edf4e9"
+      ]
+    },
+    {
+      "id": "b",
+      "name": "B · 同行下划线",
+      "concept": "桌面标题和导航同排，窄屏自然分为两行。",
+      "traits": [
+        "节省纵向空间",
+        "线条更安静",
+        "桌面左右平衡"
+      ],
+      "kind": "html",
+      "source": "b.html",
+      "interactive": true,
+      "typography": "中文标题 PlaygroundDisplay；分类 Nunito / Microsoft YaHei 900；正文16px",
+      "palette": [
+        "#fffcf6",
+        "#101113",
+        "#ff4260",
+        "#edf4e9"
+      ]
+    },
+    {
+      "id": "c",
+      "name": "C · 文件夹页签",
+      "concept": "将分类做成作品档案的纸质页签，当前页向内容区接续。",
+      "traits": [
+        "呼应相纸材质",
+        "边缘形成层次",
+        "装饰更明显"
+      ],
+      "kind": "html",
+      "source": "c.html",
+      "interactive": true,
+      "typography": "中文标题 PlaygroundDisplay；分类 Nunito / Microsoft YaHei 900；正文16px",
+      "palette": [
+        "#fffcf6",
+        "#101113",
+        "#ff4260",
+        "#edf4e9"
+      ]
+    }
+  ]
+}

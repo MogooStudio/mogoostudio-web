@@ -1,0 +1,27 @@
+[
+  {
+    "file": "page-1440x1000.png",
+    "state": null,
+    "size": "1440x1000",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "page-390x844.png",
+    "state": null,
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": [
+      {
+        "rule": "contrastLow",
+        "label": "文字对比度不达标（正文低于 4.5:1，大字低于 3:1）",
+        "count": 1,
+        "examples": [
+          "a.explore-button「探索作品」（3.39:1）"
+        ]
+      }
+    ]
+  }
+]

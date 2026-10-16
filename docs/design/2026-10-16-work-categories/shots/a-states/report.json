@@ -1,0 +1,50 @@
+[
+  {
+    "file": "all-1440x1000.png",
+    "state": "all",
+    "size": "1440x1000",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "games-1440x1000.png",
+    "state": "games",
+    "size": "1440x1000",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "mini-1440x1000.png",
+    "state": "mini",
+    "size": "1440x1000",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "all-390x844.png",
+    "state": "all",
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "games-390x844.png",
+    "state": "games",
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "mini-390x844.png",
+    "state": "mini",
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  }
+]

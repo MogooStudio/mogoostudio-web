@@ -24,6 +24,11 @@ const games = [
   { id: 'minimalist-breakout', title: 'Minimalist Breakout', description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
   { id: 'flappy-ball', title: 'Flappy Ball Hop', description: copy.flappy, platform: null, available: false, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/flappy-ball/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
 ];
+const categories = [
+  { id: 'all', label: copy.categories.all },
+  { id: 'games', label: copy.categories.games },
+  { id: 'mini', label: copy.categories.mini },
+];
 const galleries = [
   { id: 'youcanup', title: copy.youcanup.name, screenshots: [
     { src: youcanupMenu, alt: copy.youcanup.menuAlt },
@@ -43,7 +48,7 @@ const galleries = [
   <main id="main" class="playground-home">
     <section class="playground-hero" aria-labelledby="studio-title">
       <div class="hero-copy">
-        <h1 id="studio-title" class="display-type">{copy.headline.map(line => <span>{line}</span>)}</h1>
+        <div class="hero-headline-motion"><h1 id="studio-title" class="display-type">{copy.headline.map(line => <span>{line}</span>)}</h1></div>
         <p class="hero-intro">{copy.intro}</p>
         <a class="explore-button" href="#works">{copy.explore}<svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
       </div>
@@ -52,8 +57,15 @@ const galleries = [
 
     <section id="works" class="selected-work" aria-labelledby="works-title">
       <h2 id="works-title" class="display-type">{copy.selected}</h2>
-      <div class="products">
-        <article id="pinyiye" class="product product-pinyiye" aria-labelledby="pinyiye-title">
+      <nav class="work-categories" aria-label={copy.categories.label} hidden>
+        {categories.map(category => <button type="button" class="work-category" data-work-filter={category.id} aria-pressed={category.id === 'all' ? 'true' : 'false'} aria-controls="work-results"><span>{category.label}</span><span class="work-category-count" data-category-count={category.id}></span></button>)}
+        <div class="work-categories-active" aria-hidden="true">
+          {categories.map(category => <span class="work-category"><span>{category.label}</span><span class="work-category-count" data-category-count={category.id}></span></span>)}
+        </div>
+      </nav>
+      <p class="work-filter-status" role="status" data-result-message={copy.categories.result}></p>
+      <div id="work-results" class="products">
+        <article id="pinyiye" class="product product-pinyiye" data-work-category="mini" aria-labelledby="pinyiye-title">
           <button type="button" class="pinyiye-artwork" data-gallery="gallery-pinyiye" aria-label={`${copy.pinyiye.name} — ${copy.screenshot}`} aria-haspopup="dialog">
             <span class="pinyiye-print pinyiye-print-weekend"><Image src={pinyiyeWeekend} alt="" width={360} format="webp" loading="lazy" /></span>
             <span class="pinyiye-print pinyiye-print-sunshine"><Image src={pinyiyeSunshine} alt="" width={360} format="webp" loading="lazy" /></span>
@@ -66,7 +78,7 @@ const galleries = [
             <div class="product-meta pinyiye-meta"><span class="product-type">{copy.pinyiye.type} · {copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
           </div>
         </article>
-        <article id="youcanup" class="product product-youcanup" aria-labelledby="youcanup-title">
+        <article id="youcanup" class="product product-youcanup" data-work-category="games" aria-labelledby="youcanup-title">
           <button type="button" class="youcanup-artwork" data-gallery="gallery-youcanup" aria-label={`${copy.youcanup.name} — ${copy.screenshot}`} aria-haspopup="dialog">
             <span class="youcanup-screen youcanup-screen-gameplay"><Image src={youcanupGameplay} alt={copy.youcanup.gameplayAlt} width={440} format="webp" loading="lazy" /></span>
             <span class="youcanup-screen youcanup-screen-menu"><Image src={youcanupMenu} alt={copy.youcanup.menuAlt} width={440} format="webp" loading="lazy" /></span>
@@ -79,7 +91,7 @@ const galleries = [
           </div>
         </article>
         {games.map(game => (
-          <article id={game.id} class:list={['product', game.available ? 'product-breakout' : 'product-flappy']}>
+          <article id={game.id} class:list={['product', game.available ? 'product-breakout' : 'product-flappy']} data-work-category="games">
             <button type="button" class="product-artwork" data-gallery={`gallery-${game.id}`} aria-label={`${game.title} — ${copy.screenshot}`} aria-haspopup="dialog">
               {/* The approved promotional phone artwork is a CSS image sprite. All surrounding copy is live HTML. */}
               <span class="phone-art"><img src={artwork.src} width={1024} height={1536} alt="" loading="lazy" decoding="async" /></span>
@@ -121,22 +133,11 @@ const galleries = [
 </BaseLayout>
 
 <script>
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!reducedMotion.matches) {
-    document.querySelector('.hero-copy')?.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 450, easing: 'ease-out' });
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const isValues = entry.target.classList.contains('values-row');
-        entry.target.animate(isValues
-          ? [{ opacity: 0.65, clipPath: 'inset(0 6% 0 6%)' }, { opacity: 1, clipPath: 'inset(0)' }]
-          : [{ opacity: 0.75, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
-          { duration: 450, easing: 'cubic-bezier(.2,.7,.2,1)' });
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.product, .values-row').forEach(el => observer.observe(el));
-  }
+  import { initializeHomeMotion } from '../scripts/home-motion';
+  import { initializeWorkCategories } from '../scripts/work-categories';
+
+  const motion = initializeHomeMotion();
+  initializeWorkCategories(() => motion?.refreshWorks());
 
   document.querySelectorAll<HTMLDialogElement>('.screenshot-dialog').forEach(dialog => {
     const triggers = [...document.querySelectorAll<HTMLButtonElement>(`[data-gallery="${dialog.id}"]`)];

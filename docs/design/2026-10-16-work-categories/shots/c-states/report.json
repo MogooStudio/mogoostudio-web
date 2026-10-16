@@ -1,0 +1,26 @@
+[
+  {
+    "file": "all.png",
+    "state": "all",
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "games.png",
+    "state": "games",
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  },
+  {
+    "file": "mini.png",
+    "state": "mini",
+    "size": "390x844",
+    "zoom": 1,
+    "issues": [],
+    "lint": []
+  }
+]

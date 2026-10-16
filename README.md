@@ -10,6 +10,8 @@
 - 提供英语、简体中文和繁体中文页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
 - 内置响应式布局、语言切换、SEO 元信息、Canonical、`hreflang`、站点地图与爬虫规则
+- 首页采用 A+B 分段滚动动效：首屏静物拉远并衔接作品区，「拼一页」相纸向心聚拢；支持回滚倒放和系统“减少动态效果”设置
+- 精选作品采用居中胶囊分类导航，按全部、游戏、小程序切换，并显示实际作品数量
 - 提供 `ads.txt` 和 `app-ads.txt` 应用广告验证文件
 
 ## 技术栈
@@ -17,6 +19,7 @@
 - [Astro 7](https://astro.build/)
 - TypeScript
 - Astro Assets 图片优化
+- GSAP / ScrollTrigger（随站点打包，不依赖外部 CDN）
 - 纯静态输出，无服务端运行时
 
 ## 本地开发
@@ -51,6 +54,10 @@ npm run dev
 | 服务条款 | `/terms/` | `/zh-cn/terms/` | `/zh-tw/terms/` |
 
 翻译文案维护在 `src/i18n/ui.ts`（原有文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页），路径与语言识别逻辑位于 `src/i18n/utils.ts`。新增页面时，需要同步补齐三种语言的路由，并更新 `src/pages/sitemap-index.xml.ts` 中的页面列表。
+
+首页动效位于 `src/scripts/home-motion.ts`。主叙事随滚动位置变化，其他作品与价值图标仅出场一次；窄屏缩短位移，短视口取消固定舞台，减少动态效果或禁用 JavaScript 时保留完整静态内容。方案与验证记录见 `docs/design/2026-10-16-scroll-motion/`。
+
+作品分类逻辑位于 `src/scripts/work-categories.ts`，分类依据写在产品的 `data-work-category` 上，数量从实际产品节点计算。筛选后独立重建作品区动效；直达被隐藏的产品锚点时恢复全部作品并定位。禁用 JavaScript 时隐藏分类控件、展示全部产品。三语分类文案与结果播报维护在 `src/i18n/home.ts`，选定方案及截图见 `docs/design/2026-10-16-work-categories/`。
 
 ## 项目结构
 

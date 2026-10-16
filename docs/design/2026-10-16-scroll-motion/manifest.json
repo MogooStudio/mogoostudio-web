@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "lang": "zh",
+  "project": "MogooStudio · 滚动动效高清分镜",
+  "brief": "初轮四套静态分镜存档。已选 A+B 分段组合，现已接入本地网站；此页用于回看设计图。",
+  "round": "滚动方案 01",
+  "candidates": [
+    {
+      "id": "baseline",
+      "name": "当前首页",
+      "concept": "对照当前网站的静物首屏与作品入口。",
+      "typography": "PlaygroundDisplay 中文展示体；Nunito 品牌字与正文",
+      "palette": [
+        "#fffcf6",
+        "#101113",
+        "#ff4260"
+      ],
+      "traits": [
+        "当前渲染截图",
+        "用于核对现有视觉"
+      ],
+      "kind": "image",
+      "source": "baseline-home.png",
+      "baseline": true
+    },
+    {
+      "id": "a-depth",
+      "name": "A · 景深拉远",
+      "concept": "首屏桌面逐渐拉远，精选作品自然接入。",
+      "typography": "沿用现有圆润中文展示字、Nunito 品牌字",
+      "palette": [
+        "#fffcf6",
+        "#ff4260",
+        "#edf4e9"
+      ],
+      "traits": [
+        "静物缩放 1 → 0.82",
+        "约 100vh，回滚可逆",
+        "推荐与 B 分段组合"
+      ],
+      "kind": "image",
+      "source": "A-depth.png"
+    },
+    {
+      "id": "b-paper",
+      "name": "B · 相纸拼合",
+      "concept": "真实相纸从散开到靠拢，在手机旁拼成一组。",
+      "typography": "沿用现有圆润中文展示字、Nunito 品牌字",
+      "palette": [
+        "#edf4e9",
+        "#274a32",
+        "#fff3ca"
+      ],
+      "traits": [
+        "相纸向心聚拢",
+        "文字保持稳定",
+        "素材已有独立图层"
+      ],
+      "kind": "image",
+      "source": "B-paper-v2.png"
+    },
+    {
+      "id": "c-stack",
+      "name": "C · 作品叠页",
+      "concept": "前页退后，后页从下方覆盖，像翻看作品档案。",
+      "typography": "沿用现有圆润中文展示字、Nunito 品牌字",
+      "palette": [
+        "#edf4e9",
+        "#fff0df",
+        "#ddfafd"
+      ],
+      "traits": [
+        "前页缩放到 0.94",
+        "后页向上覆盖",
+        "每件约 80vh"
+      ],
+      "kind": "image",
+      "source": "C-stack-v2.png"
+    },
+    {
+      "id": "d-bounce",
+      "name": "D · 弹跳接力",
+      "concept": "白球沿页面外缘弹跳，串起作品与工作室价值。",
+      "typography": "沿用现有圆润中文展示字、Nunito 品牌字",
+      "palette": [
+        "#fffcf6",
+        "#ff4260",
+        "#00a8bd"
+      ],
+      "traits": [
+        "球体沿曲线接力",
+        "约 120vh，停滚即停",
+        "需要额外分层素材"
+      ],
+      "kind": "image",
+      "source": "D-bounce.png"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ export const homeCopy = {
     headline: ['Useful things.', 'Playful things.'],
     intro: 'Independent software, apps and games. A little more ease and joy, every day.',
     explore: 'Explore our work', selected: 'Selected work',
+    categories: { label: 'Filter selected work', all: 'All', games: 'Games', mini: 'Mini Programs', result: 'Projects shown: {count}' },
     breakout: 'Minimalist brick-breaking. Make every bounce count.',
     flappy: 'Tap to hop. Thread the hoops. Collect the stars.',
     youcanup: {
@@ -44,6 +45,7 @@ export const homeCopy = {
     headline: ['做点有用的。', '也做点有趣的。'],
     intro: '独立创造软件、应用与游戏，让日常多一点顺手与快乐。',
     explore: '探索作品', selected: '精选作品',
+    categories: { label: '按类型筛选作品', all: '全部', games: '游戏', mini: '小程序', result: '显示 {count} 件作品' },
     breakout: '极简打砖块，专注每一次反弹。',
     flappy: '轻点跃起，穿过篮圈，收集星星。',
     youcanup: {
@@ -80,6 +82,7 @@ export const homeCopy = {
     headline: ['做點有用的。', '也做點有趣的。'],
     intro: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂。',
     explore: '探索作品', selected: '精選作品',
+    categories: { label: '依類型篩選作品', all: '全部', games: '遊戲', mini: '小程式', result: '顯示 {count} 件作品' },
     breakout: '極簡打磚塊，專注每一次反彈。',
     flappy: '輕點躍起，穿過籃圈，收集星星。',
     youcanup: {
