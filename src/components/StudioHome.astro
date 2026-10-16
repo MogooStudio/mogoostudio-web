@@ -21,8 +21,8 @@ const copy = homeCopy[lang];
 const artwork = await getImage({ src: approvedArtwork, format: 'webp', quality: 100 });
 const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/**/*.png', { eager: true });
 const games = [
-  { id: 'minimalist-breakout', title: 'Minimalist Breakout', lines: ['Minimalist', 'Breakout'], description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
-  { id: 'flappy-ball', title: 'Flappy Ball Hop', lines: ['Flappy', 'Ball Hop'], description: copy.flappy, platform: null, available: false, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/flappy-ball/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
+  { id: 'minimalist-breakout', title: 'Minimalist Breakout', description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
+  { id: 'flappy-ball', title: 'Flappy Ball Hop', description: copy.flappy, platform: null, available: false, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/flappy-ball/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
 ];
 const galleries = [
   { id: 'youcanup', title: copy.youcanup.name, screenshots: [
@@ -62,10 +62,8 @@ const galleries = [
           </button>
           <div class="product-info pinyiye-info">
             <div class="pinyiye-brand"><Image src={pinyiyeIcon} alt="" width={112} format="webp" loading="lazy" /><h3 id="pinyiye-title">{copy.pinyiye.name}</h3></div>
-            <p class="product-description">{copy.pinyiye.tagline} {copy.pinyiye.description}</p>
-            <ul class="pinyiye-features">{copy.pinyiye.features.map(feature => <li>{feature}</li>)}</ul>
-            <div class="pinyiye-meta"><span class="product-type">{copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
-            <button type="button" class="pinyiye-preview" data-gallery="gallery-pinyiye" aria-haspopup="dialog">{copy.pinyiye.preview}<span aria-hidden="true">↗</span></button>
+            <p class="product-description">{copy.pinyiye.description}</p>
+            <div class="product-meta pinyiye-meta"><span class="product-type">{copy.pinyiye.type} · {copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
           </div>
         </article>
         <article id="youcanup" class="product product-youcanup" aria-labelledby="youcanup-title">
@@ -75,12 +73,9 @@ const galleries = [
             <span class="artwork-hint" aria-hidden="true">↗</span>
           </button>
           <div class="product-info youcanup-info">
-            <div class="youcanup-brand"><Image src={youcanupIcon} alt="" width={112} format="webp" loading="lazy" /><div><h3 id="youcanup-title">{copy.youcanup.name}</h3>{lang !== 'en' && <span class="youcanup-english-name">YouCanUp</span>}</div></div>
-            <p class="youcanup-tagline">{copy.youcanup.tagline}</p>
+            <div class="youcanup-brand"><Image src={youcanupIcon} alt="" width={112} format="webp" loading="lazy" /><h3 id="youcanup-title">{copy.youcanup.name}</h3></div>
             <p class="product-description">{copy.youcanup.description}</p>
-            <ul class="youcanup-features">{copy.youcanup.features.map(feature => <li>{feature}</li>)}</ul>
-            <div class="youcanup-meta"><span class="product-type">{copy.game} · iOS</span><span class="product-status">{copy.coming}</span></div>
-            <button type="button" class="youcanup-preview" data-gallery="gallery-youcanup" aria-haspopup="dialog">{copy.screenshot}<span aria-hidden="true">↗</span></button>
+            <div class="product-meta youcanup-meta"><span class="product-type">{copy.game} · iOS</span><span class="product-status">{copy.coming}</span></div>
           </div>
         </article>
         {games.map(game => (
@@ -91,10 +86,12 @@ const galleries = [
               <span class="artwork-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
             </button>
             <div class="product-info">
-              <h3>{game.lines.map(line => <span>{line}</span>)}</h3>
+              <h3>{game.title}</h3>
               <p class="product-description">{game.description}</p>
-              <span class="product-type">{copy.game}{game.platform && ` · ${game.platform}`}</span>
-              <span class:list={['product-status', { 'is-available': game.available }]}>{game.available ? copy.available : copy.coming}</span>
+              <div class="product-meta">
+                <span class="product-type">{copy.game}{game.platform && ` · ${game.platform}`}</span>
+                <span class:list={['product-status', { 'is-available': game.available }]}>{game.available ? copy.available : copy.coming}</span>
+              </div>
               {game.available && <a class="app-store-button" href="https://apps.apple.com/us/app/minimalist-breakout/id6776583255" target="_blank" rel="noopener noreferrer" aria-label={`${game.title} — App Store`}>
                 <svg class="apple-icon" viewBox="0 0 24 28" aria-hidden="true"><path fill="currentColor" d="M19.65 14.73c.03 4.02 3.53 5.36 3.57 5.38-.03.09-.56 1.92-1.84 3.81-1.11 1.64-2.27 3.27-4.09 3.3-1.79.04-2.37-1.07-4.42-1.07-2.05 0-2.69 1.04-4.39 1.11-1.75.07-3.09-1.78-4.21-3.41C1.98 20.5.01 14.45 2.37 10.36c1.17-2.03 3.26-3.31 5.53-3.35 1.72-.03 3.34 1.18 4.4 1.18 1.05 0 3.02-1.46 5.09-1.25.87.04 3.32.35 4.89 2.65-.13.08-2.92 1.7-2.89 5.14h.26ZM16.23 4.68c.93-1.12 1.56-2.68 1.39-4.24-1.34.05-2.96.89-3.92 2.01-.86.98-1.62 2.54-1.42 4.04 1.5.12 3.01-.76 3.95-1.81Z" /></svg>
                 <span>{lang === 'en' ? <><small>{copy.download}</small><strong>App Store</strong></> : <><strong>{copy.download} App Store</strong><small>{lang === 'zh-tw' ? '下載' : '下载'}</small></>}</span>
