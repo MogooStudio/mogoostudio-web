@@ -9,6 +9,13 @@ export const homeCopy = {
     explore: 'Explore our work', selected: 'Selected work',
     breakout: 'Minimalist brick-breaking. Make every bounce count.',
     flappy: 'Tap to hop. Thread the hoops. Collect the stars.',
+    youcanup: {
+      name: 'YouCanUp', tagline: 'One finger. One more jump.',
+      description: 'Hold to charge, release to jump. Find your rhythm across moving and crumbling platforms in a playful clay world, and climb past your best.',
+      features: ['One-finger controls', 'Endless platforms', 'Character outfits'],
+      menuAlt: 'YouCanUp menu with an orange clay character jumping between purple and green platforms',
+      gameplayAlt: 'YouCanUp gameplay with 3D platforms, a height counter, and the hold-to-charge button',
+    },
     pinyiye: {
       name: '拼一页',
       tagline: 'Everyday photos. A page to keep.',
@@ -43,6 +50,13 @@ export const homeCopy = {
     explore: '探索作品', selected: '精选作品',
     breakout: '极简打砖块，专注每一次反弹。',
     flappy: '轻点跃起，穿过篮圈，收集星星。',
+    youcanup: {
+      name: '你行你上啊', tagline: '一根手指，挑战再高一点。',
+      description: '按住蓄力，松手起跳。在软陶世界里穿梭于移动台与碎裂台之间，把握每一次落点，向自己的最高纪录发起挑战。',
+      features: ['单指蓄力跳跃', '无尽平台挑战', '多款角色造型'],
+      menuAlt: '你行你上啊菜单，橙色软陶角色在紫色与绿色平台之间跳跃',
+      gameplayAlt: '你行你上啊实机游戏画面，展示立体平台、高度计分和按住蓄力按钮',
+    },
     pinyiye: {
       name: '拼一页',
       tagline: '把日常照片，拼成喜欢的一页。',
@@ -76,6 +90,13 @@ export const homeCopy = {
     explore: '探索作品', selected: '精選作品',
     breakout: '極簡打磚塊，專注每一次反彈。',
     flappy: '輕點躍起，穿過籃圈，收集星星。',
+    youcanup: {
+      name: '你行你上啊', tagline: '一根手指，挑戰再高一點。',
+      description: '按住蓄力，鬆手起跳。在軟陶世界裡穿梭於移動台與碎裂台之間，把握每一次落點，向自己的最高紀錄發起挑戰。',
+      features: ['單指蓄力跳躍', '無盡平台挑戰', '多款角色造型'],
+      menuAlt: '你行你上啊選單，橙色軟陶角色在紫色與綠色平台之間跳躍',
+      gameplayAlt: '你行你上啊實機遊戲畫面，展示立體平台、高度計分和按住蓄力按鈕',
+    },
     pinyiye: {
       name: '拼一页',
       tagline: '把日常照片，拼成喜歡的一頁。',

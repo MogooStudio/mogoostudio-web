@@ -7,6 +7,9 @@ import { getLangFromUrl } from '../i18n/utils';
 import { homeCopy } from '../i18n/home';
 import hero from '../assets/home/playground-still-life.png';
 import approvedArtwork from '../assets/home/approved-artwork.png';
+import youcanupIcon from '../assets/youcanup/icon.png';
+import youcanupMenu from '../assets/youcanup/menu.png';
+import youcanupGameplay from '../assets/youcanup/gameplay.png';
 import pinyiyeIcon from '../assets/pinyiye/icon.png';
 import pinyiyeEditor from '../assets/pinyiye/editor.png';
 import pinyiyeExport from '../assets/pinyiye/export.png';
@@ -22,6 +25,10 @@ const games = [
   { id: 'flappy-ball', title: 'Flappy Ball Hop', lines: ['Flappy', 'Ball Hop'], description: copy.flappy, platform: null, available: false, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/flappy-ball/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
 ];
 const galleries = [
+  { id: 'youcanup', title: copy.youcanup.name, screenshots: [
+    { src: youcanupMenu, alt: copy.youcanup.menuAlt },
+    { src: youcanupGameplay, alt: copy.youcanup.gameplayAlt },
+  ] },
   { id: 'pinyiye', title: copy.pinyiye.name, screenshots: [
     { src: pinyiyeEditor, alt: copy.pinyiye.editorAlt },
     { src: pinyiyeWeekend, alt: copy.pinyiye.weekendAlt },
@@ -59,6 +66,21 @@ const galleries = [
             <ul class="pinyiye-features">{copy.pinyiye.features.map(feature => <li>{feature}</li>)}</ul>
             <div class="pinyiye-meta"><span class="product-type">{copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
             <button type="button" class="pinyiye-preview" data-gallery="gallery-pinyiye" aria-haspopup="dialog">{copy.pinyiye.preview}<span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+        <article id="youcanup" class="product product-youcanup" aria-labelledby="youcanup-title">
+          <button type="button" class="youcanup-artwork" data-gallery="gallery-youcanup" aria-label={`${copy.youcanup.name} — ${copy.screenshot}`} aria-haspopup="dialog">
+            <span class="youcanup-screen youcanup-screen-gameplay"><Image src={youcanupGameplay} alt={copy.youcanup.gameplayAlt} width={440} format="webp" loading="lazy" /></span>
+            <span class="youcanup-screen youcanup-screen-menu"><Image src={youcanupMenu} alt={copy.youcanup.menuAlt} width={440} format="webp" loading="lazy" /></span>
+            <span class="artwork-hint" aria-hidden="true">↗</span>
+          </button>
+          <div class="product-info youcanup-info">
+            <div class="youcanup-brand"><Image src={youcanupIcon} alt="" width={112} format="webp" loading="lazy" /><div><h3 id="youcanup-title">{copy.youcanup.name}</h3>{lang !== 'en' && <span class="youcanup-english-name">YouCanUp</span>}</div></div>
+            <p class="youcanup-tagline">{copy.youcanup.tagline}</p>
+            <p class="product-description">{copy.youcanup.description}</p>
+            <ul class="youcanup-features">{copy.youcanup.features.map(feature => <li>{feature}</li>)}</ul>
+            <div class="youcanup-meta"><span class="product-type">{copy.game} · iOS</span><span class="product-status">{copy.coming}</span></div>
+            <button type="button" class="youcanup-preview" data-gallery="gallery-youcanup" aria-haspopup="dialog">{copy.screenshot}<span aria-hidden="true">↗</span></button>
           </div>
         </article>
         {games.map(game => (
