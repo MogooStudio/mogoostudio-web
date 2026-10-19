@@ -15,6 +15,7 @@ import pinyiyeEditor from '../assets/pinyiye/editor.png';
 import pinyiyeExport from '../assets/pinyiye/export.png';
 import pinyiyeWeekend from '../assets/pinyiye/weekend.jpg';
 import pinyiyeSunshine from '../assets/pinyiye/sunshine.jpg';
+import pinyiyeCode from '../assets/pinyiye/wechat-code.jpg';
 
 const lang = getLangFromUrl(Astro.url);
 const copy = homeCopy[lang];
@@ -76,6 +77,10 @@ const galleries = [
             <div class="pinyiye-brand"><Image src={pinyiyeIcon} alt="" width={112} format="webp" loading="lazy" /><h3 id="pinyiye-title">{copy.pinyiye.name}</h3></div>
             <p class="product-description">{copy.pinyiye.description}</p>
             <div class="product-meta pinyiye-meta"><span class="product-type">{copy.pinyiye.type} · {copy.pinyiye.platform}</span><span class="product-status">{copy.pinyiye.status}</span></div>
+            <button type="button" class="mini-program-button" data-mini-program aria-haspopup="dialog" aria-controls="pinyiye-code">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><path d="M7 7h4v4H7zm6 0h4v4h-4zm-6 6h4v4H7zm6 0h2v2h-2zm2 2h2v2h-2z" fill="currentColor" /></svg>
+              {copy.pinyiye.open}
+            </button>
           </div>
         </article>
         <article id="youcanup" class="product product-youcanup" data-work-category="games" aria-labelledby="youcanup-title">
@@ -125,6 +130,12 @@ const galleries = [
     </section>
   </main>
 
+  <dialog id="pinyiye-code" class="mini-program-dialog" aria-labelledby="pinyiye-code-title" aria-describedby="pinyiye-code-hint">
+    <div class="gallery-header"><h2 id="pinyiye-code-title">{copy.pinyiye.name}</h2><button type="button" class="gallery-close" aria-label={copy.pinyiye.closeCode} autofocus>×</button></div>
+    <img class="mini-program-code" src={pinyiyeCode.src} alt={copy.pinyiye.codeAlt} width={pinyiyeCode.width} height={pinyiyeCode.height} loading="lazy" />
+    <p id="pinyiye-code-hint" class="mini-program-code-hint">{copy.pinyiye.codeHint}</p>
+  </dialog>
+
   {galleries.map(gallery => <dialog id={`gallery-${gallery.id}`} class="screenshot-dialog" aria-label={`${gallery.title} — ${copy.screenshot}`}>
     <div class="gallery-header"><h2>{gallery.title}</h2><button type="button" class="gallery-close" aria-label={copy.close}>×</button></div>
     <div class="gallery-slides">{gallery.screenshots.map(({ src, alt }, index) => <figure hidden={index !== 0}><Image src={src} alt={alt} width={440} format="webp" loading="lazy" /></figure>)}</div>
@@ -138,6 +149,23 @@ const galleries = [
 
   const motion = initializeHomeMotion();
   initializeWorkCategories(() => motion?.refreshWorks());
+
+  const codeDialog = document.querySelector<HTMLDialogElement>('#pinyiye-code')!;
+  const codeTrigger = document.querySelector<HTMLButtonElement>('[data-mini-program]')!;
+  codeTrigger.addEventListener('click', () => {
+    codeDialog.showModal();
+    document.body.classList.add('gallery-open');
+  });
+  codeDialog.querySelector('.gallery-close')!.addEventListener('click', () => codeDialog.close());
+  codeDialog.addEventListener('close', () => {
+    document.body.classList.toggle('gallery-open', !!document.querySelector('dialog[open]'));
+    codeTrigger.focus({ preventScroll: true });
+  });
+  codeDialog.addEventListener('click', event => {
+    if (event.target !== codeDialog) return;
+    const rect = codeDialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) codeDialog.close();
+  });
 
   document.querySelectorAll<HTMLDialogElement>('.screenshot-dialog').forEach(dialog => {
     const triggers = [...document.querySelectorAll<HTMLButtonElement>(`[data-gallery="${dialog.id}"]`)];
