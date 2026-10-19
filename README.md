@@ -10,7 +10,7 @@
 - 提供英语、简体中文和繁体中文页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
 - 内置响应式布局、语言切换、SEO 元信息、Canonical、`hreflang`、站点地图与爬虫规则
-- 首页采用 A+B 分段滚动动效：首屏静物拉远并衔接作品区，「拼一页」相纸向心聚拢；支持回滚倒放和系统“减少动态效果”设置
+- 首页采用原生纵向滚动与 B 方案“图文对向入场”：图片从左侧、文字从右侧进入，各自在进入视野时播放一次；移除首屏固定、拉远及产品随滚动聚拢等旧效果
 - 精选作品采用居中胶囊分类导航，按全部、游戏、小程序切换，并显示实际作品数量
 - 提供 `ads.txt` 和 `app-ads.txt` 应用广告验证文件
 
@@ -19,7 +19,7 @@
 - [Astro 7](https://astro.build/)
 - TypeScript
 - Astro Assets 图片优化
-- GSAP / ScrollTrigger（随站点打包，不依赖外部 CDN）
+- 原生 CSS、Intersection Observer 与 Web Animations API（产品入场和交互反馈）
 - 纯静态输出，无服务端运行时
 
 ## 本地开发
@@ -55,9 +55,11 @@ npm run dev
 
 翻译文案维护在 `src/i18n/ui.ts`（原有文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页），路径与语言识别逻辑位于 `src/i18n/utils.ts`。新增页面时，需要同步补齐三种语言的路由，并更新 `src/pages/sitemap-index.xml.ts` 中的页面列表。
 
-首页动效位于 `src/scripts/home-motion.ts`。主叙事随滚动位置变化，其他作品与价值图标仅出场一次；窄屏缩短位移，短视口取消固定舞台，减少动态效果或禁用 JavaScript 时保留完整静态内容。方案与验证记录见 `docs/design/2026-10-16-scroll-motion/`。
+首页已采用 B 方案“图文对向入场”，入口为 `src/scripts/home-motion.ts`，共享实现位于 `src/scripts/product-entrance.ts`。桌面图片从左侧 140px、文字从右侧 100px 入场，手机分别为 90px 与 72px，时长 760ms。图片完成解码后再播放，图片与介绍分别观察进入视野的时机；滚回时不重复播放。键盘聚焦时立即落位，系统开启“减少动态效果”时展示完整静态内容。禁用 JavaScript 时内容正常显示。
 
-作品分类逻辑位于 `src/scripts/work-categories.ts`，分类依据写在产品的 `data-work-category` 上，数量从实际产品节点计算。筛选后独立重建作品区动效；直达被隐藏的产品锚点时恢复全部作品并定位。禁用 JavaScript 时隐藏分类控件、展示全部产品。三语分类文案与结果播报维护在 `src/i18n/home.ts`，选定方案及截图见 `docs/design/2026-10-16-work-categories/`。
+独立的 `/motion-studies/` 对比页保留第二轮“整卡推近”“图文对向入场”“叠卡交接”和静态基线，使用真实首页，支持三语、宽屏/手机及自动滚动演示。预览通过 iframe 标识与 `motion-study` 参数关闭首页自动安装的动效，再由对比页安装所选方案，预览内导航后也不会重复安装。旧方案与验证记录保留在 `docs/design/2026-10-16-scroll-motion/` 作为历史记录。
+
+作品分类逻辑位于 `src/scripts/work-categories.ts`，分类依据写在产品的 `data-work-category` 上，数量从实际产品节点计算。直达被隐藏的产品锚点时恢复全部作品并定位。禁用 JavaScript 时隐藏分类控件、展示全部产品。三语分类文案与结果播报维护在 `src/i18n/home.ts`，选定方案及截图见 `docs/design/2026-10-16-work-categories/`。
 
 ## 项目结构
 

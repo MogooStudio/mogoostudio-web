@@ -1,5 +1,5 @@
 /** Native filter buttons progressively enhance the complete, readable product list. */
-export function initializeWorkCategories(refreshMotion: () => void) {
+export function initializeWorkCategories() {
   const nav = document.querySelector<HTMLElement>('.work-categories');
   const results = document.querySelector<HTMLElement>('#work-results');
   if (!nav || !results) return;
@@ -31,7 +31,6 @@ export function initializeWorkCategories(refreshMotion: () => void) {
     positionIndicator(instant);
     fade?.cancel();
     products.forEach(product => { product.hidden = selected !== 'all' && product.dataset.workCategory !== selected; });
-    refreshMotion();
     status.textContent = status.dataset.resultMessage!.replace('{count}', String(products.filter(product => !product.hidden).length));
     if (!instant && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       fade = results!.animate([{ opacity: 0.65 }, { opacity: 1 }], { duration: 180, easing: 'cubic-bezier(.23,1,.32,1)' });
@@ -69,5 +68,4 @@ export function initializeWorkCategories(refreshMotion: () => void) {
   positionIndicator(true);
   new ResizeObserver(() => positionIndicator(true)).observe(nav);
   void document.fonts.ready.then(() => positionIndicator(true));
-  refreshMotion();
 }
