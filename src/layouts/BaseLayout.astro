@@ -4,8 +4,8 @@ import '../styles/studio-pages.css';
 import { homeCopy } from '../i18n/home';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
-import { languages } from '../i18n/ui';
+import { getLangFromUrl, useTranslations, getLocalizedPath, getPathWithoutLocale } from '../i18n/utils';
+import { languages, localeMetadata, type Locale } from '../i18n/locales';
 
 interface Props {
   title: string;
@@ -18,11 +18,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const { title, description = t('meta.index'), rawTitle = false, playground = true } = Astro.props;
 const pageTitle = rawTitle ? title : `${title} | MogooStudio`;
-const htmlLang = lang === 'zh-cn' ? 'zh-CN' : lang === 'zh-tw' ? 'zh-TW' : 'en';
+const htmlLang = localeMetadata[lang].html;
 
-const pathWithoutLocale = Astro.url.pathname.replace(/^\/(zh-cn|zh-tw)/, '') || '/';
-const hreflangMap: Record<string, string> = { en: 'en', 'zh-cn': 'zh-Hans', 'zh-tw': 'zh-Hant' };
-const ogLocaleMap: Record<string, string> = { en: 'en_US', 'zh-cn': 'zh_CN', 'zh-tw': 'zh_TW' };
+const pathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const locales = Object.keys(languages) as Locale[];
 const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.site).toString();
 ---
 
@@ -35,8 +34,8 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
   <title>{pageTitle}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={canonicalUrl} />
-  {Object.keys(languages).map((code) => (
-    <link rel="alternate" hreflang={hreflangMap[code]} href={new URL(getLocalizedPath(pathWithoutLocale, code), Astro.site)} />
+  {locales.map((code) => (
+    <link rel="alternate" hreflang={localeMetadata[code].hreflang} href={new URL(getLocalizedPath(pathWithoutLocale, code), Astro.site)} />
   ))}
   <link rel="alternate" hreflang="x-default" href={new URL(pathWithoutLocale, Astro.site)} />
   <meta property="og:type" content="website" />
@@ -44,13 +43,13 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:locale" content={ogLocaleMap[lang]} />
+  <meta property="og:locale" content={localeMetadata[lang].og} />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={description} />
   {playground ? <>
     <link rel="preload" href="/fonts/nunito-900.ttf" as="font" type="font/ttf" crossorigin />
-    {lang !== 'en' && <link rel="preload" href="/fonts/playground-display.woff2" as="font" type="font/woff2" crossorigin />}
+    {lang.startsWith('zh-') && <link rel="preload" href="/fonts/playground-display.woff2" as="font" type="font/woff2" crossorigin />}
   </> : <>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -11,7 +11,7 @@ body.playground{--u:min(.09765625vw,1.25px);--cream:#fffcf6;--ink:#101113;backgr
 .skip-link:focus{top:12px}
 .playground-home{max-width:1280px;margin:auto;overflow-anchor:none}
 .display-type{font-family:PlaygroundDisplay,'Microsoft YaHei',sans-serif;font-weight:400;line-height:1.15;letter-spacing:0;-webkit-text-stroke:calc(.5 * var(--u)) currentColor;paint-order:stroke fill}
-html[lang=en] body.playground .display-type{font-family:Nunito,sans-serif;font-weight:900;letter-spacing:-.045em}
+html:is([lang=en],[lang=es]) body.playground .display-type{font-family:Nunito,sans-serif;font-weight:900;letter-spacing:-.045em}
 .playground-hero{height:calc(565 * var(--u));position:relative;isolation:isolate;overflow:hidden}
 .hero-copy{position:relative;z-index:2;text-align:center;padding-top:calc(28 * var(--u));pointer-events:none}
 .hero-copy h1{font-size:calc(84 * var(--u));line-height:1.0714;letter-spacing:-.012em}
@@ -36,7 +36,7 @@ button.work-category{cursor:pointer}
 .work-categories-active .work-category-count{color:#8d1e36;background:#fff1f3}
 .work-categories[data-instant] .work-categories-active{transition:none}
 .work-filter-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-html[lang=en] .work-categories{width:min(100%,500px)}
+html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
 .products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:calc(16 * var(--u))}
 .product{height:calc(380 * var(--u));border-radius:calc(16 * var(--u));padding:calc(21 * var(--u)) calc(24 * var(--u)) calc(19 * var(--u)) calc(40 * var(--u));display:grid;grid-template-columns:calc(180 * var(--u)) minmax(0,1fr);gap:calc(28 * var(--u));scroll-margin-top:24px}
 .product-breakout{background:radial-gradient(ellipse at 35% 60%,#c7f8fc,#ddfafd)}
@@ -133,7 +133,7 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
 .gallery-controls button:disabled{opacity:.3;cursor:default}
 .gallery-controls button:not(:disabled):hover,.gallery-close:hover{background:#ffe2bc}
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}.screenshot-dialog[open]{animation:gallery-in .2s ease-out}@keyframes gallery-in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}}
-@media(min-width:768px){html[lang=en] .hero-copy h1{font-size:calc(78 * var(--u))}html[lang=en] .hero-intro{font-size:calc(18 * var(--u))}html[lang=en] .studio-values>h2{font-size:calc(43 * var(--u))}html[lang=en] .value h3{font-size:calc(19 * var(--u))}html[lang=en] .value p{font-size:calc(12 * var(--u))}html[lang=en] .playground-footer h2{font-size:calc(30 * var(--u))}}
+@media(min-width:768px){html:is([lang=en],[lang=es]) .hero-copy h1{font-size:calc(78 * var(--u))}html:is([lang=en],[lang=es]) .hero-intro{font-size:calc(18 * var(--u))}html:is([lang=en],[lang=es]) .studio-values>h2{font-size:calc(43 * var(--u))}html:is([lang=en],[lang=es]) .value h3{font-size:calc(19 * var(--u))}html:is([lang=en],[lang=es]) .value p{font-size:calc(12 * var(--u))}html:is([lang=en],[lang=es]) .playground-footer h2{font-size:calc(30 * var(--u))}}
 @media(max-width:767px){
   body.playground{--u:1px}
   body.playground .cv2-container{height:68px;width:auto;margin:0 22px}
@@ -191,15 +191,14 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
   .playground-footer-links{border:0;padding:0;justify-content:center;width:100%;gap:24px}
   .playground-footer-email{margin:0}
   .playground-footer-copyright{border:0;padding:0}
-  html[lang=en] .hero-copy h1{font-size:clamp(43px,11vw,70px)}
-  html[lang=en] .product-description{font-size:13px}
+  html:is([lang=en],[lang=es]) .hero-copy h1{font-size:clamp(43px,11vw,70px)}
+  html:is([lang=en],[lang=es]) .product-description{font-size:13px}
 }
 @media(max-width:359px){.product{gap:13px;padding:20px 14px;grid-template-columns:42% 1fr}.product-info h3{font-size:24px}.product-description{font-size:12px}.app-store-button strong{font-size:13px}.hero-copy h1{font-size:37px}.hero-intro{padding:0}.playground-footer-links{gap:17px}}
 @media(max-width:359px){.product-pinyiye{grid-template-columns:minmax(0,1fr);padding:24px 18px;gap:24px}.pinyiye-brand h3{font-size:30px}}
-@media(max-width:359px){html[lang=en] .work-categories .work-category{flex-direction:column;gap:4px;padding:10px 4px}}
+@media(max-width:359px){html:is([lang=en],[lang=es],[lang=ja],[lang=ko]) .work-categories .work-category{flex-direction:column;gap:4px;padding:10px 4px}}
 @media(prefers-reduced-motion:reduce){.playground *, .playground *::before, .playground *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-@media(min-width:768px){html:not([lang=en]) .hero-copy h1{transform:translateX(calc(36 * var(--u)))}}
 @media(max-width:767px){.playground-footer h2,.product-description{ text-wrap:balance }}
 @media(min-width:768px) and (max-width:1023px){
   .product{height:auto;min-height:calc(380 * var(--u))}
@@ -212,8 +211,8 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
   .product-info h3{font-size:28px;margin-bottom:12px}
   .product-type{font-size:13px}.product-status{font-size:14px;margin-top:13px}
   .app-store-button{margin-top:13px}.app-store-button strong{font-size:15px}.app-store-button small{font-size:10px}
-  .value h3,html[lang=en] body.playground .value h3{font-size:16px}
-  .value p,html[lang=en] body.playground .value p{font-size:12px;white-space:normal}
+  .value h3,html:is([lang=en],[lang=es]) body.playground .value h3{font-size:16px}
+  .value p,html:is([lang=en],[lang=es]) body.playground .value p{font-size:12px;white-space:normal}
   .playground-footer-row{font-size:12px;flex-wrap:wrap;justify-content:center}
   .playground-footer-email{margin-left:0}
 }
@@ -244,3 +243,22 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
 .product-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;max-width:100%}
 .product-meta .product-type,.product-meta .product-status{margin-top:0;max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere}
 .product-breakout .product-meta>span,.product-flappy .product-meta>span{font-size:13px;padding:8px 12px}
+
+/* Use native Japanese/Korean glyphs, and let translated copy determine card height. */
+html[lang=ja] body.playground{font-family:Nunito,"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif}
+html[lang=ko] body.playground{font-family:Nunito,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;word-break:keep-all;overflow-wrap:anywhere}
+html:is([lang=ja],[lang=ko]) body.playground .display-type{font-family:inherit;font-weight:900;-webkit-text-stroke:0}
+html:is([lang=ja],[lang=ko],[lang=es]) .value p{white-space:normal}
+html:is([lang=ja],[lang=ko],[lang=es]) .playground-footer h2{white-space:normal}
+@media(min-width:768px){
+  html:is([lang=ja],[lang=ko],[lang=es]) :is(.product-breakout,.product-flappy){height:auto;min-height:calc(380 * var(--u))}
+  html:is([lang=ja],[lang=ko]) .hero-copy h1{font-size:calc(70 * var(--u))}
+  html:is([lang=ja],[lang=ko]) .hero-intro{font-size:calc(18 * var(--u))}
+  html[lang=es] .hero-copy h1{font-size:calc(70 * var(--u))}
+  html:is([lang=ja],[lang=ko],[lang=es]) .studio-values>h2{font-size:calc(38 * var(--u));white-space:normal}
+}
+@media(max-width:767px){
+  html[lang=es] .hero-copy h1{font-size:clamp(34px,9vw,62px)}
+  html:is([lang=ja],[lang=ko],[lang=es]) .work-categories .work-category{font-size:16px}
+  html:is([lang=ja],[lang=ko],[lang=es]) .playground-footer-links{flex-wrap:wrap;row-gap:12px}
+}

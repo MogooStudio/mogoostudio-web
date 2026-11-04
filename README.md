@@ -7,7 +7,7 @@
 - 展示《Minimalist Breakout》和《Flappy Ball Hop》的介绍、图标与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；当前标注 iOS、即将推出，产品介绍格式见 `AGENTS.md`
 - 首页展示微信小程序「拼一页」的品牌头像、实际编辑界面与拼图成品；当前状态为已发布，点击“打开小程序”可查看微信小程序码
-- 提供英语、简体中文和繁体中文页面；英语为默认语言
+- 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
 - 内置响应式布局、语言切换、SEO 元信息、Canonical、`hreflang`、站点地图与爬虫规则
 - 首页采用原生纵向滚动与 B 方案“图文对向入场”：图片从左侧、文字从右侧进入，各自在进入视野时播放一次；移除首屏固定、拉远及产品随滚动聚拢等旧效果
@@ -39,27 +39,27 @@ npm run dev
 | --- | --- |
 | `npm run dev` | 启动本地开发服务器 |
 | `npm run check` | 检查 Astro 与 TypeScript 类型 |
-| `node scripts/verify-site.mjs` | 开发服务器运行时检查 15 个页面、站内链接和法律原文保留 |
+| `node scripts/verify-site.mjs` | 服务器运行时检查 30 个页面、六语翻译完整性、站内链接、SEO 与原有法律正文保留（允许更新日期） |
 | `npm run build` | 构建生产版本到 `dist/` |
 | `npm run preview` | 本地预览生产构建 |
 
 ## 路由与多语言
 
-| 内容 | 英语 | 简体中文 | 繁体中文 |
-| --- | --- | --- | --- |
-| 首页 | `/` | `/zh-cn/` | `/zh-tw/` |
-| 关于我们 | `/about/` | `/zh-cn/about/` | `/zh-tw/about/` |
-| 技术支持 | `/support/` | `/zh-cn/support/` | `/zh-tw/support/` |
-| 隐私政策 | `/privacy/` | `/zh-cn/privacy/` | `/zh-tw/privacy/` |
-| 服务条款 | `/terms/` | `/zh-cn/terms/` | `/zh-tw/terms/` |
+| 内容 | 英语 | 简体中文 | 繁体中文 | 日语 | 韩语 | 西班牙语 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 首页 | `/` | `/zh-cn/` | `/zh-tw/` | `/ja/` | `/ko/` | `/es/` |
+| 关于我们 | `/about/` | `/zh-cn/about/` | `/zh-tw/about/` | `/ja/about/` | `/ko/about/` | `/es/about/` |
+| 技术支持 | `/support/` | `/zh-cn/support/` | `/zh-tw/support/` | `/ja/support/` | `/ko/support/` | `/es/support/` |
+| 隐私政策 | `/privacy/` | `/zh-cn/privacy/` | `/zh-tw/privacy/` | `/ja/privacy/` | `/ko/privacy/` | `/es/privacy/` |
+| 服务条款 | `/terms/` | `/zh-cn/terms/` | `/zh-tw/terms/` | `/ja/terms/` | `/ko/terms/` | `/es/terms/` |
 
-翻译文案维护在 `src/i18n/ui.ts`（原有文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页），路径与语言识别逻辑位于 `src/i18n/utils.ts`。新增页面时，需要同步补齐三种语言的路由，并更新 `src/pages/sitemap-index.xml.ts` 中的页面列表。
+语言名称及 HTML、`hreflang`、Open Graph 标记集中维护在 `src/i18n/locales.ts`，语言识别与路径工具位于 `src/i18n/utils.ts`。英语与中文文案分别在 `src/i18n/ui.ts`（通用文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页）；日语、韩语、西班牙语的完整文案分别在 `ja.ts`、`ko.ts`、`es.ts`，由上述三个入口统一导出并检查类型。Astro 语言列表维护在 `astro.config.mjs`。新增语言使用 `src/pages/[locale]/[...page].astro` 生成五类静态页面，现有英语和中文保留独立路由。新增页面时，需要补齐六种语言的路由，并更新站点地图和验证脚本中的页面列表。
 
 首页已采用 B 方案“图文对向入场”，入口为 `src/scripts/home-motion.ts`，共享实现位于 `src/scripts/product-entrance.ts`。桌面图片从左侧 140px、文字从右侧 100px 入场，手机分别为 90px 与 72px，时长 760ms。图片完成解码后再播放，图片与介绍分别观察进入视野的时机；滚回时不重复播放。键盘聚焦时立即落位，系统开启“减少动态效果”时展示完整静态内容。禁用 JavaScript 时内容正常显示。
 
-独立的 `/motion-studies/` 对比页保留第二轮“整卡推近”“图文对向入场”“叠卡交接”和静态基线，使用真实首页，支持三语、宽屏/手机及自动滚动演示。预览通过 iframe 标识与 `motion-study` 参数关闭首页自动安装的动效，再由对比页安装所选方案，预览内导航后也不会重复安装。旧方案与验证记录保留在 `docs/design/2026-10-16-scroll-motion/` 作为历史记录。
+独立的 `/motion-studies/` 对比页保留第二轮“整卡推近”“图文对向入场”“叠卡交接”和静态基线，使用真实首页，支持六语、宽屏/手机及自动滚动演示。预览通过 iframe 标识与 `motion-study` 参数关闭首页自动安装的动效，再由对比页安装所选方案，预览内导航后也不会重复安装。旧方案与验证记录保留在 `docs/design/2026-10-16-scroll-motion/` 作为历史记录。
 
-作品分类逻辑位于 `src/scripts/work-categories.ts`，分类依据写在产品的 `data-work-category` 上，数量从实际产品节点计算。直达被隐藏的产品锚点时恢复全部作品并定位。禁用 JavaScript 时隐藏分类控件、展示全部产品。三语分类文案与结果播报维护在 `src/i18n/home.ts`，选定方案及截图见 `docs/design/2026-10-16-work-categories/`。
+作品分类逻辑位于 `src/scripts/work-categories.ts`，分类依据写在产品的 `data-work-category` 上，数量从实际产品节点计算。直达被隐藏的产品锚点时恢复全部作品并定位。禁用 JavaScript 时隐藏分类控件、展示全部产品。六语分类文案与结果播报由 `src/i18n/home.ts` 统一导出，选定方案及截图见 `docs/design/2026-10-16-work-categories/`。
 
 ## 项目结构
 
@@ -71,7 +71,7 @@ npm run dev
 │   ├── components/         # 导航、页脚、游戏展示和截图组件
 │   ├── i18n/               # 多语言文案与路径工具
 │   ├── layouts/            # 全局页面布局与 SEO 元信息
-│   └── pages/              # 英语及中英文页面路由、站点地图
+│   └── pages/              # 六语页面路由、站点地图
 ├── astro.config.mjs        # 站点地址、静态输出与语言路由配置
 └── package.json            # 依赖与开发命令
 ```
@@ -79,12 +79,12 @@ npm run dev
 ## 内容维护
 
 - 页面统一使用 `BaseLayout`；仅在需要完整自定义标题时传入 `rawTitle`
-- 新增通用文案时，同时补齐 `en`、`zh-cn` 和 `zh-tw` 三套翻译
+- 新增通用文案时，同时补齐 `en`、`zh-cn`、`zh-tw`、`ja`、`ko` 和 `es` 六套翻译
 - 可由 Astro 优化的图片放在 `src/assets/`，必须保持固定 URL 的文件放在 `public/`
 - 隐私政策、服务条款、第三方 SDK 或支持邮箱发生变化时，必须同步更新所有语言版本
 - 提交前至少执行一次 `npm run build`
 
-「拼一页」文案位于 `src/i18n/home.ts` 的 `pinyiye` 字段，展示素材位于 `src/assets/pinyiye/`，来源为本地 `photo-collage-mini-program` 项目的已选头像 v16、原生编辑/导出截图和实际模板导出成品。小程序已发布，三种语言的发布状态已同步；“打开小程序”按钮弹出用户提供的正式微信小程序码（`wechat-code.jpg`），支持关闭按钮、Esc 和点击遮罩关闭，并恢复按钮焦点。小程序码保留原始文件，不做有损转换或裁切。
+「拼一页」文案由 `src/i18n/home.ts` 的 `pinyiye` 字段统一导出，展示素材位于 `src/assets/pinyiye/`，来源为本地 `photo-collage-mini-program` 项目的已选头像 v16、原生编辑/导出截图和实际模板导出成品。小程序已发布，六种语言的发布状态已同步；“打开小程序”按钮弹出用户提供的正式微信小程序码（`wechat-code.jpg`），支持关闭按钮、Esc 和点击遮罩关闭，并恢复按钮焦点。小程序码保留原始文件，不做有损转换或裁切。
 
 ## 部署
 

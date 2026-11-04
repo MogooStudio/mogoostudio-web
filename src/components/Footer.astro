@@ -17,7 +17,7 @@ const copy = homeCopy[currentLang];
   <h2 class="display-type">{copy.statement}</h2>
   <div class="playground-footer-row">
     <a class="playground-footer-brand" href={getLocalizedPath('/', currentLang)}><span class="playground-footer-mark" aria-hidden="true">M</span>MogooStudio</a>
-    <nav class="playground-footer-links" aria-label={currentLang === 'en' ? 'Footer' : currentLang === 'zh-tw' ? '頁尾導覽' : '页尾导航'}>
+    <nav class="playground-footer-links" aria-label={copy.footerLabel}>
       <a href={getLocalizedPath('/about', currentLang)}>{copy.about}</a>
       <a href={getLocalizedPath('/support', currentLang)}>{copy.support}</a>
       <a href={getLocalizedPath('/privacy', currentLang)}>{copy.privacy}</a>

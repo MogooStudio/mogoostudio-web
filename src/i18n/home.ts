@@ -1,11 +1,16 @@
+import { jaHome } from './ja';
+import { koHome } from './ko';
+import { esHome } from './es';
+import type { Locale, Translation } from './locales';
+
 /** Copy for the shared studio homepage. Product availability is not inferred from locale. */
-export const homeCopy = {
+const originalHomeCopy = {
   en: {
     title: 'MogooStudio — Useful things. Playful things.',
     description: 'An independent studio making thoughtful software, apps and games. Discover our work and find a little more ease and joy in the everyday.',
     works: 'Work', about: 'About', support: 'Support',
-    headline: ['Useful things.', 'Playful things.'],
-    intro: 'Independent software, apps and games. A little more ease and joy, every day.',
+    headline: ['Useful things', 'Playful things'],
+    intro: 'Independent software, apps and games. A little more ease and joy, every day',
     explore: 'Explore our work', selected: 'Selected work',
     categories: { label: 'Filter selected work', all: 'All', games: 'Games', mini: 'Mini Programs', result: 'Projects shown: {count}' },
     breakout: 'Minimalist brick-breaking. Make every bounce count.',
@@ -33,21 +38,21 @@ export const homeCopy = {
     download: 'Download on the',
     philosophy: 'Small details. Better experiences.',
     values: [
-      { title: 'A little more ease', body: 'Simple, intuitive, and made to help.' },
-      { title: 'A little more joy', body: 'Find a moment of fun in the everyday.' },
-      { title: 'Always improving', body: 'Thoughtfully refined, one detail at a time.' },
+      { title: 'A little more ease', body: 'Simple, intuitive, and made to help' },
+      { title: 'A little more joy', body: 'Find a moment of fun in the everyday' },
+      { title: 'Always improving', body: 'Thoughtfully refined, one detail at a time' },
     ],
     statement: 'One independent studio. More than one possibility.',
     privacy: 'Privacy', terms: 'Terms',
     screenshot: 'View screenshots', close: 'Close screenshots', previous: 'Previous screenshot', next: 'Next screenshot',
-    skip: 'Skip to content',
+    skip: 'Skip to content', footerLabel: 'Footer',
   },
   'zh-cn': {
     title: 'MogooStudio — 做点有用的，也做点有趣的。',
     description: '独立创造软件、应用与游戏，让日常多一点顺手与快乐。探索 MogooStudio 的作品。',
     works: '作品', about: '关于', support: '支持',
-    headline: ['做点有用的。', '也做点有趣的。'],
-    intro: '独立创造软件、应用与游戏，让日常多一点顺手与快乐。',
+    headline: ['做点有用的', '也做点有趣的'],
+    intro: '独立创造软件、应用与游戏，让日常多一点顺手与快乐',
     explore: '探索作品', selected: '精选作品',
     categories: { label: '按类型筛选作品', all: '全部', games: '游戏', mini: '小程序', result: '显示 {count} 件作品' },
     breakout: '极简打砖块，专注每一次反弹。',
@@ -71,24 +76,24 @@ export const homeCopy = {
       sunshineAlt: '带有叠放相框的海边照片拼图',
       exportAlt: '拼一页导出界面，提供保存图片与预览大图功能',
     },
-    game: '游戏', available: '已上线', coming: '即将推出', download: '在',
-    philosophy: '认真做小事。让体验更好。',
+    game: '游戏', available: '已上线', coming: '即将推出', download: '下载于',
+    philosophy: '认真做小事，让体验更好',
     values: [
-      { title: '用起来顺手', body: '简单直观，专注解决问题。' },
-      { title: '玩起来有趣', body: '在平凡的日常里发现快乐。' },
-      { title: '持续打磨', body: '从细节出发，不断做得更好。' },
+      { title: '用起来顺手', body: '简单直观，专注解决问题' },
+      { title: '玩起来有趣', body: '在平凡的日常里发现快乐' },
+      { title: '持续打磨', body: '从细节出发，不断做得更好' },
     ],
-    statement: '一个人的工作室，不止一种可能。',
+    statement: '一个人的工作室，不止一种可能',
     privacy: '隐私政策', terms: '服务条款',
     screenshot: '查看截图', close: '关闭截图', previous: '上一张截图', next: '下一张截图',
-    skip: '跳到主要内容',
+    skip: '跳到主要内容', footerLabel: '页尾导航',
   },
   'zh-tw': {
     title: 'MogooStudio — 做點有用的，也做點有趣的。',
     description: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂。探索 MogooStudio 的作品。',
     works: '作品', about: '關於', support: '支援',
-    headline: ['做點有用的。', '也做點有趣的。'],
-    intro: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂。',
+    headline: ['做點有用的', '也做點有趣的'],
+    intro: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂',
     explore: '探索作品', selected: '精選作品',
     categories: { label: '依類型篩選作品', all: '全部', games: '遊戲', mini: '小程式', result: '顯示 {count} 件作品' },
     breakout: '極簡打磚塊，專注每一次反彈。',
@@ -112,16 +117,20 @@ export const homeCopy = {
       sunshineAlt: '帶有疊放相框的海邊照片拼圖',
       exportAlt: '拼一页匯出介面，提供儲存圖片與預覽大圖功能',
     },
-    game: '遊戲', available: '已上線', coming: '即將推出', download: '在',
-    philosophy: '認真做小事。讓體驗更好。',
+    game: '遊戲', available: '已上線', coming: '即將推出', download: '下載於',
+    philosophy: '認真做小事，讓體驗更好',
     values: [
-      { title: '用起來順手', body: '簡單直觀，專注解決問題。' },
-      { title: '玩起來有趣', body: '在平凡的日常裡發現快樂。' },
-      { title: '持續打磨', body: '從細節出發，不斷做得更好。' },
+      { title: '用起來順手', body: '簡單直觀，專注解決問題' },
+      { title: '玩起來有趣', body: '在平凡的日常裡發現快樂' },
+      { title: '持續打磨', body: '從細節出發，不斷做得更好' },
     ],
-    statement: '一個人的工作室，不止一種可能。',
+    statement: '一個人的工作室，不止一種可能',
     privacy: '隱私政策', terms: '服務條款',
     screenshot: '查看截圖', close: '關閉截圖', previous: '上一張截圖', next: '下一張截圖',
-    skip: '跳到主要內容',
+    skip: '跳到主要內容', footerLabel: '頁尾導覽',
   },
 } as const;
+
+export const homeCopy = {
+  ...originalHomeCopy, ja: jaHome, ko: koHome, es: esHome,
+} satisfies Record<Locale, Translation<typeof originalHomeCopy.en>>;

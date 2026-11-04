@@ -1,12 +1,10 @@
-export const languages = {
-  en: 'English',
-  'zh-cn': '简体中文',
-  'zh-tw': '繁體中文',
-};
+import { jaUi } from './ja';
+import { koUi } from './ko';
+import { esUi } from './es';
+import type { Locale } from './locales';
+export { languages, defaultLang } from './locales';
 
-export const defaultLang = 'en';
-
-export const ui = {
+const originalUi = {
   en: {
     // Nav
     'nav.games': 'Games',
@@ -82,7 +80,7 @@ export const ui = {
 
     // Privacy & Terms pages
     'privacy.title': 'Privacy Policy',
-    'privacy.updated': 'Last updated: September 17, 2026',
+    'privacy.updated': 'Last updated: November 4, 2026',
     'privacy.website.h': '12. Website Analytics',
     'privacy.website.p1': 'This section applies to mogoostudio.com, separately from analytics inside our Apps. The website uses Cloudflare Web Analytics to measure aggregate traffic and page performance.',
     'privacy.website.cloudflare': 'Cloudflare privacy policy',
@@ -149,7 +147,7 @@ export const ui = {
     'privacy.s11.h': '11. Contact Us',
     'privacy.s11.p1': 'If you have questions, requests, or concerns about this Privacy Policy, contact us at:',
     'terms.title': 'Terms of Service',
-    'terms.updated': 'Last updated: August 11, 2026',
+    'terms.updated': 'Last updated: November 4, 2026',
     'terms.s1.h': '1. Acceptance and Privacy',
     'terms.s1.p1': 'By downloading, installing, or using a MogooStudio app, you agree to these Terms of Service. If you do not agree, do not use the app.',
     'terms.s1.p2': 'Our Privacy Policy explains how information is handled. Agreement to these Terms does not itself constitute consent to personalized advertising or tracking; those choices are requested separately where required.',
@@ -274,7 +272,7 @@ export const ui = {
 
     // Privacy & Terms pages
     'privacy.title': '隐私政策',
-    'privacy.updated': '最后更新：2026 年 9 月 17 日',
+    'privacy.updated': '最后更新：2026 年 11 月 4 日',
     'privacy.website.h': '12. 官网访问统计',
     'privacy.website.p1': '本节适用于 mogoostudio.com 官网，与应用内的统计服务分别说明。官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能。',
     'privacy.website.cloudflare': 'Cloudflare 隐私政策',
@@ -341,7 +339,7 @@ export const ui = {
     'privacy.s11.h': '11. 联系我们',
     'privacy.s11.p1': '如您对本隐私政策有任何疑问、请求或疑虑，请通过以下方式联系我们：',
     'terms.title': '服务条款',
-    'terms.updated': '最后更新：2026 年 8 月 11 日',
+    'terms.updated': '最后更新：2026 年 11 月 4 日',
     'terms.s1.h': '1. 接受条款与隐私',
     'terms.s1.p1': '下载、安装或使用 MogooStudio 应用即表示您同意本服务条款。如果您不同意，请不要使用相关应用。',
     'terms.s1.p2': '我们的隐私政策说明信息的处理方式。同意本条款本身并不代表您同意个性化广告或跟踪；我们会在法律要求时另行征求这些选择。',
@@ -466,7 +464,7 @@ export const ui = {
 
     // Privacy & Terms pages
     'privacy.title': '隱私政策',
-    'privacy.updated': '最後更新：2026 年 9 月 17 日',
+    'privacy.updated': '最後更新：2026 年 11 月 4 日',
     'privacy.website.h': '12. 官網瀏覽統計',
     'privacy.website.p1': '本節適用於 mogoostudio.com 官網，與應用程式內的統計服務分別說明。官網使用 Cloudflare Web Analytics 統計彙總瀏覽量與頁面效能。',
     'privacy.website.cloudflare': 'Cloudflare 隱私政策',
@@ -533,7 +531,7 @@ export const ui = {
     'privacy.s11.h': '11. 聯繫我們',
     'privacy.s11.p1': '如您對本隱私政策有任何疑問、請求或疑慮，請透過以下方式聯繫我們：',
     'terms.title': '服務條款',
-    'terms.updated': '最後更新：2026 年 8 月 11 日',
+    'terms.updated': '最後更新：2026 年 11 月 4 日',
     'terms.s1.h': '1. 接受條款與隱私',
     'terms.s1.p1': '下載、安裝或使用 MogooStudio 應用程式即表示您同意本服務條款。如果您不同意，請勿使用相關應用程式。',
     'terms.s1.p2': '我們的隱私政策說明資訊的處理方式。同意本條款本身並不代表您同意個人化廣告或追蹤；我們會在法律要求時另行徵求這些選擇。',
@@ -584,3 +582,7 @@ export const ui = {
     'game.badge.comingSoon': '即將推出',
   },
 } as const;
+
+export const ui = {
+  ...originalUi, ja: jaUi, ko: koUi, es: esUi,
+} satisfies Record<Locale, Record<keyof typeof originalUi.en, string>>;

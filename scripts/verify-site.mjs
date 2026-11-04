@@ -1,17 +1,57 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
+import { resolve, dirname } from 'node:path';
+import { runInNewContext } from 'node:vm';
+import ts from 'typescript';
+
+// Read the actual TypeScript dictionaries without depending on Node's TS support.
+const modules = new Map();
+function loadTranslations(filename) {
+  const path = resolve(filename);
+  if (modules.has(path)) return modules.get(path);
+  const module = { exports: {} };
+  modules.set(path, module.exports);
+  const { outputText } = ts.transpileModule(readFileSync(path, 'utf8'), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
+  });
+  runInNewContext(outputText, {
+    exports: module.exports,
+    require: name => loadTranslations(resolve(dirname(path), `${name}.ts`)),
+  }, { filename: path });
+  return module.exports;
+}
+
+const { languages, localeMetadata } = loadTranslations('src/i18n/locales.ts');
+const { ui } = loadTranslations('src/i18n/ui.ts');
+const { homeCopy } = loadTranslations('src/i18n/home.ts');
+const { studioCopy } = loadTranslations('src/i18n/studio.ts');
+const locales = Object.keys(languages);
+const prefix = locale => locale === 'en' ? '' : `/${locale}`;
+const flatten = (value, path = '') => Object.fromEntries(Object.entries(value).flatMap(([key, child]) =>
+  typeof child === 'string' ? [[`${path}${key}`, child]] : Object.entries(flatten(child, `${path}${key}.`))));
+for (const [name, dictionary] of Object.entries({ ui, homeCopy, studioCopy })) {
+  const source = flatten(dictionary.en);
+  for (const locale of locales) {
+    const translated = flatten(dictionary[locale]);
+    assert.deepEqual(Object.keys(translated).sort(), Object.keys(source).sort(), `${name}/${locale}: complete translation keys`);
+    for (const [key, value] of Object.entries(translated)) {
+      assert.ok(value.trim(), `${name}/${locale}/${key}: nonempty translation`);
+      const placeholders = text => [...text.matchAll(/\{\w+\}/g)].map(match => match[0]).sort();
+      assert.deepEqual(placeholders(value), placeholders(source[key]), `${name}/${locale}/${key}: interpolation`);
+    }
+  }
+}
 
 const base = process.argv[2] || 'http://127.0.0.1:4321';
-// Pin the pre-redesign revision so the legal-copy regression check survives commits.
-const legalBaseline = '5ed87fa';
-const locales = ['', '/zh-cn', '/zh-tw'];
+// Pin the revision before adding languages, including the existing YouCanUp disclosure.
+const legalBaseline = '9bfe25e5aac74e94e53b6c8abac70e7e6d5d8cd7';
 const pages = ['', '/about', '/support', '/privacy', '/terms'];
 const documents = new Map();
 const normalize = path => path.replace(/\/$/, '') || '/';
 for (const locale of locales) {
   for (const page of pages) {
-    const path = `${locale}${page}/`;
+    const path = `${prefix(locale)}${page}/`;
     const response = await fetch(`${base}${path}`);
     assert.equal(response.status, 200, path);
     const html = await response.text();
@@ -20,9 +60,19 @@ for (const locale of locales) {
     assert.match(html, /<main id="main"/, `${path}: accessible main content`);
     assert.match(html, /class="playground-footer"/, `${path}: shared footer`);
     assert.match(html, /rel="canonical"/, `${path}: canonical`);
-    assert.equal((html.match(/rel="alternate"/g) || []).length, 4, `${path}: locale alternatives`);
-    const expectedLanguage = locale === '/zh-cn' ? 'zh-CN' : locale === '/zh-tw' ? 'zh-TW' : 'en';
-    assert.ok(html.includes(`<html lang="${expectedLanguage}"`), `${path}: language`);
+    assert.equal((html.match(/rel="alternate"/g) || []).length, locales.length + 1, `${path}: locale alternatives`);
+    assert.ok(html.includes(`<html lang="${localeMetadata[locale].html}"`), `${path}: language`);
+    assert.ok(html.includes(`property="og:locale" content="${localeMetadata[locale].og}"`), `${path}: Open Graph locale`);
+    const canonical = html.match(/rel="canonical" href="([^"]+)"/)[1];
+    assert.equal(new URL(canonical).pathname, path, `${path}: canonical preserves page and locale`);
+    for (const code of locales) {
+      const href = `${prefix(code)}${page}/`;
+      assert.ok(html.includes(`hreflang="${localeMetadata[code].hreflang}" href="https://mogoostudio.com${href}"`), `${path}: alternate ${code}`);
+      assert.equal((html.match(new RegExp(`href="${href}" lang="${code}"`, 'g')) || []).length, 2, `${path}: desktop and mobile language links`);
+    }
+    for (const kind of ['privacy', 'terms']) {
+      if (page === `/${kind}`) assert.ok(html.includes(ui[locale][`${kind}.updated`]), `${path}: rendered revision date`);
+    }
     documents.set(normalize(path), html);
   }
 }
@@ -41,13 +91,25 @@ for (const [path, html] of documents) {
 for (const kind of ['privacy', 'terms']) {
   const component = readFileSync(`src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`, 'utf8');
   const keys = text => [...text.matchAll(/t\('([^']+)'\)/g)].map(m => m[1]);
-  for (const locale of ['', 'zh-cn/', 'zh-tw/']) {
-    const original = execFileSync('git', ['show', `${legalBaseline}:src/pages/${locale}${kind}.astro`], { encoding: 'utf8' });
-    const body = original.split('<section class="legal-body">')[1].split('</section>')[0];
-    assert.deepEqual(keys(component), keys(body), `${locale}${kind}: preserve every legal paragraph`);
-    const externalLinks = text => [...text.matchAll(/href="(https:[^"]+)"/g)].map(m => m[1]);
-    assert.deepEqual(externalLinks(component), externalLinks(body), `${locale}${kind}: preserve external policy links`);
+  const original = execFileSync('git', ['show', `${legalBaseline}:src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`], { encoding: 'utf8' });
+  assert.deepEqual(keys(component), keys(original), `${kind}: preserve every legal paragraph`);
+  const externalLinks = text => [...text.matchAll(/href="(https:[^"]+)"/g)].map(m => m[1]);
+  assert.deepEqual(externalLinks(component), externalLinks(original), `${kind}: preserve external policy links`);
+}
+const baseline = execFileSync('git', ['show', `${legalBaseline}:src/i18n/ui.ts`], { encoding: 'utf8' });
+const originalUi = new Function(`${baseline.replace(/export const /g, 'const ').replace(/ as const/g, '')}; return ui;`)();
+for (const locale of ['en', 'zh-cn', 'zh-tw']) {
+  for (const [key, value] of Object.entries(originalUi[locale])) {
+    if (key === 'privacy.updated' || key === 'terms.updated') continue;
+    assert.equal(ui[locale][key], value, `${locale}/${key}: preserve original wording`);
   }
 }
-assert.equal(execFileSync('git', ['diff', legalBaseline, '--', 'src/i18n/ui.ts'], { encoding: 'utf8' }), '', 'Original legal translations unchanged');
-console.log(`PASS: ${documents.size} localized pages, ${links} internal links, metadata and all legal copy preserved.`);
+const sitemapResponse = await fetch(`${base}/sitemap-index.xml`);
+assert.equal(sitemapResponse.status, 200, 'sitemap available');
+const sitemap = await sitemapResponse.text();
+assert.equal((sitemap.match(/<loc>/g) || []).length, documents.size, 'sitemap covers all localized pages');
+for (const path of documents.keys()) {
+  assert.ok(sitemap.includes(`<loc>https://mogoostudio.com${path === '/' ? '/' : `${path}/`}</loc>`), `sitemap: ${path}`);
+}
+assert.ok(!sitemap.includes('undefined'), 'sitemap has no missing locale metadata');
+console.log(`PASS: ${documents.size} localized pages, ${links} internal links, complete translations, SEO, sitemap and original wording preserved (revision dates excluded).`);

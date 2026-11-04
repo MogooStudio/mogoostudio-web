@@ -1,6 +1,6 @@
 ---
-import { useTranslations, getLocalizedPath } from '../i18n/utils';
-import { languages } from '../i18n/ui';
+import { useTranslations, getLocalizedPath, getPathWithoutLocale } from '../i18n/utils';
+import { languages, type Locale } from '../i18n/locales';
 import { homeCopy } from '../i18n/home';
 
 interface Props {
@@ -12,6 +12,8 @@ const { currentLang, playground = false } = Astro.props;
 const t = useTranslations(currentLang);
 const copy = homeCopy[currentLang];
 const currentPath = Astro.url.pathname;
+const languageOptions = Object.entries(languages) as [Locale, string][];
+const pathWithoutLocale = getPathWithoutLocale(currentPath);
 ---
 
 <header class="cv2-header" id="cv2Header">
@@ -37,9 +39,11 @@ const currentPath = Astro.url.pathname;
           </svg>
         </button>
         <div class="lang-menu" id="langMenu">
-          {Object.entries(languages).map(([code, name]) => (
+          {languageOptions.map(([code, name]) => (
             <a
-              href={code === 'en' ? currentPath.replace(/^\/(zh-cn|zh-tw)/, '') || '/' : `/${code}${currentPath.replace(/^\/(zh-cn|zh-tw)/, '')}`}
+              href={getLocalizedPath(pathWithoutLocale, code)}
+              lang={code}
+              aria-current={code === currentLang ? 'page' : undefined}
               class:list={['lang-option', { active: code === currentLang }]}
             >
               {name}
@@ -67,9 +71,11 @@ const currentPath = Astro.url.pathname;
     <a href={getLocalizedPath("/about", currentLang)}>{playground ? copy.about : t('nav.about')}</a>
     <a href={getLocalizedPath("/support", currentLang)}>{playground ? copy.support : t('nav.support')}</a>
     <div class="mobile-lang-list">
-      {Object.entries(languages).map(([code, name]) => (
+      {languageOptions.map(([code, name]) => (
         <a
-          href={code === 'en' ? currentPath.replace(/^\/(zh-cn|zh-tw)/, '') || '/' : `/${code}${currentPath.replace(/^\/(zh-cn|zh-tw)/, '')}`}
+          href={getLocalizedPath(pathWithoutLocale, code)}
+          lang={code}
+          aria-current={code === currentLang ? 'page' : undefined}
           class:list={['mobile-lang-option', { active: code === currentLang }]}
         >
           {name}
@@ -298,7 +304,8 @@ const currentPath = Astro.url.pathname;
   }
 
   .cv2-header.menu-open .cv2-mobile-menu {
-    max-height: 320px;
+    max-height: min(440px, calc(100dvh - var(--nav-h)));
+    overflow-y: auto;
     padding: 8px 20px 20px;
     border-top-color: rgba(0,0,0,.07);
   }
@@ -331,7 +338,8 @@ const currentPath = Astro.url.pathname;
   }
 
   .mobile-lang-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
     margin-top: 16px;
     padding-top: 16px;

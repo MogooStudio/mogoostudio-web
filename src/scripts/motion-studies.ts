@@ -1,5 +1,6 @@
 /** Isolated study harness. Production homepages never import these experiments. */
 import { installScrollExperiment } from './scroll-experiments';
+import { isLocale } from '../i18n/locales';
 
 type StudyMode = 'depth' | 'split' | 'stack' | 'static';
 const directions = {
@@ -89,7 +90,7 @@ export function initializeMotionStudies() {
     const products = [...doc.querySelectorAll<HTMLElement>('.product')];
     if (!products.length) { status.textContent = '当前为内页 · 点击重播返回首页'; return; }
     const locale = doc.documentElement.lang.toLowerCase();
-    language.value = locale === 'en' ? 'en' : locale === 'zh-tw' ? 'zh-tw' : 'zh-cn';
+    language.value = isLocale(locale) ? locale : 'en';
     if (!win.location.hash) win.scrollTo({ top: 0, behavior: 'instant' });
     const abort = new AbortController();
     const options = { signal: abort.signal };

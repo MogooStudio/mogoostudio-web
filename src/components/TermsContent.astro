@@ -18,7 +18,7 @@ const privacyPath = getLocalizedPath('/privacy/', lang);
       <p>{t('terms.s4.p1')}</p>
 
       <h2 id="section-5">{t('terms.s5.h')}</h2>
-      <p>{t('terms.s5.p1')} <a href={privacyPath}>{t('terms.s5.privacyLink')}</a>{lang === 'en' ? '.' : '。'}</p>
+      <p>{t('terms.s5.p1')} <a href={privacyPath}>{t('terms.s5.privacyLink')}</a>{lang === 'en' || lang === 'es' || lang === 'ko' ? '.' : '。'}</p>
 
       <h2 id="section-6">{t('terms.s6.h')}</h2>
       <p>{t('terms.s6.p1')}</p>
@@ -42,4 +42,4 @@ const privacyPath = getLocalizedPath('/privacy/', lang);
       <p>{t('terms.s11.p1')}</p>
 
       <h2 id="section-12">{t('terms.s12.h')}</h2>
-      <p>{t('terms.s12.p1')} <a href="mailto:support@mogoostudio.com">support@mogoostudio.com</a>{lang === 'en' ? '.' : '。'}</p>
+      <p>{t('terms.s12.p1')} <a href="mailto:support@mogoostudio.com">support@mogoostudio.com</a>{lang === 'en' || lang === 'es' || lang === 'ko' ? '.' : '。'}</p>
