@@ -52,6 +52,7 @@ const legalAdditions = {
     'privacy.s2.gameCenterP', 'privacy.s2.gameCenterLi1', 'privacy.s2.gameCenterLi2',
     'privacy.s3.li7', 'privacy.s4.p4', 'privacy.s4.appleGameCenterPrivacy',
     'privacy.s6.p4', 'privacy.s7.p4', 'privacy.s9.li5',
+    'privacy.s5.analyticsConsent', 'privacy.s9.analyticsChoice',
   ],
   terms: ['terms.s5.gameCenter', 'terms.s5.appleTerms', 'terms.s6.youcanup'],
 };
