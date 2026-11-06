@@ -12,7 +12,7 @@ const originalHomeCopy = {
     headline: ['Useful things', 'Playful things'],
     intro: 'Independent software, apps and games. A little more ease and joy, every day',
     explore: 'Explore our work', selected: 'Selected work',
-    categories: { label: 'Filter selected work', all: 'All', games: 'Games', mini: 'Mini Programs', result: 'Projects shown: {count}' },
+    categories: { label: 'Filter selected work', all: 'All', games: 'Games', mini: 'Mini Programs', apps: 'Web Apps', result: 'Projects shown: {count}' },
     breakout: 'Minimalist brick-breaking. Make every bounce count.',
     flappy: 'Tap to hop. Thread the hoops. Collect the stars.',
     youcanup: {
@@ -34,6 +34,12 @@ const originalHomeCopy = {
       sunshineAlt: 'A seaside collage with overlapping photo frames',
       exportAlt: 'Pinyiye export screen with save image and preview controls',
     },
+    goldenHour: {
+      name: '薪动 · Golden Hour', description: 'Watch an estimate of your work income grow in real time, then review the day, month, and year.',
+      type: 'Web App', platform: 'Browser', status: 'Released', open: 'View product',
+      dashboardAlt: '薪动 dashboard with demonstration income data', monthlyAlt: '薪动 monthly calendar with demonstration income data', yearlyAlt: '薪动 annual report with demonstration income data',
+      demo: 'Demo data',
+    },
     game: 'Game', available: 'Available now', coming: 'Coming soon',
     download: 'Download on the',
     philosophy: 'Small details. Better experiences.',
@@ -54,7 +60,7 @@ const originalHomeCopy = {
     headline: ['做点有用的', '也做点有趣的'],
     intro: '独立创造软件、应用与游戏，让日常多一点顺手与快乐',
     explore: '探索作品', selected: '精选作品',
-    categories: { label: '按类型筛选作品', all: '全部', games: '游戏', mini: '小程序', result: '显示 {count} 件作品' },
+    categories: { label: '按类型筛选作品', all: '全部', games: '游戏', mini: '小程序', apps: 'Web 应用', result: '显示 {count} 件作品' },
     breakout: '极简打砖块，专注每一次反弹。',
     flappy: '轻点跃起，穿过篮圈，收集星星。',
     youcanup: {
@@ -76,6 +82,12 @@ const originalHomeCopy = {
       sunshineAlt: '带有叠放相框的海边照片拼图',
       exportAlt: '拼一页导出界面，提供保存图片与预览大图功能',
     },
+    goldenHour: {
+      name: '薪动 · Golden Hour', description: '实时看见工时收入增长，并回顾今天、这个月和这一年的记录。',
+      type: 'Web App', platform: '浏览器', status: '已发布', open: '查看产品',
+      dashboardAlt: '薪动主界面，展示演示收入数据', monthlyAlt: '薪动月度日历，展示演示收入数据', yearlyAlt: '薪动年度报告，展示演示收入数据',
+      demo: '演示数据',
+    },
     game: '游戏', available: '已上线', coming: '即将推出', download: '下载于',
     philosophy: '认真做小事，让体验更好',
     values: [
@@ -95,7 +107,7 @@ const originalHomeCopy = {
     headline: ['做點有用的', '也做點有趣的'],
     intro: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂',
     explore: '探索作品', selected: '精選作品',
-    categories: { label: '依類型篩選作品', all: '全部', games: '遊戲', mini: '小程式', result: '顯示 {count} 件作品' },
+    categories: { label: '依類型篩選作品', all: '全部', games: '遊戲', mini: '小程式', apps: 'Web 應用', result: '顯示 {count} 件作品' },
     breakout: '極簡打磚塊，專注每一次反彈。',
     flappy: '輕點躍起，穿過籃圈，收集星星。',
     youcanup: {
@@ -116,6 +128,12 @@ const originalHomeCopy = {
       weekendAlt: '帶有紙質相框和膠帶的四張照片週末拼圖',
       sunshineAlt: '帶有疊放相框的海邊照片拼圖',
       exportAlt: '拼一页匯出介面，提供儲存圖片與預覽大圖功能',
+    },
+    goldenHour: {
+      name: '薪動 · Golden Hour', description: '即時看見工時收入增長，並回顧今天、這個月和這一年的紀錄。',
+      type: 'Web App', platform: '瀏覽器', status: '已發佈', open: '查看產品',
+      dashboardAlt: '薪動主畫面，顯示示範收入資料', monthlyAlt: '薪動月度日曆，顯示示範收入資料', yearlyAlt: '薪動年度報告，顯示示範收入資料',
+      demo: '示範資料',
     },
     game: '遊戲', available: '已上線', coming: '即將推出', download: '下載於',
     philosophy: '認真做小事，讓體驗更好',

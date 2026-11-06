@@ -6,7 +6,7 @@ export const jaHome = {
   headline: ['役立つものを', '楽しいものを'],
   intro: 'ソフトウェア、アプリ、ゲームで、毎日を少し便利に、少し楽しく',
   explore: '作品を見る', selected: '主な作品',
-  categories: { label: '作品を種類で絞り込む', all: 'すべて', games: 'ゲーム', mini: 'ミニアプリ', result: '{count} 件の作品を表示' },
+  categories: { label: '作品を種類で絞り込む', all: 'すべて', games: 'ゲーム', mini: 'ミニアプリ', apps: 'Web アプリ', result: '{count} 件の作品を表示' },
   breakout: 'シンプルなブロック崩し。ひとつひとつの反射を楽しもう。',
   flappy: 'タップでジャンプ。リングをくぐって、星を集めよう。',
   youcanup: {
@@ -22,6 +22,7 @@ export const jaHome = {
     weekendAlt: '紙のフレームとテープで飾った4枚の週末写真のコラージュ', sunshineAlt: '写真のフレームを重ねた海辺のコラージュ',
     exportAlt: '画像の保存とプレビューができる拼一页の書き出し画面',
   },
+  goldenHour: { name: '薪動 · Golden Hour', description: '勤務収入の目安が増える様子をリアルタイムで見ながら、今日・今月・今年の記録を振り返れます。', type: 'Web アプリ', platform: 'ブラウザ', status: '公開中', open: '製品を見る', dashboardAlt: 'デモ収入データを表示する薪動のメイン画面', monthlyAlt: 'デモ収入データを表示する薪動の月間カレンダー', yearlyAlt: 'デモ収入データを表示する薪動の年間レポート', demo: 'デモデータ' },
   game: 'ゲーム', available: '配信中', coming: '近日公開', download: 'ダウンロード',
   philosophy: '細部を大切に。体験をより良く。',
   values: [{ title: 'もっと使いやすく', body: 'シンプルで直感的に、役立つものを' }, { title: 'もっと楽しく', body: '何気ない毎日に、楽しむひとときを' }, { title: '少しずつ改善', body: 'ひとつひとつ、丁寧に磨き続けます' }],

@@ -2,10 +2,11 @@
 export const koHome = {
   title: 'MogooStudio — 쓸모 있는 것. 즐거운 것.', description: '소프트웨어, 앱, 게임을 만드는 독립 스튜디오입니다. 일상에 편리함과 즐거움을 더하는 작품을 만나보세요.',
   works: '작품', about: '소개', support: '지원', headline: ['쓸모 있는 것', '즐거운 것'], intro: '독립적으로 만드는 소프트웨어, 앱, 게임. 일상에 편리함과 즐거움을 조금 더합니다',
-  explore: '작품 둘러보기', selected: '주요 작품', categories: { label: '종류별 작품 보기', all: '전체', games: '게임', mini: '미니앱', result: '표시된 작품: {count}개' },
+  explore: '작품 둘러보기', selected: '주요 작품', categories: { label: '종류별 작품 보기', all: '전체', games: '게임', mini: '미니앱', apps: '웹 앱', result: '표시된 작품: {count}개' },
   breakout: '간결한 벽돌 깨기. 공이 튕기는 순간에 집중하세요.', flappy: '탭해서 뛰어오르고, 링을 통과하며 별을 모으세요.',
   youcanup: { name: 'YouCanUp', description: '길게 눌러 힘을 모으고 손을 떼어 점프하세요. 클레이 세상에서 최고 기록에 도전해 보세요.', menuAlt: '주황색 클레이 캐릭터가 보라색과 초록색 발판 사이를 뛰는 YouCanUp 메뉴', gameplayAlt: '입체 발판, 높이 점수, 길게 누르기 버튼이 표시된 YouCanUp 게임 화면' },
   pinyiye: { name: '拼一页', description: '사진을 배치하고 글을 더해 콜라주를 한 장의 이미지로 저장하세요.', type: '미니앱', platform: 'WeChat', status: '출시됨', open: '미니앱 열기', codeHint: 'WeChat으로 코드를 스캔해 미니앱을 여세요.', codeAlt: '拼一页의 WeChat 미니앱 코드', closeCode: '미니앱 코드 닫기', editorAlt: '사진 세 장의 콜라주와 편집 도구가 표시된 拼一页 사진 편집기', weekendAlt: '종이 액자와 테이프로 꾸민 주말 사진 네 장의 콜라주', sunshineAlt: '사진 액자가 겹쳐진 바닷가 콜라주', exportAlt: '이미지 저장 및 미리보기 기능이 있는 拼一页 내보내기 화면' },
+  goldenHour: { name: '薪动 · Golden Hour', description: '근무 수입 예상치가 실시간으로 늘어나는 모습을 보고 오늘, 이번 달, 올해의 기록을 돌아보세요.', type: '웹 앱', platform: '브라우저', status: '출시됨', open: '제품 보기', dashboardAlt: '데모 수입 데이터를 표시하는 薪动 메인 화면', monthlyAlt: '데모 수입 데이터를 표시하는 薪动 월간 달력', yearlyAlt: '데모 수입 데이터를 표시하는 薪动 연간 보고서', demo: '데모 데이터' },
   game: '게임', available: '출시됨', coming: '출시 예정', download: '다운로드하기', philosophy: '작은 디테일로 더 나은 경험을.',
   values: [{ title: '더 편리하게', body: '간단하고 직관적으로, 필요한 도움을' }, { title: '더 즐겁게', body: '평범한 일상 속 작은 즐거움을' }, { title: '꾸준한 개선', body: '작은 부분부터 정성껏 다듬습니다' }],
   statement: '혼자 만드는 스튜디오. 무한한 가능성.', privacy: '개인정보 처리방침', terms: '이용약관', screenshot: '스크린샷 보기', close: '스크린샷 닫기', previous: '이전 스크린샷', next: '다음 스크린샷', skip: '본문으로 이동', footerLabel: '하단 탐색',

@@ -7,6 +7,7 @@
 - 展示《Minimalist Breakout》和《Flappy Ball Hop》的介绍、图标与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；当前标注 iOS、即将推出，产品介绍格式见 `AGENTS.md`
 - 首页展示微信小程序「拼一页」的品牌头像、实际编辑界面与拼图成品；当前状态为已发布，点击“打开小程序”可查看微信小程序码
+- 新增「薪动 · Golden Hour」产品入口与六语独立落地页，介绍实时计薪、当前免费能力、浏览器支持、隐私边界和尚未开放的意向方向；演示截图来自当前线上产品
 - 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
 - 内置响应式布局、语言切换、SEO 元信息、Canonical、`hreflang`、站点地图与爬虫规则
@@ -39,7 +40,7 @@ npm run dev
 | --- | --- |
 | `npm run dev` | 启动本地开发服务器 |
 | `npm run check` | 检查 Astro 与 TypeScript 类型 |
-| `node scripts/verify-site.mjs` | 服务器运行时检查 30 个页面、六语翻译完整性、站内链接、SEO、新增法律文案与第三方链接的实际输出，以及未修订法律正文的保留 |
+| `node scripts/verify-site.mjs` | 服务器运行时检查 36 个页面、六语翻译完整性、站内链接、SEO、新增法律文案与第三方链接的实际输出，以及未修订法律正文的保留 |
 | `npm run build` | 构建生产版本到 `dist/` |
 | `npm run preview` | 本地预览生产构建 |
 
@@ -52,8 +53,9 @@ npm run dev
 | 技术支持 | `/support/` | `/zh-cn/support/` | `/zh-tw/support/` | `/ja/support/` | `/ko/support/` | `/es/support/` |
 | 隐私政策 | `/privacy/` | `/zh-cn/privacy/` | `/zh-tw/privacy/` | `/ja/privacy/` | `/ko/privacy/` | `/es/privacy/` |
 | 服务条款 | `/terms/` | `/zh-cn/terms/` | `/zh-tw/terms/` | `/ja/terms/` | `/ko/terms/` | `/es/terms/` |
+| 薪动 · Golden Hour | `/golden-hour/` | `/zh-cn/golden-hour/` | `/zh-tw/golden-hour/` | `/ja/golden-hour/` | `/ko/golden-hour/` | `/es/golden-hour/` |
 
-语言名称及 HTML、`hreflang`、Open Graph 标记集中维护在 `src/i18n/locales.ts`，语言识别与路径工具位于 `src/i18n/utils.ts`。英语与中文文案分别在 `src/i18n/ui.ts`（通用文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页）；日语、韩语、西班牙语的完整文案分别在 `ja.ts`、`ko.ts`、`es.ts`，由上述三个入口统一导出并检查类型。Astro 语言列表维护在 `astro.config.mjs`。新增语言使用 `src/pages/[locale]/[...page].astro` 生成五类静态页面，现有英语和中文保留独立路由。新增页面时，需要补齐六种语言的路由，并更新站点地图和验证脚本中的页面列表。
+语言名称及 HTML、`hreflang`、Open Graph 标记集中维护在 `src/i18n/locales.ts`，语言识别与路径工具位于 `src/i18n/utils.ts`。英语与中文文案分别在 `src/i18n/ui.ts`（通用文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页）；薪动落地页六语文案集中在 `src/i18n/golden-hour.ts`；日语、韩语、西班牙语的其他完整文案分别在 `ja.ts`、`ko.ts`、`es.ts`，由上述入口统一导出并检查类型。Astro 语言列表维护在 `astro.config.mjs`。新增页面使用 `src/pages/[locale]/[...page].astro` 生成对应的日语、韩语与西班牙语静态页面，现有英语和中文保留独立路由。新增页面时，需要补齐六种语言的路由，并更新站点地图和验证脚本中的页面列表。
 
 首页已采用 B 方案“图文对向入场”，入口为 `src/scripts/home-motion.ts`，共享实现位于 `src/scripts/product-entrance.ts`。桌面图片从左侧 140px、文字从右侧 100px 入场，手机分别为 90px 与 72px，时长 760ms。图片完成解码后再播放，图片与介绍分别观察进入视野的时机；滚回时不重复播放。键盘聚焦时立即落位，系统开启“减少动态效果”时展示完整静态内容。禁用 JavaScript 时内容正常显示。
 
@@ -97,7 +99,7 @@ npm run dev
 
 官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能，由托管平台注入脚本，仓库不重复插入。
 
-官网同时接入 Google Analytics，使用 Google 后台提供的 `GTM-MTMZ554B` 安装代码，在 `src/layouts/BaseLayout.astro` 的 `<head>` 中统一异步加载，覆盖六种语言的 30 个正式页面。代码只在生产构建中输出，`npm run dev` 不加载 Google 统计；`npm run preview` 可用于检查生产脚本。GA4 数据流关联与后续标签设置由 Google 后台管理，不额外添加 `gtag('config', ...)` 或另一份安装代码。隐私政策的官网统计章节已同步披露 Google 统计与 Cookie 使用。
+官网同时接入 Google Analytics，使用 Google 后台提供的 `GTM-MTMZ554B` 安装代码，在 `src/layouts/BaseLayout.astro` 的 `<head>` 中统一异步加载，覆盖六种语言的 36 个正式页面。代码只在生产构建中输出，`npm run dev` 不加载 Google 统计；`npm run preview` 可用于检查生产脚本。GA4 数据流关联与后续标签设置由 Google 后台管理，不额外添加 `gtag('config', ...)` 或另一份安装代码。隐私政策的官网统计章节已同步披露 Google 统计与 Cookie 使用。
 
 ## 联系方式
 

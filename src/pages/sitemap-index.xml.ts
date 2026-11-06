@@ -2,7 +2,7 @@ import { languages, localeMetadata, type Locale } from '../i18n/locales';
 import { getLocalizedPath } from '../i18n/utils';
 
 const SITE = 'https://mogoostudio.com';
-const paths = ['/', '/about', '/privacy', '/support', '/terms'];
+const paths = ['/', '/about', '/privacy', '/support', '/terms', '/golden-hour'];
 const locales = Object.keys(languages) as Locale[];
 
 function withTrailingSlash(path: string) {

@@ -3,7 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StudioValueIcon from './StudioValueIcon.astro';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
 import { homeCopy } from '../i18n/home';
 import hero from '../assets/home/playground-still-life.png';
 import approvedArtwork from '../assets/home/approved-artwork.png';
@@ -16,6 +16,9 @@ import pinyiyeExport from '../assets/pinyiye/export.png';
 import pinyiyeWeekend from '../assets/pinyiye/weekend.jpg';
 import pinyiyeSunshine from '../assets/pinyiye/sunshine.jpg';
 import pinyiyeCode from '../assets/pinyiye/wechat-code.jpg';
+import goldenDashboard from '../assets/golden-hour/dashboard-demo.png';
+import goldenMonthly from '../assets/golden-hour/monthly-demo.png';
+import goldenYearly from '../assets/golden-hour/yearly-demo.png';
 
 const lang = getLangFromUrl(Astro.url);
 const copy = homeCopy[lang];
@@ -29,8 +32,14 @@ const categories = [
   { id: 'all', label: copy.categories.all },
   { id: 'games', label: copy.categories.games },
   { id: 'mini', label: copy.categories.mini },
+  { id: 'apps', label: copy.categories.apps },
 ];
 const galleries = [
+  { id: 'golden-hour', title: copy.goldenHour.name, screenshots: [
+    { src: goldenDashboard, alt: copy.goldenHour.dashboardAlt, caption: copy.goldenHour.demo },
+    { src: goldenMonthly, alt: copy.goldenHour.monthlyAlt, caption: copy.goldenHour.demo },
+    { src: goldenYearly, alt: copy.goldenHour.yearlyAlt, caption: copy.goldenHour.demo },
+  ] },
   { id: 'youcanup', title: copy.youcanup.name, screenshots: [
     { src: youcanupMenu, alt: copy.youcanup.menuAlt },
     { src: youcanupGameplay, alt: copy.youcanup.gameplayAlt },
@@ -66,6 +75,19 @@ const galleries = [
       </nav>
       <p class="work-filter-status" role="status" data-result-message={copy.categories.result}></p>
       <div id="work-results" class="products">
+        <article id="golden-hour" class="product product-golden-hour" data-work-category="apps" aria-labelledby="golden-hour-title">
+          <button type="button" class="golden-hour-artwork" data-gallery="gallery-golden-hour" aria-label={`${copy.goldenHour.name} — ${copy.screenshot}`} aria-haspopup="dialog">
+            <Image src={goldenDashboard} alt={copy.goldenHour.dashboardAlt} widths={[520, 760, 1080]} sizes="(max-width: 767px) 90vw, 48vw" format="webp" quality={88} loading="lazy" />
+            <span class="golden-demo-label">{copy.goldenHour.demo}</span>
+            <span class="artwork-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          </button>
+          <div class="product-info golden-hour-info">
+            <h3 id="golden-hour-title">{copy.goldenHour.name}</h3>
+            <p class="product-description">{copy.goldenHour.description}</p>
+            <div class="product-meta golden-hour-meta"><span class="product-type">{copy.goldenHour.type} · {copy.goldenHour.platform}</span><span class="product-status is-available">{copy.goldenHour.status}</span></div>
+            <a class="golden-hour-link" href={getLocalizedPath('/golden-hour/', lang)}>{copy.goldenHour.open}<span aria-hidden="true">→</span></a>
+          </div>
+        </article>
         <article id="pinyiye" class="product product-pinyiye" data-work-category="mini" aria-labelledby="pinyiye-title">
           <button type="button" class="pinyiye-artwork" data-gallery="gallery-pinyiye" aria-label={`${copy.pinyiye.name} — ${copy.screenshot}`} aria-haspopup="dialog">
             <span class="pinyiye-print pinyiye-print-weekend"><Image src={pinyiyeWeekend} alt="" width={360} format="webp" loading="lazy" /></span>
@@ -138,7 +160,7 @@ const galleries = [
 
   {galleries.map(gallery => <dialog id={`gallery-${gallery.id}`} class="screenshot-dialog" aria-label={`${gallery.title} — ${copy.screenshot}`}>
     <div class="gallery-header"><h2>{gallery.title}</h2><button type="button" class="gallery-close" aria-label={copy.close}>×</button></div>
-    <div class="gallery-slides">{gallery.screenshots.map(({ src, alt }, index) => <figure hidden={index !== 0}><Image src={src} alt={alt} width={440} format="webp" loading="lazy" /></figure>)}</div>
+    <div class="gallery-slides">{gallery.screenshots.map((item, index) => <figure hidden={index !== 0}><Image src={item.src} alt={item.alt} width={440} format="webp" loading="lazy" />{'caption' in item && item.caption && <figcaption class="gallery-demo-caption">{item.caption}</figcaption>}</figure>)}</div>
     <div class="gallery-controls"><button type="button" class="gallery-previous" aria-label={copy.previous}>←</button><span class="gallery-counter" aria-live="polite">1 / {gallery.screenshots.length}</span><button type="button" class="gallery-next" aria-label={copy.next}>→</button></div>
   </dialog>)}
 </BaseLayout>
@@ -199,3 +221,17 @@ const galleries = [
     });
   });
 </script>
+
+<style>
+  .product-golden-hour{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:46px;align-items:center;min-height:440px;padding:40px;background:#fff0c5}
+  .golden-hour-artwork{position:relative;display:block;width:100%;border:0;border-radius:24px;overflow:hidden;background:#15140f;cursor:zoom-in;box-shadow:0 24px 48px rgba(94,65,12,.2);transition:transform .22s ease,box-shadow .22s ease}
+  .golden-hour-artwork:hover{transform:translateY(-4px) rotate(-.4deg);box-shadow:0 30px 58px rgba(94,65,12,.25)}.golden-hour-artwork:focus-visible{outline:4px solid #7f5e15;outline-offset:5px}.golden-hour-artwork img{width:100%;height:auto}
+  .golden-demo-label{position:absolute;top:16px;left:16px;border-radius:99px;background:#fffcf6;color:#60450e;padding:8px 12px;font-size:11px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+  .golden-hour-info h3{font-size:34px;letter-spacing:-.03em;line-height:1.2;margin:0 0 18px}.golden-hour-info .product-description{font-size:15px;line-height:1.75;min-height:0;max-width:440px;margin-bottom:16px;text-wrap:pretty}
+  .golden-hour-meta .product-type,.golden-hour-meta .product-status{margin:0;padding:8px 15px;font-size:14px}.golden-hour-meta .product-type{background:#efd38c;color:#65480e}.golden-hour-meta .product-status{background:#d6f0dd;color:#275b36}
+  .golden-hour-link{display:inline-flex;align-items:center;gap:16px;margin-top:22px;color:#75530d;font-size:15px;font-weight:900;text-decoration:underline;text-underline-offset:6px}.golden-hour-link:hover{color:#a5263e}.golden-hour-link:focus-visible{outline:3px solid #7f5e15;outline-offset:5px;border-radius:4px}
+  .gallery-demo-caption{display:inline-block;margin-top:12px;border-radius:99px;background:#f0d58c;color:#5d430e;padding:6px 11px;font-size:12px;font-weight:900}
+  @media(min-width:768px) and (max-width:1023px){.product-golden-hour{padding:32px;gap:32px}.golden-hour-info h3{font-size:28px}}
+  @media(max-width:767px){.product-golden-hour{grid-template-columns:minmax(0,1fr);padding:25px 20px 30px;gap:28px;min-height:0}.golden-hour-artwork{border-radius:18px}.golden-hour-info{padding:0}.golden-hour-info h3{font-size:29px}.golden-hour-info .product-description{font-size:14px}.golden-hour-link{margin-top:20px}}
+  @media(prefers-reduced-motion:reduce){.golden-hour-artwork{transition:none}}
+</style>

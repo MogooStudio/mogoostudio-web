@@ -26,11 +26,12 @@ const { languages, localeMetadata } = loadTranslations('src/i18n/locales.ts');
 const { ui } = loadTranslations('src/i18n/ui.ts');
 const { homeCopy } = loadTranslations('src/i18n/home.ts');
 const { studioCopy } = loadTranslations('src/i18n/studio.ts');
+const { goldenHourCopy } = loadTranslations('src/i18n/golden-hour.ts');
 const locales = Object.keys(languages);
 const prefix = locale => locale === 'en' ? '' : `/${locale}`;
 const flatten = (value, path = '') => Object.fromEntries(Object.entries(value).flatMap(([key, child]) =>
   typeof child === 'string' ? [[`${path}${key}`, child]] : Object.entries(flatten(child, `${path}${key}.`))));
-for (const [name, dictionary] of Object.entries({ ui, homeCopy, studioCopy })) {
+for (const [name, dictionary] of Object.entries({ ui, homeCopy, studioCopy, goldenHourCopy })) {
   const source = flatten(dictionary.en);
   for (const locale of locales) {
     const translated = flatten(dictionary[locale]);
@@ -60,7 +61,7 @@ const revisedLegalKeys = new Set(['privacy.s2.youcanup', 'privacy.s9.p2']);
 const decodeHtml = html => html.replace(/&(?:amp|lt|gt|quot|apos|#39|#x27);/g, entity => ({
   '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'", '&#39;': "'", '&#x27;': "'",
 })[entity]);
-const pages = ['', '/about', '/support', '/privacy', '/terms'];
+const pages = ['', '/about', '/support', '/privacy', '/terms', '/golden-hour'];
 const documents = new Map();
 const normalize = path => path.replace(/\/$/, '') || '/';
 for (const locale of locales) {

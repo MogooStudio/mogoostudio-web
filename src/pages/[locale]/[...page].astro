@@ -4,12 +4,13 @@ import StudioHome from '../../components/StudioHome.astro';
 import StudioAbout from '../../components/StudioAbout.astro';
 import StudioSupport from '../../components/StudioSupport.astro';
 import StudioLegal from '../../components/StudioLegal.astro';
+import GoldenHourLanding from '../../components/GoldenHourLanding.astro';
 import { languages } from '../../i18n/locales';
 
 // Existing English and Chinese routes keep their public URLs.
 export const getStaticPaths = (() => Object.keys(languages)
   .filter(locale => !['en', 'zh-cn', 'zh-tw'].includes(locale))
-  .flatMap(locale => ['', 'about', 'support', 'privacy', 'terms'].map(page => ({
+  .flatMap(locale => ['', 'about', 'support', 'privacy', 'terms', 'golden-hour'].map(page => ({
     params: { locale, page: page || undefined }, props: { page },
   })))) satisfies GetStaticPaths;
 
@@ -21,3 +22,4 @@ const { page } = Astro.props;
 {page === 'support' && <StudioSupport />}
 {page === 'privacy' && <StudioLegal kind="privacy" />}
 {page === 'terms' && <StudioLegal kind="terms" />}
+{page === 'golden-hour' && <GoldenHourLanding />}
