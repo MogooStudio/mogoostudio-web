@@ -80,10 +80,12 @@ const originalUi = {
 
     // Privacy & Terms pages
     'privacy.title': 'Privacy Policy',
-    'privacy.updated': 'Last updated: November 4, 2026',
+    'privacy.updated': 'Last updated: November 6, 2026',
     'privacy.website.h': '12. Website Analytics',
     'privacy.website.p1': 'This section applies to mogoostudio.com, separately from analytics inside our Apps. The website uses Cloudflare Web Analytics to measure aggregate traffic and page performance.',
     'privacy.website.cloudflare': 'Cloudflare privacy policy',
+    'privacy.website.p2': 'We also use Google Analytics, loaded through Google Tag Manager, to understand page visits, referral sources, and website usage. Google may process page URLs, IP addresses, device and browser information, and cookie identifiers. Cookies may be used to distinguish visits. You can manage cookies in your browser; Google handles this information under its privacy policy.',
+    'privacy.website.google': 'Google privacy policy',
     'privacy.s1.h': '1. Scope',
     'privacy.s1.p1': 'This Privacy Policy explains how MogooStudio ("we", "us", or "our") handles information when you use our games, apps, and related support services (collectively, the "Apps").',
     'privacy.s1.p2': 'Data practices vary by App and version. Advertising and tracking sections apply only to an App version that actually includes the described services. Consent to advertising personalization or tracking is requested separately where required.',
@@ -272,10 +274,12 @@ const originalUi = {
 
     // Privacy & Terms pages
     'privacy.title': '隐私政策',
-    'privacy.updated': '最后更新：2026 年 11 月 4 日',
+    'privacy.updated': '最后更新：2026 年 11 月 6 日',
     'privacy.website.h': '12. 官网访问统计',
     'privacy.website.p1': '本节适用于 mogoostudio.com 官网，与应用内的统计服务分别说明。官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能。',
     'privacy.website.cloudflare': 'Cloudflare 隐私政策',
+    'privacy.website.p2': '官网还通过 Google Tag Manager 加载 Google Analytics，用于了解页面访问、流量来源及网站使用情况。Google 可能处理页面网址、IP 地址、设备和浏览器信息以及 Cookie 标识符，并可能使用 Cookie 区分访问。你可以通过浏览器管理 Cookie；Google 按其隐私政策处理这些信息。',
+    'privacy.website.google': 'Google 隐私政策',
     'privacy.s1.h': '1. 适用范围',
     'privacy.s1.p1': '本隐私政策说明 MogooStudio（“我们”）在您使用我们的游戏、应用及相关支持服务（统称“应用”）时如何处理信息。',
     'privacy.s1.p2': '不同应用和版本的数据实践可能不同。广告和跟踪相关章节仅适用于实际包含所述服务的应用版本。对于广告个性化或跟踪，我们会在法律要求时另行征求您的同意。',
@@ -464,10 +468,12 @@ const originalUi = {
 
     // Privacy & Terms pages
     'privacy.title': '隱私政策',
-    'privacy.updated': '最後更新：2026 年 11 月 4 日',
+    'privacy.updated': '最後更新：2026 年 11 月 6 日',
     'privacy.website.h': '12. 官網瀏覽統計',
     'privacy.website.p1': '本節適用於 mogoostudio.com 官網，與應用程式內的統計服務分別說明。官網使用 Cloudflare Web Analytics 統計彙總瀏覽量與頁面效能。',
     'privacy.website.cloudflare': 'Cloudflare 隱私政策',
+    'privacy.website.p2': '官網亦透過 Google Tag Manager 載入 Google Analytics，用於了解頁面瀏覽、流量來源及網站使用情況。Google 可能處理頁面網址、IP 位址、裝置和瀏覽器資訊以及 Cookie 識別碼，並可能使用 Cookie 區分瀏覽。你可以透過瀏覽器管理 Cookie；Google 按其隱私政策處理這些資訊。',
+    'privacy.website.google': 'Google 隱私政策',
     'privacy.s1.h': '1. 適用範圍',
     'privacy.s1.p1': '本隱私政策說明 MogooStudio（「我們」）在您使用我們的遊戲、應用程式及相關支援服務（統稱「應用程式」）時如何處理資訊。',
     'privacy.s1.p2': '不同應用程式和版本的資料實務可能不同。廣告和追蹤相關章節僅適用於實際包含所述服務的應用程式版本。對於廣告個人化或追蹤，我們會在法律要求時另行徵求您的同意。',

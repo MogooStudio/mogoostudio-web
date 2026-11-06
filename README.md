@@ -96,6 +96,8 @@ npm run dev
 
 官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能，由托管平台注入脚本，仓库不重复插入。
 
+官网同时接入 Google Analytics，使用 Google 后台提供的 `GTM-MTMZ554B` 安装代码，在 `src/layouts/BaseLayout.astro` 的 `<head>` 中统一异步加载，覆盖六种语言的 30 个正式页面。代码只在生产构建中输出，`npm run dev` 不加载 Google 统计；`npm run preview` 可用于检查生产脚本。GA4 数据流关联与后续标签设置由 Google 后台管理，不额外添加 `gtag('config', ...)` 或另一份安装代码。隐私政策的官网统计章节已同步披露 Google 统计与 Cookie 使用。
+
 ## 联系方式
 
 技术支持：[support@mogoostudio.com](mailto:support@mogoostudio.com)

@@ -29,6 +29,14 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
 <html lang={htmlLang}>
 <head>
   <meta charset="UTF-8" />
+  {import.meta.env.PROD && <>
+    <script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-MTMZ554B"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+  </>}
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{pageTitle}</title>

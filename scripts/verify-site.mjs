@@ -55,6 +55,15 @@ for (const locale of locales) {
     const response = await fetch(`${base}${path}`);
     assert.equal(response.status, 200, path);
     const html = await response.text();
+    const googleTag = 'https://www.googletagmanager.com/gtm.js?id=GTM-MTMZ554B';
+    const googleScripts = [...html.matchAll(/<script\b[^>]*src="([^"]*googletagmanager\.com[^"]*)"[^>]*>/g)];
+    const isDev = html.includes('/@vite/client');
+    assert.equal(googleScripts.length, isDev ? 0 : 1, `${path}: Google tag only once in production`);
+    if (!isDev) {
+      assert.equal(googleScripts[0][1], googleTag, `${path}: supplied Google tag ID and loader`);
+      assert.ok(html.indexOf(googleScripts[0][0]) < html.indexOf('</head>'), `${path}: Google tag in head`);
+      assert.match(googleScripts[0][0], /\basync(?:\s|>)/, `${path}: asynchronous Google tag`);
+    }
     assert.match(html, /<body class="playground"/, `${path}: shared design`);
     assert.equal((html.match(/<h1\b/g) || []).length, 1, `${path}: one main heading`);
     assert.match(html, /<main id="main"/, `${path}: accessible main content`);
@@ -72,6 +81,10 @@ for (const locale of locales) {
     }
     for (const kind of ['privacy', 'terms']) {
       if (page === `/${kind}`) assert.ok(html.includes(ui[locale][`${kind}.updated`]), `${path}: rendered revision date`);
+    }
+    if (page === '/privacy') {
+      assert.ok(html.includes(ui[locale]['privacy.website.p2']), `${path}: rendered Google analytics disclosure`);
+      assert.ok(html.includes(ui[locale]['privacy.website.google']), `${path}: Google privacy policy link`);
     }
     documents.set(normalize(path), html);
   }
@@ -92,9 +105,12 @@ for (const kind of ['privacy', 'terms']) {
   const component = readFileSync(`src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`, 'utf8');
   const keys = text => [...text.matchAll(/t\('([^']+)'\)/g)].map(m => m[1]);
   const original = execFileSync('git', ['show', `${legalBaseline}:src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`], { encoding: 'utf8' });
-  assert.deepEqual(keys(component), keys(original), `${kind}: preserve every legal paragraph`);
+  const additions = kind === 'privacy' ? ['privacy.website.p2', 'privacy.website.google'] : [];
+  assert.deepEqual(keys(component).filter(key => !additions.includes(key)), keys(original), `${kind}: preserve every original legal paragraph`);
+  for (const key of additions) assert.equal(keys(component).filter(value => value === key).length, 1, `${kind}: one ${key}`);
   const externalLinks = text => [...text.matchAll(/href="(https:[^"]+)"/g)].map(m => m[1]);
-  assert.deepEqual(externalLinks(component), externalLinks(original), `${kind}: preserve external policy links`);
+  const addedLinks = kind === 'privacy' ? ['https://policies.google.com/privacy'] : [];
+  assert.deepEqual(externalLinks(component), [...externalLinks(original), ...addedLinks], `${kind}: preserve external policy links and add Google disclosure`);
 }
 const baseline = execFileSync('git', ['show', `${legalBaseline}:src/i18n/ui.ts`], { encoding: 'utf8' });
 const originalUi = new Function(`${baseline.replace(/export const /g, 'const ').replace(/ as const/g, '')}; return ui;`)();
@@ -112,4 +128,4 @@ for (const path of documents.keys()) {
   assert.ok(sitemap.includes(`<loc>https://mogoostudio.com${path === '/' ? '/' : `${path}/`}</loc>`), `sitemap: ${path}`);
 }
 assert.ok(!sitemap.includes('undefined'), 'sitemap has no missing locale metadata');
-console.log(`PASS: ${documents.size} localized pages, ${links} internal links, complete translations, SEO, sitemap and original wording preserved (revision dates excluded).`);
+console.log(`PASS: ${documents.size} localized pages, ${links} internal links, complete translations, SEO, sitemap, Google tag installation and original wording preserved (revision dates excluded).`);
