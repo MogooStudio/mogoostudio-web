@@ -44,8 +44,21 @@ for (const [name, dictionary] of Object.entries({ ui, homeCopy, studioCopy })) {
 }
 
 const base = process.argv[2] || 'http://127.0.0.1:4321';
-// Pin the revision before adding languages, including the existing YouCanUp disclosure.
+// Pin the revision before adding languages; list intentional legal revisions below.
 const legalBaseline = '9bfe25e5aac74e94e53b6c8abac70e7e6d5d8cd7';
+const legalAdditions = {
+  privacy: [
+    'privacy.website.p2', 'privacy.website.google',
+    'privacy.s2.gameCenterP', 'privacy.s2.gameCenterLi1', 'privacy.s2.gameCenterLi2',
+    'privacy.s3.li7', 'privacy.s4.p4', 'privacy.s4.appleGameCenterPrivacy',
+    'privacy.s6.p4', 'privacy.s7.p4', 'privacy.s9.li5',
+  ],
+  terms: ['terms.s5.gameCenter', 'terms.s5.appleTerms', 'terms.s6.youcanup'],
+};
+const revisedLegalKeys = new Set(['privacy.s2.youcanup', 'privacy.s9.p2']);
+const decodeHtml = html => html.replace(/&(?:amp|lt|gt|quot|apos|#39|#x27);/g, entity => ({
+  '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'", '&#39;': "'", '&#x27;': "'",
+})[entity]);
 const pages = ['', '/about', '/support', '/privacy', '/terms'];
 const documents = new Map();
 const normalize = path => path.replace(/\/$/, '') || '/';
@@ -80,7 +93,14 @@ for (const locale of locales) {
       assert.equal((html.match(new RegExp(`href="${href}" lang="${code}"`, 'g')) || []).length, 2, `${path}: desktop and mobile language links`);
     }
     for (const kind of ['privacy', 'terms']) {
-      if (page === `/${kind}`) assert.ok(html.includes(ui[locale][`${kind}.updated`]), `${path}: rendered revision date`);
+      if (page === `/${kind}`) {
+        const rendered = decodeHtml(html);
+        assert.ok(rendered.includes(ui[locale][`${kind}.updated`]), `${path}: rendered revision date`);
+        const changedKeys = [...legalAdditions[kind], ...[...revisedLegalKeys].filter(key => key.startsWith(`${kind}.`))];
+        for (const key of changedKeys) {
+          assert.ok(rendered.includes(ui[locale][key]), `${path}: rendered localized ${key}`);
+        }
+      }
     }
     if (page === '/privacy') {
       assert.ok(html.includes(ui[locale]['privacy.website.p2']), `${path}: rendered Google analytics disclosure`);
@@ -105,18 +125,31 @@ for (const kind of ['privacy', 'terms']) {
   const component = readFileSync(`src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`, 'utf8');
   const keys = text => [...text.matchAll(/t\('([^']+)'\)/g)].map(m => m[1]);
   const original = execFileSync('git', ['show', `${legalBaseline}:src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`], { encoding: 'utf8' });
-  const additions = kind === 'privacy' ? ['privacy.website.p2', 'privacy.website.google'] : [];
+  const additions = legalAdditions[kind];
   assert.deepEqual(keys(component).filter(key => !additions.includes(key)), keys(original), `${kind}: preserve every original legal paragraph`);
   for (const key of additions) assert.equal(keys(component).filter(value => value === key).length, 1, `${kind}: one ${key}`);
   const externalLinks = text => [...text.matchAll(/href="(https:[^"]+)"/g)].map(m => m[1]);
-  const addedLinks = kind === 'privacy' ? ['https://policies.google.com/privacy'] : [];
-  assert.deepEqual(externalLinks(component), [...externalLinks(original), ...addedLinks], `${kind}: preserve external policy links and add Google disclosure`);
+  const expectedLinks = kind === 'privacy' ? [
+    'https://policies.google.com/privacy',
+    'https://policies.google.com/technologies/partner-sites',
+    'https://gameanalytics.com/privacy/',
+    'https://www.apple.com/legal/privacy/data/en/game-center/',
+    'https://www.cloudflare.com/privacypolicy/',
+    'https://policies.google.com/privacy',
+  ] : ['https://www.apple.com/legal/internet-services/itunes/'];
+  assert.deepEqual(externalLinks(component), expectedLinks, `${kind}: existing and new provider policy links`);
+  for (const locale of locales) {
+    const page = documents.get(normalize(`${prefix(locale)}/${kind}/`));
+    for (const href of new Set(expectedLinks)) {
+      assert.ok(page.includes(`href="${href}"`), `${locale}/${kind}: rendered provider link ${href}`);
+    }
+  }
 }
 const baseline = execFileSync('git', ['show', `${legalBaseline}:src/i18n/ui.ts`], { encoding: 'utf8' });
 const originalUi = new Function(`${baseline.replace(/export const /g, 'const ').replace(/ as const/g, '')}; return ui;`)();
 for (const locale of ['en', 'zh-cn', 'zh-tw']) {
   for (const [key, value] of Object.entries(originalUi[locale])) {
-    if (key === 'privacy.updated' || key === 'terms.updated') continue;
+    if (key === 'privacy.updated' || key === 'terms.updated' || revisedLegalKeys.has(key)) continue;
     assert.equal(ui[locale][key], value, `${locale}/${key}: preserve original wording`);
   }
 }
@@ -128,4 +161,4 @@ for (const path of documents.keys()) {
   assert.ok(sitemap.includes(`<loc>https://mogoostudio.com${path === '/' ? '/' : `${path}/`}</loc>`), `sitemap: ${path}`);
 }
 assert.ok(!sitemap.includes('undefined'), 'sitemap has no missing locale metadata');
-console.log(`PASS: ${documents.size} localized pages, ${links} internal links, complete translations, SEO, sitemap, Google tag installation and original wording preserved (revision dates excluded).`);
+console.log(`PASS: ${documents.size} localized pages, ${links} internal links, complete translations, SEO, sitemap, Google tag installation, rendered Game Center/revive disclosures and unchanged legal wording preserved.`);
