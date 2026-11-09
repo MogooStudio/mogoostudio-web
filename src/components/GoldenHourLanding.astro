@@ -13,7 +13,7 @@ import yearlyMobile from '../assets/golden-hour/yearly-mobile.png';
 const locale = getLangFromUrl(Astro.url);
 const copy = goldenHourCopy[locale];
 const productUrl = 'https://hour.mogoostudio.com/';
-const mobileMedia = '(max-width: 700px)';
+const mobileMedia = '(max-width: 767px), (max-width: 960px) and (max-height: 500px) and (orientation: landscape) and (pointer: coarse)';
 const [mobileDashboard, mobileCalendar, mobileAnnual] = await Promise.all(
   [mobileDemo, monthlyMobile, yearlyMobile].map(src => getImage({ src, format: 'webp', quality: 90 })),
 );
@@ -107,13 +107,13 @@ const reports = [
     </section>
 
     <div class="golden-section golden-guide">
-      <section aria-labelledby="golden-browser-title">
-        <h2 id="golden-browser-title">{copy.browser.title}</h2>
+      <section id="golden-browser-title" aria-labelledby="browser-title">
+        <h2 id="browser-title">{copy.browser.title}</h2>
         <p>{copy.browser.floating}</p>
         <p>{copy.browser.install}</p>
       </section>
-      <section aria-labelledby="golden-privacy-title">
-        <h2 id="golden-privacy-title">{copy.data.title}</h2>
+      <section id="golden-privacy-title" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">{copy.data.title}</h2>
         <p>{copy.privacyNote}</p>
         <p>{copy.data.backup}</p>
         <p>{copy.data.analytics}</p>
@@ -262,7 +262,7 @@ const reports = [
   .golden-notes h2 { margin-bottom: 7px; font-size: 20px; font-weight: 900; }
   .golden-notes .pill-link { flex: none; }
 
-  @media (max-width: 700px) {
+  @media (max-width: 767px), (max-width: 960px) and (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
     .golden-hour-page { --golden-gutter: 20px; --golden-section-gap: 48px; padding-bottom: 36px; }
     .golden-hero { padding-top: 28px; }
     .golden-hero h1 { margin-top: 10px; font-size: clamp(27px, 8.9vw, 40px); }
@@ -276,7 +276,7 @@ const reports = [
     .golden-feature-list { grid-template-columns: minmax(0, 1fr); padding-block: 0; }
     .golden-feature-list li { padding: 12px 0; }
     .golden-feature-list li + li { border-inline-start: 0; border-top: 1px solid var(--golden-rule); }
-    .golden-report-grid { grid-template-columns: minmax(0, 1fr); gap: 27px; }
+    .golden-report-grid { grid-template-columns: minmax(0, 520px); justify-content: center; gap: 27px; }
     .golden-report h3, .golden-feature-list h3, .golden-notes h2 { font-size: 18px; }
     .golden-section p, .golden-notes p { font-size: 14px; }
     .golden-guide { grid-template-columns: minmax(0, 1fr); gap: 16px; }
