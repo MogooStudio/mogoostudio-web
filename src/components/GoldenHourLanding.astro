@@ -13,7 +13,7 @@ import yearlyMobile from '../assets/golden-hour/yearly-mobile.png';
 const locale = getLangFromUrl(Astro.url);
 const copy = goldenHourCopy[locale];
 const productUrl = 'https://hour.mogoostudio.com/';
-const mobileMedia = '(max-width: 767px), (max-width: 960px) and (max-height: 500px) and (orientation: landscape) and (pointer: coarse)';
+const mobileMedia = '(max-width: 767px), (max-height: 500px) and (orientation: landscape) and (pointer: coarse)';
 const [mobileDashboard, mobileCalendar, mobileAnnual] = await Promise.all(
   [mobileDemo, monthlyMobile, yearlyMobile].map(src => getImage({ src, format: 'webp', quality: 90 })),
 );
@@ -262,7 +262,7 @@ const reports = [
   .golden-notes h2 { margin-bottom: 7px; font-size: 20px; font-weight: 900; }
   .golden-notes .pill-link { flex: none; }
 
-  @media (max-width: 767px), (max-width: 960px) and (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
+  @media (max-width: 767px), (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
     .golden-hour-page { --golden-gutter: 20px; --golden-section-gap: 48px; padding-bottom: 36px; }
     .golden-hero { padding-top: 28px; }
     .golden-hero h1 { margin-top: 10px; font-size: clamp(27px, 8.9vw, 40px); }
