@@ -45,6 +45,7 @@ for (const [name, dictionary] of Object.entries({ ui, homeCopy, studioCopy, gold
 }
 
 const base = process.argv[2] || 'http://127.0.0.1:4321';
+const baseOrigin = new URL(base).origin;
 // Pin the revision before adding languages; list intentional legal revisions below.
 const legalBaseline = '9bfe25e5aac74e94e53b6c8abac70e7e6d5d8cd7';
 const legalAdditions = {
@@ -112,16 +113,26 @@ for (const locale of locales) {
   }
 }
 let links = 0;
+const imageLinks = new Set();
 for (const [path, html] of documents) {
   for (const match of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
     const href = match[1];
     if (!href.startsWith('/') && !href.startsWith('#')) continue;
-    const target = new URL(href, `${base}${path}`);
+    const target = new URL(decodeHtml(href), `${base}${path}`);
+    if (target.origin === baseOrigin && target.pathname.endsWith('.png') && !target.hash) {
+      imageLinks.add(target.href);
+      continue;
+    }
     const document = documents.get(normalize(target.pathname));
     assert.ok(document, `${path}: missing page ${href}`);
     if (target.hash) assert.ok(document.includes(`id="${target.hash.slice(1)}"`), `${path}: missing anchor ${href}`);
     links++;
   }
+}
+for (const href of imageLinks) {
+  const response = await fetch(href, { method: 'HEAD' });
+  assert.equal(response.status, 200, `linked screenshot: ${href}`);
+  assert.match(response.headers.get('content-type') || '', /^image\/png\b/, `linked screenshot type: ${href}`);
 }
 for (const kind of ['privacy', 'terms']) {
   const component = readFileSync(`src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`, 'utf8');
@@ -163,4 +174,4 @@ for (const path of documents.keys()) {
   assert.ok(sitemap.includes(`<loc>https://mogoostudio.com${path === '/' ? '/' : `${path}/`}</loc>`), `sitemap: ${path}`);
 }
 assert.ok(!sitemap.includes('undefined'), 'sitemap has no missing locale metadata');
-console.log(`PASS: ${documents.size} localized pages, ${links} internal links, complete translations, SEO, sitemap, Google tag installation, rendered Game Center/revive disclosures and unchanged legal wording preserved.`);
+console.log(`PASS: ${documents.size} localized pages, ${links} internal links, ${imageLinks.size} linked screenshots, complete translations, SEO, sitemap, Google tag installation, rendered Game Center/revive disclosures and unchanged legal wording preserved.`);

@@ -12,11 +12,12 @@ interface Props {
   description?: string;
   rawTitle?: boolean;
   playground?: boolean;
+  compactFooter?: boolean;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description = t('meta.index'), rawTitle = false, playground = true } = Astro.props;
+const { title, description = t('meta.index'), rawTitle = false, playground = true, compactFooter = false } = Astro.props;
 const pageTitle = rawTitle ? title : `${title} | MogooStudio`;
 const htmlLang = localeMetadata[lang].html;
 
@@ -68,7 +69,7 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
   <a class="skip-link" href="#main">{homeCopy[lang].skip}</a>
   <Nav currentLang={lang} playground={playground} />
   <slot />
-  <Footer currentLang={lang} playground={playground} />
+  <Footer currentLang={lang} playground={playground} compact={compactFooter} />
 </body>
 </html>
 

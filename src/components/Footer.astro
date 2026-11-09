@@ -6,15 +6,16 @@ import { homeCopy } from '../i18n/home';
 interface Props {
   currentLang: keyof typeof languages;
   playground?: boolean;
+  compact?: boolean;
 }
 
-const { currentLang, playground = false } = Astro.props;
+const { currentLang, playground = false, compact = false } = Astro.props;
 const t = useTranslations(currentLang);
 const copy = homeCopy[currentLang];
 ---
 
-{playground ? <footer class="playground-footer">
-  <h2 class="display-type">{copy.statement}</h2>
+{playground ? <footer class="playground-footer" data-compact={compact || undefined}>
+  {!compact && <h2 class="display-type">{copy.statement}</h2>}
   <div class="playground-footer-row">
     <a class="playground-footer-brand" href={getLocalizedPath('/', currentLang)}><span class="playground-footer-mark" aria-hidden="true">M</span>MogooStudio</a>
     <nav class="playground-footer-links" aria-label={copy.footerLabel}>
@@ -76,6 +77,26 @@ const copy = homeCopy[currentLang];
 </script>
 
 <style>
+  .playground-footer[data-compact] {
+    max-width: 1060px;
+    width: calc(100% - 64px);
+    min-height: auto;
+    padding: 22px 0 26px;
+    border-top: 1px solid #e9e0d0;
+    background: transparent;
+    color: #5f5a4f;
+  }
+
+  [data-compact] .playground-footer-row { flex-wrap: wrap; gap: 14px 18px; font-size: 13px; }
+  [data-compact] .playground-footer-brand { color: var(--ink); }
+  [data-compact] .playground-footer-mark { background: var(--ink); color: var(--cream); }
+  [data-compact] .playground-footer-links { flex-wrap: wrap; gap: 8px 18px; padding-left: 0; border: 0; }
+  [data-compact] .playground-footer-copyright { padding-left: 0; border: 0; }
+
+  @media (max-width: 700px) {
+    .playground-footer[data-compact] { width: calc(100% - 40px); }
+  }
+
   .cv2-footer {
     background: #181818;
     color: #eee;
