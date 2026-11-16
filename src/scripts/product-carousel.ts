@@ -3,7 +3,7 @@ export function initializeProductCarousels() {
   document.querySelectorAll<HTMLElement>('[data-product-carousel]').forEach(carousel => {
     const viewport = carousel.querySelector<HTMLElement>('.carousel-viewport')!;
     const slides = [...viewport.querySelectorAll<HTMLElement>('.carousel-slide')];
-    const controls = [...carousel.querySelectorAll<HTMLButtonElement>('[data-carousel-direction]')];
+    const controls = [...document.querySelectorAll<HTMLButtonElement>(`[data-carousel-direction][aria-controls="${viewport.id}"]`)];
     const status = carousel.querySelector<HTMLElement>('.carousel-status')!;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let current = 0;
@@ -56,13 +56,15 @@ export function initializeProductCarousels() {
       control.hidden = false;
       control.addEventListener('click', event => select((destination ?? current) + Number(control.dataset.carouselDirection), event.detail === 0));
     });
-    carousel.addEventListener('keydown', event => {
+    function handleKeydown(event: KeyboardEvent) {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       event.preventDefault();
       const target = Math.max(0, Math.min(slides.length - 1, (destination ?? current) + (event.key === 'ArrowLeft' ? -1 : 1)));
       select(target, true);
       slides[target].focus({ preventScroll: true });
-    });
+    }
+    carousel.addEventListener('keydown', handleKeydown);
+    controls.forEach(control => control.addEventListener('keydown', handleKeydown));
 
     viewport.addEventListener('pointerdown', () => { destination = undefined; }, { passive: true });
     new ResizeObserver(() => {

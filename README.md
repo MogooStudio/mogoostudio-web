@@ -63,7 +63,7 @@ npm run dev
 
 首页精选作品直接展示三个游戏，产品图片不再提供弹框预览或放大入口。历史作品分类实现与六语文案暂时保留，但首页不再加载分类脚本或渲染筛选控件；历史方案及截图见 `docs/design/2026-10-16-work-categories/`。
 
-YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，各提供六张截图，不自动播放。YouCanUp 第一项为原来的菜单与实机双图组合，向右切换后每次显示一张，向左切回第一项恢复双图，无需刷新；双图与单图可以反复往返切换。Minimalist Breakout 默认只显示第一张。手机可左右滑动，触控板可横向滚动；桌面鼠标移到图片左右两侧时显示对应箭头，点击切换。键盘可聚焦箭头或当前截图，用方向键切换，首尾箭头按实际位置禁用；纵向手势仍滚动页面。悬停或点击截图均不打开弹框。未启用 JavaScript 时仍可原生横向浏览截图。
+YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，各提供六张截图，不自动播放。YouCanUp 第一项为原来的菜单与实机双图组合，向右切换后每次显示一张，向左切回第一项恢复双图，无需刷新；双图与单图可以反复往返切换。Minimalist Breakout 默认只显示第一张。手机可左右滑动，触控板可横向滚动；桌面鼠标移到作品卡片左右内边缘时显示对应箭头，按钮距边缘 8px、垂直居中，单图与双图模式保持相同位置，点击切换。键盘可聚焦箭头或当前截图，用方向键切换，首尾箭头按实际位置禁用；纵向手势仍滚动页面。悬停或点击截图均不打开弹框。未启用 JavaScript 时仍可原生横向浏览截图。
 
 ## 项目结构
 

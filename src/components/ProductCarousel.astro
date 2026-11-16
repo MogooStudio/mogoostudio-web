@@ -25,11 +25,11 @@ const hasIntro = Astro.slots.has('intro');
       </div>
     ))}
   </div>
-  <button type="button" class="carousel-arrow carousel-previous" data-carousel-direction="-1" aria-label={previous} aria-controls={viewportId} hidden>
-    <span class="carousel-arrow-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="m14 6-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
-  </button>
-  <button type="button" class="carousel-arrow carousel-next" data-carousel-direction="1" aria-label={next} aria-controls={viewportId} hidden>
-    <span class="carousel-arrow-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="m10 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
-  </button>
   <span class="carousel-status" aria-live="polite" aria-atomic="true">1 / {screenshots.length}</span>
 </div>
+<button type="button" class="carousel-arrow carousel-previous" data-carousel-direction="-1" aria-label={previous} aria-controls={viewportId} hidden>
+  <span class="carousel-arrow-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="m14 6-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+</button>
+<button type="button" class="carousel-arrow carousel-next" data-carousel-direction="1" aria-label={next} aria-controls={viewportId} hidden>
+  <span class="carousel-arrow-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="m10 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+</button>
