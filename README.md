@@ -59,9 +59,9 @@ npm run dev
 
 首页已采用 B 方案“图文对向入场”，入口为 `src/scripts/home-motion.ts`，共享实现位于 `src/scripts/product-entrance.ts`。桌面图片从左侧 140px、文字从右侧 100px 入场，手机分别为 90px 与 72px，时长 760ms。图片完成解码后再播放，图片与介绍分别观察进入视野的时机；滚回时不重复播放。键盘聚焦时立即落位，系统开启“减少动态效果”时展示完整静态内容。禁用 JavaScript 时内容正常显示。
 
-独立的 `/motion-studies/` 对比页保留第二轮“整卡推近”“图文对向入场”“叠卡交接”和静态基线，使用真实首页，支持六语、宽屏/手机及自动滚动演示。预览通过 iframe 标识与 `motion-study` 参数关闭首页自动安装的动效，再由对比页安装所选方案，预览内导航后也不会重复安装。旧方案与验证记录保留在 `docs/design/2026-10-16-scroll-motion/` 作为历史记录。
+独立的 `/motion-studies/` 对比页保留第二轮“整卡推近”“图文对向入场”“叠卡交接”和静态基线，使用真实首页，支持六语、宽屏/手机及自动滚动演示。预览通过 iframe 标识与 `motion-study` 参数关闭首页自动安装的动效，再由对比页安装所选方案，预览内导航后也不会重复安装。
 
-首页精选作品展示薪动、拼一页、YouCanUp 和 Minimalist Breakout，桌面端各占一整行；Flappy Ball Hop 展示及其页脚入口已移除。四款产品共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，截图均不提供弹框预览或放大入口。历史作品分类实现与六语文案暂时保留，但首页不加载分类脚本或渲染筛选控件；历史方案及截图见 `docs/design/2026-10-16-work-categories/`。
+首页精选作品展示薪动、拼一页、YouCanUp 和 Minimalist Breakout，桌面端各占一整行。四款产品共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，截图均不提供弹框预览或放大入口。历史作品分类实现与六语文案暂时保留，但首页不加载分类脚本或渲染筛选控件。
 
 YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，各提供六张截图，不自动播放。YouCanUp 第一项为原来的菜单与实机双图组合，向右切换后每次显示一张，向左切回第一项恢复双图，无需刷新；双图与单图可以反复往返切换。Minimalist Breakout 默认只显示第一张。手机可左右滑动，触控板可横向滚动；桌面鼠标移到作品卡片左右内边缘时显示对应箭头，按钮距边缘 8px、垂直居中，单图与双图模式保持相同位置，点击切换。键盘可聚焦箭头或当前截图，用方向键切换，首尾箭头按实际位置禁用；纵向手势仍滚动页面。悬停或点击截图均不打开弹框。未启用 JavaScript 时仍可原生横向浏览截图。
 
@@ -87,6 +87,7 @@ YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro
 - 可由 Astro 优化的图片放在 `src/assets/`，必须保持固定 URL 的文件放在 `public/`
 - 隐私政策、服务条款、第三方 SDK 或支持邮箱发生变化时，必须同步更新所有语言版本
 - 2026-11-06 六语法律文档已补充 YouCanUp 的 Game Center 资料、玩家标识与本地哈希、排行榜成绩同步、公开展示、Apple 保存及退出／删除边界；隐私政策另说明独立统计先同意、拒绝仍可游玩、设置中撤回及历史数据处理边界；服务条款说明每局最多成功复活一次、广告奖励确认条件和续玩成绩规则
+- 2026-11-16 清理已移除作品的隐私条目、旧翻译、样式、素材及早期设计档案，六语隐私政策的页面更新时间同步修订
 - 提交前至少执行一次 `npm run build`
 
 2026-11-16 恢复「拼一页」六语首页展示，用户已确认正式发布。使用 `photo-collage-mini-program` 当前 `71d2fae` 代码，在微信开发者工具重新截取首页、模板库、模板详情、编辑器和导出页，保存到 `src/assets/pinyiye/` 的 `home.png`、`templates.png`、`detail.png`、`editor.png`、`export.png`。第一项为编辑器与两张界面的组合，向右逐张切换，返回第一项恢复组合。产品入口打开原有微信小程序码供扫描；小程序码使用原始文件，不做有损转换或裁切，点击截图本身不弹框。

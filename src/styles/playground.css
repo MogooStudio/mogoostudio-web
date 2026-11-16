@@ -44,7 +44,6 @@ html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
   .product-breakout{grid-column:1/-1;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);padding-inline:48px;gap:48px}
   .product-breakout .product-carousel{max-width:calc(180 * var(--u));justify-self:center}
 }
-.product-flappy{background:radial-gradient(ellipse at 60% 30%,#fff1e1,#fff4e8)}
 .product-pinyiye{grid-column:1/-1;height:auto;min-height:calc(390 * var(--u));grid-template-columns:minmax(0,.95fr) minmax(0,1fr);padding:calc(28 * var(--u)) calc(48 * var(--u));gap:calc(48 * var(--u));background:#edf4e9}
 .pinyiye-artwork{position:relative;align-self:center;width:100%;height:calc(340 * var(--u));padding:0;border:0;border-radius:20px;background:transparent}
 .pinyiye-print{position:absolute;top:calc(60 * var(--u));width:42%;max-width:calc(165 * var(--u));box-shadow:0 8px 18px #30463426}
@@ -69,7 +68,6 @@ html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
 .product-artwork{width:100%;height:calc(340 * var(--u));align-self:center;border:0;padding:0;background:transparent;position:relative;border-radius:calc(24 * var(--u))}
 .phone-art{display:block;position:relative;width:100%;height:100%;overflow:hidden;border-radius:calc(24 * var(--u));box-shadow:0 5px 8px #33241814}
 .phone-art img{position:absolute;max-width:none;width:568.888889%;height:auto;left:-41.666667%;top:-217.941176%;pointer-events:none}
-.product-flappy .phone-art img{left:-311.111111%}
 .phone-art-screenshot{background:#0b0e20}
 .phone-art-screenshot img{position:static;width:100%;height:100%;object-fit:contain}
 .product-carousel{cursor:auto;min-width:0}
@@ -120,7 +118,6 @@ html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
 .product-type,.product-status{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:99px;background:#b9f3fb;color:#293841;padding:calc(8 * var(--u)) calc(17 * var(--u));font-size:calc(16 * var(--u));line-height:1.2}
 .product-status{margin-top:calc(22 * var(--u));font-size:calc(18 * var(--u));padding:calc(9 * var(--u)) calc(23 * var(--u))}
 .product-status.is-available{background:#4de0f5;color:#07333d}
-.product-flappy .product-type,.product-flappy .product-status{background:#ffe5c4;color:#473522}
 .app-store-button{display:inline-flex;align-items:center;gap:calc(10 * var(--u));margin-top:calc(21 * var(--u));padding:calc(7 * var(--u)) calc(15 * var(--u));min-width:calc(181 * var(--u));min-height:calc(54 * var(--u));background:#08090a;color:#fff;border-radius:calc(8 * var(--u));transition:transform .15s,background .15s}
 .app-store-button:hover{transform:translateY(-2px);background:#252527}
 .app-store-button:active{transform:scale(.97)}
@@ -290,7 +287,7 @@ body.mini-program-open{overflow:hidden}
 /* The third information row groups product type/platform and release status. */
 .product-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;max-width:100%}
 .product-meta .product-type,.product-meta .product-status{margin-top:0;max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere}
-.product-breakout .product-meta>span,.product-flappy .product-meta>span{font-size:13px;padding:8px 12px}
+.product-breakout .product-meta>span{font-size:13px;padding:8px 12px}
 
 /* Use native Japanese/Korean glyphs, and let translated copy determine card height. */
 html[lang=ja] body.playground{font-family:Nunito,"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif}
@@ -299,7 +296,7 @@ html:is([lang=ja],[lang=ko]) body.playground .display-type{font-family:inherit;f
 html:is([lang=ja],[lang=ko],[lang=es]) .value p{white-space:normal}
 html:is([lang=ja],[lang=ko],[lang=es]) .playground-footer h2{white-space:normal}
 @media(min-width:768px){
-  html:is([lang=ja],[lang=ko],[lang=es]) :is(.product-breakout,.product-flappy){height:auto;min-height:calc(380 * var(--u))}
+  html:is([lang=ja],[lang=ko],[lang=es]) .product-breakout{height:auto;min-height:calc(380 * var(--u))}
   html:is([lang=ja],[lang=ko]) .hero-copy h1{font-size:calc(70 * var(--u))}
   html:is([lang=ja],[lang=ko]) .hero-intro{font-size:calc(18 * var(--u))}
   html[lang=es] .hero-copy h1{font-size:calc(70 * var(--u))}

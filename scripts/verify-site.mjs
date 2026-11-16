@@ -59,6 +59,7 @@ const legalAdditions = {
   terms: ['terms.s5.gameCenter', 'terms.s5.appleTerms', 'terms.s6.youcanup'],
 };
 const revisedLegalKeys = new Set(['privacy.s2.youcanup', 'privacy.s9.p2']);
+const removedLegalKeys = new Set(['privacy.s2.app2']);
 const decodeHtml = html => html.replace(/&(?:amp|lt|gt|quot|apos|#39|#x27);/g, entity => ({
   '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&apos;': "'", '&#39;': "'", '&#x27;': "'",
 })[entity]);
@@ -139,7 +140,11 @@ for (const kind of ['privacy', 'terms']) {
   const keys = text => [...text.matchAll(/t\('([^']+)'\)/g)].map(m => m[1]);
   const original = execFileSync('git', ['show', `${legalBaseline}:src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`], { encoding: 'utf8' });
   const additions = legalAdditions[kind];
-  assert.deepEqual(keys(component).filter(key => !additions.includes(key)), keys(original), `${kind}: preserve every original legal paragraph`);
+  assert.deepEqual(keys(component).filter(key => !additions.includes(key)), keys(original).filter(key => !removedLegalKeys.has(key)), `${kind}: preserve original legal paragraphs except approved removals`);
+  for (const key of removedLegalKeys) {
+    assert.ok(!keys(component).includes(key), `${kind}: retired disclosure absent`);
+    for (const locale of locales) assert.ok(!(key in ui[locale]), `${locale}: retired disclosure translation absent`);
+  }
   for (const key of additions) assert.equal(keys(component).filter(value => value === key).length, 1, `${kind}: one ${key}`);
   const externalLinks = text => [...text.matchAll(/href="(https:[^"]+)"/g)].map(m => m[1]);
   const expectedLinks = kind === 'privacy' ? [
@@ -162,8 +167,9 @@ const baseline = execFileSync('git', ['show', `${legalBaseline}:src/i18n/ui.ts`]
 const originalUi = new Function(`${baseline.replace(/export const /g, 'const ').replace(/ as const/g, '')}; return ui;`)();
 for (const locale of ['en', 'zh-cn', 'zh-tw']) {
   for (const [key, value] of Object.entries(originalUi[locale])) {
-    if (key === 'privacy.updated' || key === 'terms.updated' || revisedLegalKeys.has(key)) continue;
-    assert.equal(ui[locale][key], value, `${locale}/${key}: preserve original wording`);
+    if (!key.startsWith('privacy.') && !key.startsWith('terms.')) continue;
+    if (key === 'privacy.updated' || key === 'terms.updated' || revisedLegalKeys.has(key) || removedLegalKeys.has(key)) continue;
+    assert.equal(ui[locale][key], value, `${locale}/${key}: preserve original legal wording`);
   }
 }
 const sitemapResponse = await fetch(`${base}/sitemap-index.xml`);
@@ -174,4 +180,4 @@ for (const path of documents.keys()) {
   assert.ok(sitemap.includes(`<loc>https://mogoostudio.com${path === '/' ? '/' : `${path}/`}</loc>`), `sitemap: ${path}`);
 }
 assert.ok(!sitemap.includes('undefined'), 'sitemap has no missing locale metadata');
-console.log(`PASS: ${documents.size} localized pages, ${links} internal links, ${imageLinks.size} linked screenshots, complete translations, SEO, sitemap, Google tag installation, rendered Game Center/revive disclosures and unchanged legal wording preserved.`);
+console.log(`PASS: ${documents.size} localized pages, ${links} internal links, ${imageLinks.size} linked screenshots, complete translations, SEO, sitemap, Google tag installation, rendered Game Center/revive disclosures and remaining legal wording preserved.`);

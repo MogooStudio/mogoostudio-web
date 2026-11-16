@@ -31,8 +31,6 @@ const originalUi = {
     // Index page - Games
     'game.minimalist.title': 'Minimalist Breakout',
     'game.minimalist.desc': 'A clean, distraction-free take on the timeless breakout formula. Pure gameplay, zero clutter. Built for mobile from the ground up.',
-    'game.flappy.title': 'Flappy Ball Hop',
-    'game.flappy.desc': 'Dodge, weave, and soar through an ever-changing world. Easy to learn, impossible to put down. Coming to iOS & Android.',
 
     // Index page - Philosophy
     'index.philosophy.eyebrow': 'Our Philosophy',
@@ -80,7 +78,7 @@ const originalUi = {
 
     // Privacy & Terms pages
     'privacy.title': 'Privacy Policy',
-    'privacy.updated': 'Last updated: November 6, 2026',
+    'privacy.updated': 'Last updated: November 16, 2026',
     'privacy.website.h': '12. Website Analytics',
     'privacy.website.p1': 'This section applies to mogoostudio.com, separately from analytics inside our Apps. The website uses Cloudflare Web Analytics to measure aggregate traffic and page performance.',
     'privacy.website.cloudflare': 'Cloudflare privacy policy',
@@ -92,7 +90,6 @@ const originalUi = {
     'privacy.s2.h': '2. App-Specific Practices and Information Processed',
     'privacy.s2.p1': 'The App and service practices covered by this Policy are:',
     'privacy.s2.app1': 'Minimalist Breakout: the core game is offline single-player. Depending on the services included and disclosed for the distributed build, it may use GameAnalytics for gameplay analytics and Google Mobile Ads and Google UMP for optional rewarded ads; ATT may be requested on iOS.',
-    'privacy.s2.app2': 'Flappy Ball Hop: the core game is offline single-player. Depending on the services included and disclosed for the distributed build, it may use GameAnalytics for gameplay analytics and Google Mobile Ads and Google UMP for optional rewarded ads; ATT may be requested on iOS.',
     'privacy.s2.youcanup': 'YouCanUp: the core game is offline single-player. The app uses GameAnalytics to analyze gameplay and rewarded-ad events using an SDK-generated randomized identifier, and Google Mobile Ads for optional rewarded-ad revives. Google UMP handles applicable advertising privacy choices; ATT may be requested on iOS. On iOS, Apple Game Center also provides optional player profiles and a height leaderboard.',
     'privacy.s2.app3': 'Conditional application: a service-specific section of this Policy applies only when that service is actually included and enabled in the App you use. If a service is absent or disabled, that service does not process information for that App.',
     'privacy.s2.app4': 'Future Apps: before enabling a new third-party service or materially changing the information processed or its purpose, we will update this Policy and any required store disclosures.',
@@ -239,8 +236,6 @@ const originalUi = {
     // Index page - Games
     'game.minimalist.title': 'Minimalist Breakout',
     'game.minimalist.desc': '纯粹的打砖块体验，没有干扰，零杂乱。专为移动设备打造，简洁而专注。',
-    'game.flappy.title': 'Flappy Ball Hop',
-    'game.flappy.desc': '在不断变化的世界中躲避、穿梭、翱翔。易于上手，根本停不下来。即将登陆 iOS 和 Android。',
 
     // Index page - Philosophy
     'index.philosophy.eyebrow': '我们的理念',
@@ -288,7 +283,7 @@ const originalUi = {
 
     // Privacy & Terms pages
     'privacy.title': '隐私政策',
-    'privacy.updated': '最后更新：2026 年 11 月 6 日',
+    'privacy.updated': '最后更新：2026 年 11 月 16 日',
     'privacy.website.h': '12. 官网访问统计',
     'privacy.website.p1': '本节适用于 mogoostudio.com 官网，与应用内的统计服务分别说明。官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能。',
     'privacy.website.cloudflare': 'Cloudflare 隐私政策',
@@ -300,7 +295,6 @@ const originalUi = {
     'privacy.s2.h': '2. 各应用的数据实践与处理的信息',
     'privacy.s2.p1': '本政策覆盖的应用及服务数据实践如下：',
     'privacy.s2.app1': 'Minimalist Breakout：核心玩法为离线单机。根据实际分发构建中包含并已披露的服务，应用可能使用 GameAnalytics 进行玩法分析，并使用 Google Mobile Ads 和 Google UMP 提供可选激励广告；iOS 上可能请求 ATT 权限。',
-    'privacy.s2.app2': 'Flappy Ball Hop：核心玩法为离线单机。根据实际分发构建中包含并已披露的服务，应用可能使用 GameAnalytics 进行玩法分析，并使用 Google Mobile Ads 和 Google UMP 提供可选激励广告；iOS 上可能请求 ATT 权限。',
     'privacy.s2.youcanup': '你行你上啊（YouCanUp）：核心玩法为离线单机。应用使用 GameAnalytics，通过 SDK 生成的随机标识分析玩法与激励广告事件，并使用 Google Mobile Ads 提供可选的看广告复活。Google UMP 处理适用的广告隐私选择；iOS 上可能请求 ATT 权限。iOS 版本还通过 Apple Game Center 提供可选的玩家资料与高度排行榜功能。',
     'privacy.s2.app3': '条件适用：本政策中针对某项服务的条款，仅在您使用的应用实际包含并启用该服务时适用。如果某项服务未包含或已禁用，该服务不会为相应应用处理信息。',
     'privacy.s2.app4': '未来应用：在启用新的第三方服务，或对所处理的信息或处理目的作出实质变更前，我们会更新本政策及必要的应用商店披露。',
@@ -447,8 +441,6 @@ const originalUi = {
     // Index page - Games
     'game.minimalist.title': 'Minimalist Breakout',
     'game.minimalist.desc': '純粹的打磚塊體驗，沒有干擾，零雜亂。專為移動裝置打造，簡潔而專注。',
-    'game.flappy.title': 'Flappy Ball Hop',
-    'game.flappy.desc': '在不斷變化的世界中躲避、穿梭、翱翔。易於上手，根本停不下來。即將登陸 iOS 和 Android。',
 
     // Index page - Philosophy
     'index.philosophy.eyebrow': '我們的理念',
@@ -496,7 +488,7 @@ const originalUi = {
 
     // Privacy & Terms pages
     'privacy.title': '隱私政策',
-    'privacy.updated': '最後更新：2026 年 11 月 6 日',
+    'privacy.updated': '最後更新：2026 年 11 月 16 日',
     'privacy.website.h': '12. 官網瀏覽統計',
     'privacy.website.p1': '本節適用於 mogoostudio.com 官網，與應用程式內的統計服務分別說明。官網使用 Cloudflare Web Analytics 統計彙總瀏覽量與頁面效能。',
     'privacy.website.cloudflare': 'Cloudflare 隱私政策',
@@ -508,7 +500,6 @@ const originalUi = {
     'privacy.s2.h': '2. 各應用程式的資料實務與處理的資訊',
     'privacy.s2.p1': '本政策涵蓋的應用程式及服務資料實務如下：',
     'privacy.s2.app1': 'Minimalist Breakout：核心玩法為離線單機。根據實際散布組建中包含並已揭露的服務，應用程式可能使用 GameAnalytics 進行玩法分析，並使用 Google Mobile Ads 和 Google UMP 提供可選獎勵廣告；iOS 上可能要求 ATT 權限。',
-    'privacy.s2.app2': 'Flappy Ball Hop：核心玩法為離線單機。根據實際散布組建中包含並已揭露的服務，應用程式可能使用 GameAnalytics 進行玩法分析，並使用 Google Mobile Ads 和 Google UMP 提供可選獎勵廣告；iOS 上可能要求 ATT 權限。',
     'privacy.s2.youcanup': '你行你上啊（YouCanUp）：核心玩法為離線單機。應用程式使用 GameAnalytics，透過 SDK 產生的隨機識別碼分析玩法與獎勵廣告事件，並使用 Google Mobile Ads 提供可選的觀看廣告復活。Google UMP 處理適用的廣告隱私選擇；iOS 上可能要求 ATT 權限。iOS 版本另透過 Apple Game Center 提供可選的玩家個人檔案與高度排行榜功能。',
     'privacy.s2.app3': '條件適用：本政策中針對某項服務的條款，僅在您使用的應用程式實際包含並啟用該服務時適用。如果某項服務未包含或已停用，該服務不會為相應應用程式處理資訊。',
     'privacy.s2.app4': '未來應用程式：在啟用新的第三方服務，或對所處理的資訊或處理目的作出實質變更前，我們會更新本政策及必要的應用程式商店揭露。',
