@@ -32,10 +32,6 @@ const youcanupScreenshots = [
   { src: youcanupResults, alt: copy.youcanup.resultsAlt },
   { src: youcanupOutfits, alt: copy.youcanup.outfitsAlt },
 ];
-const galleries = [
-  { id: 'youcanup', title: copy.youcanup.name, screenshots: youcanupScreenshots },
-  ...games.map(game => ({ ...game, screenshots: game.screenshots.map((src, index) => ({ src, alt: `${game.title} ${index + 1}` })) })),
-];
 ---
 
 <BaseLayout title={copy.title} description={copy.description} rawTitle playground>
@@ -53,7 +49,7 @@ const galleries = [
       <h2 id="works-title" class="display-type">{copy.selected}</h2>
       <div id="work-results" class="products">
         <article id="youcanup" class="product product-youcanup" aria-labelledby="youcanup-title">
-          <ProductCarousel id="youcanup" title={copy.youcanup.name} screenshots={youcanupScreenshots} preview={copy.screenshot} previous={copy.previous} next={copy.next}>
+          <ProductCarousel id="youcanup" title={copy.youcanup.name} screenshots={youcanupScreenshots} previous={copy.previous} next={copy.next}>
             <span slot="intro" class="youcanup-artwork">
               <span class="youcanup-screen youcanup-screen-gameplay"><Image src={youcanupGameplay} alt="" width={440} format="webp" loading="lazy" /></span>
               <span class="youcanup-screen youcanup-screen-menu"><Image src={youcanupMenu} alt="" width={440} format="webp" loading="lazy" /></span>
@@ -68,12 +64,11 @@ const galleries = [
         {games.map(game => (
           <article id={game.id} class:list={['product', game.available ? 'product-breakout' : 'product-flappy']}>
             {game.id === 'minimalist-breakout' ? (
-              <ProductCarousel id={game.id} title={game.title} screenshots={game.screenshots.map((src, index) => ({ src, alt: `${game.title} ${index + 1}` }))} preview={copy.screenshot} previous={copy.previous} next={copy.next} />
+              <ProductCarousel id={game.id} title={game.title} screenshots={game.screenshots.map((src, index) => ({ src, alt: `${game.title} ${index + 1}` }))} previous={copy.previous} next={copy.next} />
             ) : (
-              <button type="button" class="product-artwork" data-gallery={`gallery-${game.id}`} aria-label={`${game.title} — ${copy.screenshot}`} aria-haspopup="dialog">
-              <span class="phone-art"><img src={artwork.src} width={1024} height={1536} alt="" loading="lazy" decoding="async" /></span>
-              <span class="artwork-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
-              </button>
+              <div class="product-artwork">
+                <span class="phone-art"><img src={artwork.src} width={1024} height={1536} alt={game.title} loading="lazy" decoding="async" /></span>
+              </div>
             )}
             <div class="product-info">
               <h3>{game.title}</h3>
@@ -103,11 +98,6 @@ const galleries = [
     </section>
   </main>
 
-  {galleries.map(gallery => <dialog id={`gallery-${gallery.id}`} class="screenshot-dialog" aria-label={`${gallery.title} — ${copy.screenshot}`}>
-    <div class="gallery-header"><h2>{gallery.title}</h2><button type="button" class="gallery-close" aria-label={copy.close}>×</button></div>
-    <div class="gallery-slides">{gallery.screenshots.map((item, index) => <figure hidden={index !== 0}><Image src={item.src} alt={item.alt} width={440} format="webp" loading="lazy" /></figure>)}</div>
-    <div class="gallery-controls"><button type="button" class="gallery-previous" aria-label={copy.previous}>←</button><span class="gallery-counter" aria-live="polite">1 / {gallery.screenshots.length}</span><button type="button" class="gallery-next" aria-label={copy.next}>→</button></div>
-  </dialog>)}
 </BaseLayout>
 
 <script>
@@ -117,42 +107,4 @@ const galleries = [
   initializeProductCarousels();
   initializeHomeMotion();
 
-  document.querySelectorAll<HTMLDialogElement>('.screenshot-dialog').forEach(dialog => {
-    const triggers = [...document.querySelectorAll<HTMLButtonElement>(`[data-gallery="${dialog.id}"]`)];
-    let activeTrigger: HTMLButtonElement | undefined;
-    const slides = [...dialog.querySelectorAll<HTMLElement>('figure')];
-    const previous = dialog.querySelector<HTMLButtonElement>('.gallery-previous')!;
-    const next = dialog.querySelector<HTMLButtonElement>('.gallery-next')!;
-    const counter = dialog.querySelector('.gallery-counter')!;
-    let current = 0;
-    function display(index: number) {
-      current = Math.max(0, Math.min(index, slides.length - 1));
-      slides.forEach((slide, i) => { slide.hidden = i !== current; });
-      previous.disabled = current === 0;
-      next.disabled = current === slides.length - 1;
-      counter.textContent = `${current + 1} / ${slides.length}`;
-    }
-    triggers.forEach(trigger => trigger.addEventListener('click', () => {
-      activeTrigger = trigger;
-      display(Number(trigger.dataset.galleryIndex ?? 0));
-      dialog.showModal();
-      document.body.classList.add('gallery-open');
-    }));
-    previous.addEventListener('click', () => display(current - 1));
-    next.addEventListener('click', () => display(current + 1));
-    dialog.querySelector('.gallery-close')?.addEventListener('click', () => dialog.close());
-    dialog.addEventListener('close', () => {
-      const hasOpenDialog = !!document.querySelector('dialog[open]');
-      document.body.classList.toggle('gallery-open', hasOpenDialog);
-      // Native dialogs restore focus immediately; a delayed close event must not steal it back.
-      if (!hasOpenDialog && (document.activeElement === document.body || dialog.contains(document.activeElement))) {
-        activeTrigger?.focus({ preventScroll: true });
-      }
-    });
-    dialog.addEventListener('click', event => { if (event.target === dialog) { const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close(); } });
-    dialog.addEventListener('keydown', event => {
-      if (event.key === 'ArrowRight') { event.preventDefault(); display(current + 1); }
-      if (event.key === 'ArrowLeft') { event.preventDefault(); display(current - 1); }
-    });
-  });
 </script>

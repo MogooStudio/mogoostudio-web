@@ -2,14 +2,13 @@
 export function initializeProductCarousels() {
   document.querySelectorAll<HTMLElement>('[data-product-carousel]').forEach(carousel => {
     const viewport = carousel.querySelector<HTMLElement>('.carousel-viewport')!;
-    const slides = [...viewport.querySelectorAll<HTMLButtonElement>('.carousel-slide')];
+    const slides = [...viewport.querySelectorAll<HTMLElement>('.carousel-slide')];
     const controls = [...carousel.querySelectorAll<HTMLButtonElement>('[data-carousel-direction]')];
     const status = carousel.querySelector<HTMLElement>('.carousel-status')!;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let current = 0;
     let destination: number | undefined;
     let frame = 0;
-    let pressedScrollLeft = 0;
     let introResized = false;
 
     function synchronizeIntro(index: number) {
@@ -65,14 +64,7 @@ export function initializeProductCarousels() {
       slides[target].focus({ preventScroll: true });
     });
 
-    // A swipe must never also open the enlarged preview on release.
-    viewport.addEventListener('pointerdown', () => { destination = undefined; pressedScrollLeft = viewport.scrollLeft; }, { passive: true });
-    viewport.addEventListener('click', event => {
-      if (event.detail !== 0 && Math.abs(viewport.scrollLeft - pressedScrollLeft) > 8) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-      }
-    }, true);
+    viewport.addEventListener('pointerdown', () => { destination = undefined; }, { passive: true });
     new ResizeObserver(() => {
       if (introResized) { introResized = false; return; }
       select(destination ?? current, true);

@@ -6,25 +6,23 @@ interface Props {
   id: string;
   title: string;
   screenshots: { src: ImageMetadata; alt: string }[];
-  preview: string;
   previous: string;
   next: string;
 }
 
-const { id, title, screenshots, preview, previous, next } = Astro.props;
+const { id, title, screenshots, previous, next } = Astro.props;
 const viewportId = `carousel-${id}`;
 const hasIntro = Astro.slots.has('intro');
 ---
 
-<div class="product-artwork product-carousel" data-product-carousel data-carousel-intro={hasIntro ? '' : undefined} role="group" aria-label={`${title} — ${preview}`}>
+<div class="product-artwork product-carousel" data-product-carousel data-carousel-intro={hasIntro ? '' : undefined} role="group" aria-label={title}>
   <div id={viewportId} class="carousel-viewport phone-art phone-art-screenshot">
     {screenshots.map((item, index) => (
-      <button type="button" class="carousel-slide" data-gallery={`gallery-${id}`} data-gallery-index={index}
-        aria-label={`${title} — ${preview} ${index + 1} / ${screenshots.length}`} aria-haspopup="dialog"
+      <div class="carousel-slide" role="group" aria-label={`${title} ${index + 1} / ${screenshots.length}`}
         aria-hidden={index !== 0 ? 'true' : undefined} tabindex={index === 0 ? 0 : -1}>
         <span class="carousel-single"><Image src={item.src} alt={item.alt} width={440} format="webp" loading="lazy" draggable="false" /></span>
         {hasIntro && index === 0 && <span class="carousel-intro" aria-hidden="true"><slot name="intro" /></span>}
-      </button>
+      </div>
     ))}
   </div>
   <button type="button" class="carousel-arrow carousel-previous" data-carousel-direction="-1" aria-label={previous} aria-controls={viewportId} hidden>

@@ -4,7 +4,7 @@ type MotionWindow = Window & typeof globalThis;
 export function installProductEntrance(win: MotionWindow, doc: Document) {
   const products = [...doc.querySelectorAll<HTMLElement>('.product')];
   const targets = products.flatMap(product => [
-    product.querySelector<HTMLElement>(':scope > button, :scope > .product-carousel'),
+    product.querySelector<HTMLElement>(':scope > .product-artwork'),
     product.querySelector<HTMLElement>('.product-info'),
   ].filter((target): target is HTMLElement => target !== null));
   const originalStyles = [...products, ...targets].map(element => [element, element.getAttribute('style')] as const);
@@ -16,7 +16,7 @@ export function installProductEntrance(win: MotionWindow, doc: Document) {
   let disposed = false;
 
   products.forEach(product => { product.style.overflow = 'hidden'; });
-  const isArtwork = (target: HTMLElement) => target.matches('button, .product-carousel');
+  const isArtwork = (target: HTMLElement) => target.matches('.product-artwork');
   const pose = (target: HTMLElement) => isArtwork(target)
     ? `translate3d(${win.innerWidth < 768 ? -90 : -140}px,32px,0) rotate(-4deg)`
     : `translate3d(${win.innerWidth < 768 ? 72 : 100}px,20px,0)`;
