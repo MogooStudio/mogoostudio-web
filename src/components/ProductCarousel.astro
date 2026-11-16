@@ -13,15 +13,17 @@ interface Props {
 
 const { id, title, screenshots, preview, previous, next } = Astro.props;
 const viewportId = `carousel-${id}`;
+const hasIntro = Astro.slots.has('intro');
 ---
 
-<div class="product-artwork product-carousel" data-product-carousel role="group" aria-label={`${title} — ${preview}`}>
+<div class="product-artwork product-carousel" data-product-carousel data-carousel-intro={hasIntro ? '' : undefined} role="group" aria-label={`${title} — ${preview}`}>
   <div id={viewportId} class="carousel-viewport phone-art phone-art-screenshot">
     {screenshots.map((item, index) => (
       <button type="button" class="carousel-slide" data-gallery={`gallery-${id}`} data-gallery-index={index}
         aria-label={`${title} — ${preview} ${index + 1} / ${screenshots.length}`} aria-haspopup="dialog"
         aria-hidden={index !== 0 ? 'true' : undefined} tabindex={index === 0 ? 0 : -1}>
-        <Image src={item.src} alt={item.alt} width={440} format="webp" loading="lazy" draggable="false" />
+        <span class="carousel-single"><Image src={item.src} alt={item.alt} width={440} format="webp" loading="lazy" draggable="false" /></span>
+        {hasIntro && index === 0 && <span class="carousel-intro" aria-hidden="true"><slot name="intro" /></span>}
       </button>
     ))}
   </div>

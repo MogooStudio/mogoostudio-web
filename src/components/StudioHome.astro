@@ -53,7 +53,12 @@ const galleries = [
       <h2 id="works-title" class="display-type">{copy.selected}</h2>
       <div id="work-results" class="products">
         <article id="youcanup" class="product product-youcanup" aria-labelledby="youcanup-title">
-          <ProductCarousel id="youcanup" title={copy.youcanup.name} screenshots={youcanupScreenshots} preview={copy.screenshot} previous={copy.previous} next={copy.next} />
+          <ProductCarousel id="youcanup" title={copy.youcanup.name} screenshots={youcanupScreenshots} preview={copy.screenshot} previous={copy.previous} next={copy.next}>
+            <span slot="intro" class="youcanup-artwork">
+              <span class="youcanup-screen youcanup-screen-gameplay"><Image src={youcanupGameplay} alt="" width={440} format="webp" loading="lazy" /></span>
+              <span class="youcanup-screen youcanup-screen-menu"><Image src={youcanupMenu} alt="" width={440} format="webp" loading="lazy" /></span>
+            </span>
+          </ProductCarousel>
           <div class="product-info youcanup-info">
             <div class="youcanup-brand"><Image src={youcanupIcon} alt="" width={112} format="webp" loading="lazy" /><h3 id="youcanup-title">{copy.youcanup.name}</h3></div>
             <p class="product-description">{copy.youcanup.description}</p>

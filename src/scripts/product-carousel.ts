@@ -10,9 +10,19 @@ export function initializeProductCarousels() {
     let destination: number | undefined;
     let frame = 0;
     let pressedScrollLeft = 0;
+    let introResized = false;
+
+    function startSingle() {
+      if (!carousel.hasAttribute('data-carousel-intro') || carousel.hasAttribute('data-carousel-started')) return;
+      const progress = viewport.clientWidth ? viewport.scrollLeft / viewport.clientWidth : 0;
+      carousel.setAttribute('data-carousel-started', '');
+      introResized = true;
+      viewport.scrollLeft = progress * viewport.clientWidth;
+    }
 
     function update() {
       if (!viewport.clientWidth) return;
+      if (viewport.scrollLeft > 1) startSingle();
       current = Math.max(0, Math.min(slides.length - 1, Math.round(viewport.scrollLeft / viewport.clientWidth)));
       if (destination !== undefined && Math.abs(viewport.scrollLeft - slides[destination].offsetLeft) < 1) destination = undefined;
       const focusedSlide = slides.find(slide => slide === document.activeElement);
@@ -33,6 +43,7 @@ export function initializeProductCarousels() {
 
     function select(index: number, instant: boolean) {
       const target = Math.max(0, Math.min(slides.length - 1, index));
+      if (target !== current) startSingle();
       destination = target;
       viewport.scrollTo({ left: slides[target].offsetLeft, behavior: instant || reducedMotion.matches ? 'instant' : 'smooth' });
       if (instant || reducedMotion.matches) update();
@@ -62,7 +73,10 @@ export function initializeProductCarousels() {
         event.stopImmediatePropagation();
       }
     }, true);
-    new ResizeObserver(() => select(destination ?? current, true)).observe(viewport);
+    new ResizeObserver(() => {
+      if (introResized) { introResized = false; return; }
+      select(destination ?? current, true);
+    }).observe(viewport);
     update();
   });
 }
