@@ -46,7 +46,7 @@ html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
 }
 .product-flappy{background:radial-gradient(ellipse at 60% 30%,#fff1e1,#fff4e8)}
 .product-pinyiye{grid-column:1/-1;height:auto;min-height:calc(390 * var(--u));grid-template-columns:minmax(0,.95fr) minmax(0,1fr);padding:calc(28 * var(--u)) calc(48 * var(--u));gap:calc(48 * var(--u));background:#edf4e9}
-.pinyiye-artwork{position:relative;align-self:center;width:100%;height:calc(340 * var(--u));padding:0;border:0;border-radius:20px;background:transparent;cursor:zoom-in}
+.pinyiye-artwork{position:relative;align-self:center;width:100%;height:calc(340 * var(--u));padding:0;border:0;border-radius:20px;background:transparent}
 .pinyiye-print{position:absolute;top:calc(60 * var(--u));width:42%;max-width:calc(165 * var(--u));box-shadow:0 8px 18px #30463426}
 .pinyiye-print img{display:block;width:100%;height:auto}
 .pinyiye-print-weekend{left:0;transform:rotate(-10deg)}
@@ -77,6 +77,7 @@ html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
 .carousel-viewport::-webkit-scrollbar{display:none}
 .carousel-slide{position:relative;display:block;flex:0 0 100%;width:100%;height:100%;min-width:0;padding:0;border:0;background:transparent;scroll-snap-align:start;scroll-snap-stop:always}
 .carousel-single{display:block;width:100%;height:100%}
+.carousel-single>picture{display:block;width:100%;height:100%}
 .carousel-intro{display:none;position:absolute;inset:0;transform:scale(.94)}
 [data-carousel-intro]:not([data-carousel-started]) .carousel-slide:first-child .carousel-single{visibility:hidden}
 [data-carousel-intro]:not([data-carousel-started]) .carousel-intro{display:block}
@@ -90,6 +91,28 @@ html:is([lang=en],[lang=es]) .work-categories{width:min(100%,500px)}
 .carousel-arrow:focus-visible{opacity:1;pointer-events:auto;outline-offset:-4px}
 .carousel-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 @media(hover:hover) and (pointer:fine){.carousel-arrow{pointer-events:auto}.carousel-arrow:hover{opacity:1}}
+.product-pinyiye .product-carousel{--carousel-height:calc(340 * var(--u));width:100%;height:var(--carousel-height);max-width:430px;aspect-ratio:auto;justify-self:center}
+.product-pinyiye .carousel-viewport{border-radius:0;background:transparent;box-shadow:none}
+.product-pinyiye [data-carousel-started] .carousel-viewport{width:calc(var(--carousel-height) * .75);max-width:100%;margin:auto}
+.product-pinyiye .pinyiye-artwork{display:block;height:100%}
+.product-pinyiye .pinyiye-phone img{width:auto;height:100%}
+.product-pinyiye .pinyiye-print{top:13%;height:74%;width:33%;max-width:none}
+.product-pinyiye .pinyiye-print img{width:100%;height:100%;object-fit:contain}
+.product-pinyiye .pinyiye-print-weekend{left:4%}
+.product-pinyiye .pinyiye-print-sunshine{right:4%;top:16%}
+.product-golden-hour{grid-column:1/-1;height:auto;min-height:440px;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:46px;align-items:center;padding:40px;background:#fff0c5}
+.product-golden-hour .product-carousel{width:100%;height:auto;max-width:none;aspect-ratio:1440/1000;justify-self:center}
+.product-golden-hour .carousel-viewport{position:absolute;inset:0;border-radius:24px;background:#15140f;box-shadow:0 24px 48px #5e410c33}
+.golden-demo-label{position:absolute;top:16px;left:16px;border-radius:99px;background:#fffcf6;color:#60450e;padding:8px 12px;font-size:11px;font-weight:900;box-shadow:0 8px 20px #0003}
+.golden-hour-info h3{font-size:34px;letter-spacing:-.03em;line-height:1.2;margin:0 0 18px}
+.golden-hour-info .product-description{font-size:15px;line-height:1.75;min-height:0;max-width:440px;margin-bottom:16px;text-wrap:pretty}
+.golden-hour-meta .product-type,.golden-hour-meta .product-status{margin:0;padding:8px 15px;font-size:14px}
+.golden-hour-meta .product-type{background:#efd38c;color:#65480e}.golden-hour-meta .product-status{background:#d6f0dd;color:#275b36}
+.golden-hour-link{display:inline-flex;align-items:center;gap:16px;margin-top:22px;color:#75530d;font-size:15px;font-weight:900;text-decoration:underline;text-underline-offset:6px}
+.golden-hour-link:hover{color:#a5263e}
+.golden-hour-link:focus-visible{outline:3px solid #7f5e15;outline-offset:5px;border-radius:4px}
+@media(min-width:768px) and (max-width:1023px){.product-pinyiye .product-carousel{--carousel-height:300px}.product-golden-hour{padding:32px;gap:32px}.golden-hour-info h3{font-size:28px}}
+@media(max-width:767px){.product-pinyiye .product-carousel{--carousel-height:290px;max-width:360px}.product.product-golden-hour{grid-template-columns:minmax(0,1fr);padding:25px 20px 30px;gap:28px;min-height:0}.product-golden-hour .product-carousel{max-width:240px;aspect-ratio:390/844}.product-golden-hour .carousel-viewport{border-radius:18px}.golden-hour-info{padding:0}.golden-hour-info h3{font-size:29px}.golden-hour-info .product-description{font-size:14px}.golden-hour-link{margin-top:20px}}
 .product-info{padding-top:calc(19 * var(--u));display:flex;align-items:flex-start;flex-direction:column;min-width:0}
 .product-info h3{font-size:calc(36 * var(--u));font-weight:900;line-height:1.02;letter-spacing:-.045em;margin-bottom:calc(19 * var(--u))}
 .product-info h3 span{display:block}
@@ -140,6 +163,11 @@ body.playground .lang-menu .lang-option{font-size:14px!important;padding:12px 16
 .mini-program-dialog{border:0;border-radius:24px;padding:20px;background:#fffcf6;color:#16191c;max-width:min(560px,calc(100vw - 28px));width:100%;max-height:calc(100dvh - 32px);margin:auto;box-shadow:0 24px 120px #0004}
 .mini-program-dialog::backdrop{background:#0f1519b3;backdrop-filter:blur(6px)}
 .mini-program-dialog{width:360px;max-width:calc(100vw - 32px);padding:24px;overflow:auto;text-align:center}
+body.mini-program-open{overflow:hidden}
+.mini-program-header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.mini-program-header h2{font-size:20px;font-weight:900}
+.mini-program-close{flex:none;border:0;width:44px;height:44px;border-radius:50%;background:#eee9df;cursor:pointer;color:#16191c;font-size:26px!important}
+.mini-program-close:hover{background:#ffe2bc}
 .mini-program-code{width:258px;height:auto;max-width:100%;margin:20px auto 0;background:#fff}
 .mini-program-code-hint{margin-top:20px;color:#314637;font-size:15px;line-height:1.7;text-wrap:pretty}
 @media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}

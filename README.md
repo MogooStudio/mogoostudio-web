@@ -7,7 +7,7 @@
 - 展示《你行你上啊 · YouCanUp》和《Minimalist Breakout》的介绍与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；当前标注 iOS、即将推出，产品介绍格式见 `AGENTS.md`
 - YouCanUp 与 Minimalist Breakout 的首页展示图及截图轮播已同步项目现有的新素材，来源与更新日期见下方“内容维护”
-- 首页仅展示游戏，不再展示小程序和 Web 项目，也不再提供作品分类筛选
+- 首页展示两款游戏、「拼一页」微信小程序和「薪动 · Golden Hour」Web 项目，不提供作品分类筛选
 - 「薪动 · Golden Hour」保留六语独立落地页，分区介绍日常计薪、收入记录与分享、浏览器与安装、数据与隐私。桌面与手机采用对应的真实截图，按原比例显示。
 - 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
@@ -61,7 +61,7 @@ npm run dev
 
 独立的 `/motion-studies/` 对比页保留第二轮“整卡推近”“图文对向入场”“叠卡交接”和静态基线，使用真实首页，支持六语、宽屏/手机及自动滚动演示。预览通过 iframe 标识与 `motion-study` 参数关闭首页自动安装的动效，再由对比页安装所选方案，预览内导航后也不会重复安装。旧方案与验证记录保留在 `docs/design/2026-10-16-scroll-motion/` 作为历史记录。
 
-首页精选作品仅展示 YouCanUp 和 Minimalist Breakout，桌面端各占一整行；Flappy Ball Hop 展示及其页脚入口已移除。产品图片不再提供弹框预览或放大入口。历史作品分类实现与六语文案暂时保留，但首页不再加载分类脚本或渲染筛选控件；历史方案及截图见 `docs/design/2026-10-16-work-categories/`。
+首页精选作品展示薪动、拼一页、YouCanUp 和 Minimalist Breakout，桌面端各占一整行；Flappy Ball Hop 展示及其页脚入口已移除。四款产品共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，截图均不提供弹框预览或放大入口。历史作品分类实现与六语文案暂时保留，但首页不加载分类脚本或渲染筛选控件；历史方案及截图见 `docs/design/2026-10-16-work-categories/`。
 
 YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，各提供六张截图，不自动播放。YouCanUp 第一项为原来的菜单与实机双图组合，向右切换后每次显示一张，向左切回第一项恢复双图，无需刷新；双图与单图可以反复往返切换。Minimalist Breakout 默认只显示第一张。手机可左右滑动，触控板可横向滚动；桌面鼠标移到作品卡片左右内边缘时显示对应箭头，按钮距边缘 8px、垂直居中，单图与双图模式保持相同位置，点击切换。键盘可聚焦箭头或当前截图，用方向键切换，首尾箭头按实际位置禁用；纵向手势仍滚动页面。悬停或点击截图均不打开弹框。未启用 JavaScript 时仍可原生横向浏览截图。
 
@@ -89,9 +89,11 @@ YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro
 - 2026-11-06 六语法律文档已补充 YouCanUp 的 Game Center 资料、玩家标识与本地哈希、排行榜成绩同步、公开展示、Apple 保存及退出／删除边界；隐私政策另说明独立统计先同意、拒绝仍可游玩、设置中撤回及历史数据处理边界；服务条款说明每局最多成功复活一次、广告奖励确认条件和续玩成绩规则
 - 提交前至少执行一次 `npm run build`
 
-「拼一页」已从六语首页移除，截图预览与小程序码弹窗也不再渲染。原有 `src/i18n/home.ts` 的 `pinyiye` 文案与 `src/assets/pinyiye/` 素材保留，小程序码保留原始文件，不做有损转换或裁切。
+2026-11-16 恢复「拼一页」六语首页展示，用户已确认正式发布。使用 `photo-collage-mini-program` 当前 `71d2fae` 代码，在微信开发者工具重新截取首页、模板库、模板详情、编辑器和导出页，保存到 `src/assets/pinyiye/` 的 `home.png`、`templates.png`、`detail.png`、`editor.png`、`export.png`。第一项为编辑器与两张界面的组合，向右逐张切换，返回第一项恢复组合。产品入口打开原有微信小程序码供扫描；小程序码使用原始文件，不做有损转换或裁切，点击截图本身不弹框。
 
-2026-11-16 更新游戏截图：YouCanUp 使用相邻 `you-can-up-godot-handoff` 项目中 `game/output/app-store-media/editor/public/screenshots/search-menu/zh-Hans.png` 的菜单图，以及 `apple/iphone/zh-Hans/` 的五张游戏截图，同步到 `src/assets/youcanup/`，包括菜单、待蓄力、瞄准、蓄力、结算和造型；Minimalist Breakout 使用相邻 `minimalist-breakout` 项目中 `design/v1.1/store/screenshots/` 的六张截图，按文件名顺序同步到 `src/assets/screenshots/minimalist-breakout/1.png` 至 `6.png`。原图直接复制，首页轮播与截图弹窗共用并完整显示画面。
+同日恢复「薪动 · Golden Hour」六语首页，基于 `golden-hour` 当前 `a7a71ad` 的本地运行界面重新截取主界面、月历、年报，桌面 1440×1000、手机 390×844，共六张图片，更新 `src/assets/golden-hour/`。采集使用内存中的示例记录和演示模式，不读取或写入个人收入归档；页面标注演示数据。桌面和窄屏自动显示对应截图，产品链接通向当前语言的独立落地页，落地页共享更新后的图片。两个恢复项目的切换按钮与 YouCanUp 相同，固定在作品卡片左右内边缘，支持鼠标、键盘及滑动。
+
+2026-11-16 更新游戏截图：YouCanUp 使用相邻 `you-can-up-godot-handoff` 项目中 `game/output/app-store-media/editor/public/screenshots/search-menu/zh-Hans.png` 的菜单图，以及 `apple/iphone/zh-Hans/` 的五张游戏截图，同步到 `src/assets/youcanup/`，包括菜单、待蓄力、瞄准、蓄力、结算和造型；Minimalist Breakout 使用相邻 `minimalist-breakout` 项目中 `design/v1.1/store/screenshots/` 的六张截图，按文件名顺序同步到 `src/assets/screenshots/minimalist-breakout/1.png` 至 `6.png`。原图直接复制，首页轮播完整显示画面。
 
 ## 部署
 
