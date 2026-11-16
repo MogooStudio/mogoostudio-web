@@ -101,6 +101,8 @@ YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro
 
 当前托管为 Cloudflare Pages，项目 `mogoostudio-web` 与 GitHub 仓库关联；推送 `main` 后可通过对应提交的 Cloudflare Pages 检查核对部署结果，最后检查正式域名上的页面。
 
+已停用的滚动动效原型地址通过 `public/_redirects` 永久跳转到首页，覆盖带尾斜杠、无尾斜杠及目录内的旧地址。清理源文件和 CDN 缓存后仍曾出现旧资源响应，因此保留这条退役入口规则；发布后需检查正式域名的实际跳转。
+
 ## 网站统计
 
 官网使用 Cloudflare Web Analytics 统计汇总访问量与页面性能，由托管平台注入脚本，仓库不重复插入。

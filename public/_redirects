@@ -1,0 +1,4 @@
+# Retired prototype: redirect before Pages serves retained assets.
+/motion-studies / 301
+/motion-studies/ / 301
+/motion-studies/* / 301
