@@ -12,19 +12,20 @@ export function initializeProductCarousels() {
     let pressedScrollLeft = 0;
     let introResized = false;
 
-    function startSingle() {
-      if (!carousel.hasAttribute('data-carousel-intro') || carousel.hasAttribute('data-carousel-started')) return;
-      const progress = viewport.clientWidth ? viewport.scrollLeft / viewport.clientWidth : 0;
-      carousel.setAttribute('data-carousel-started', '');
+    function synchronizeIntro(index: number) {
+      if (!carousel.hasAttribute('data-carousel-intro')) return;
+      const single = index !== 0;
+      if (carousel.hasAttribute('data-carousel-started') === single) return;
+      carousel.toggleAttribute('data-carousel-started', single);
       introResized = true;
-      viewport.scrollLeft = progress * viewport.clientWidth;
+      viewport.scrollLeft = slides[index].offsetLeft;
     }
 
     function update() {
       if (!viewport.clientWidth) return;
-      if (viewport.scrollLeft > 1) startSingle();
       current = Math.max(0, Math.min(slides.length - 1, Math.round(viewport.scrollLeft / viewport.clientWidth)));
       if (destination !== undefined && Math.abs(viewport.scrollLeft - slides[destination].offsetLeft) < 1) destination = undefined;
+      if (destination === undefined && Math.abs(viewport.scrollLeft - slides[current].offsetLeft) < 1) synchronizeIntro(current);
       const focusedSlide = slides.find(slide => slide === document.activeElement);
       if (focusedSlide && focusedSlide !== slides[current]) {
         slides[current].removeAttribute('aria-hidden');
@@ -43,7 +44,6 @@ export function initializeProductCarousels() {
 
     function select(index: number, instant: boolean) {
       const target = Math.max(0, Math.min(slides.length - 1, index));
-      if (target !== current) startSingle();
       destination = target;
       viewport.scrollTo({ left: slides[target].offsetLeft, behavior: instant || reducedMotion.matches ? 'instant' : 'smooth' });
       if (instant || reducedMotion.matches) update();
