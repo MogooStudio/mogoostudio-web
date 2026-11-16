@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StudioValueIcon from './StudioValueIcon.astro';
@@ -7,7 +7,6 @@ import ProductCarousel from './ProductCarousel.astro';
 import { getLangFromUrl } from '../i18n/utils';
 import { homeCopy } from '../i18n/home';
 import hero from '../assets/home/playground-still-life.png';
-import approvedArtwork from '../assets/home/approved-artwork.png';
 import youcanupIcon from '../assets/youcanup/icon.png';
 import youcanupMenu from '../assets/youcanup/menu.png';
 import youcanupGameplay from '../assets/youcanup/gameplay.png';
@@ -18,11 +17,9 @@ import youcanupOutfits from '../assets/youcanup/outfits.png';
 
 const lang = getLangFromUrl(Astro.url);
 const copy = homeCopy[lang];
-const artwork = await getImage({ src: approvedArtwork, format: 'webp', quality: 100 });
-const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/**/*.png', { eager: true });
+const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/minimalist-breakout/*.png', { eager: true });
 const games = [
   { id: 'minimalist-breakout', title: 'Minimalist Breakout', description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
-  { id: 'flappy-ball', title: 'Flappy Ball Hop', description: copy.flappy, platform: null, available: false, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/flappy-ball/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
 ];
 const youcanupScreenshots = [
   { src: youcanupMenu, alt: copy.youcanup.menuAlt },
@@ -62,14 +59,8 @@ const youcanupScreenshots = [
           </div>
         </article>
         {games.map(game => (
-          <article id={game.id} class:list={['product', game.available ? 'product-breakout' : 'product-flappy']}>
-            {game.id === 'minimalist-breakout' ? (
-              <ProductCarousel id={game.id} title={game.title} screenshots={game.screenshots.map((src, index) => ({ src, alt: `${game.title} ${index + 1}` }))} previous={copy.previous} next={copy.next} />
-            ) : (
-              <div class="product-artwork">
-                <span class="phone-art"><img src={artwork.src} width={1024} height={1536} alt={game.title} loading="lazy" decoding="async" /></span>
-              </div>
-            )}
+          <article id={game.id} class="product product-breakout">
+            <ProductCarousel id={game.id} title={game.title} screenshots={game.screenshots.map((src, index) => ({ src, alt: `${game.title} ${index + 1}` }))} previous={copy.previous} next={copy.next} />
             <div class="product-info">
               <h3>{game.title}</h3>
               <p class="product-description">{game.description}</p>
