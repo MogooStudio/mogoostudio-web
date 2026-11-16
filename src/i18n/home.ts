@@ -12,7 +12,6 @@ const originalHomeCopy = {
     headline: ['Useful things', 'Playful things'],
     intro: 'Independent software, apps and games. A little more ease and joy, every day',
     explore: 'Explore our work', selected: 'Selected work',
-    categories: { label: 'Filter selected work', all: 'All', games: 'Games', mini: 'Mini Programs', apps: 'Web Apps', result: 'Projects shown: {count}' },
     breakout: 'Minimalist brick-breaking. Make every bounce count.',
     youcanup: {
       name: 'YouCanUp',
@@ -36,8 +35,6 @@ const originalHomeCopy = {
       templatesAlt: 'Pinyiye template library with search and scene categories',
       detailAlt: 'Pinyiye template detail with a photo poster and the use template button',
       editorAlt: 'Pinyiye photo poster editor with background, layers, ratio and export tools',
-      weekendAlt: 'A four-photo weekend collage with paper frames and tape',
-      sunshineAlt: 'A seaside collage with overlapping photo frames',
       exportAlt: 'Pinyiye export screen with save image and preview controls',
     },
     goldenHour: {
@@ -56,7 +53,7 @@ const originalHomeCopy = {
     ],
     statement: 'One independent studio. More than one possibility.',
     privacy: 'Privacy', terms: 'Terms',
-    screenshot: 'View screenshots', close: 'Close screenshots', previous: 'Previous screenshot', next: 'Next screenshot',
+    previous: 'Previous screenshot', next: 'Next screenshot',
     skip: 'Skip to content', footerLabel: 'Footer',
   },
   'zh-cn': {
@@ -66,7 +63,6 @@ const originalHomeCopy = {
     headline: ['做点有用的', '也做点有趣的'],
     intro: '独立创造软件、应用与游戏，让日常多一点顺手与快乐',
     explore: '探索作品', selected: '精选作品',
-    categories: { label: '按类型筛选作品', all: '全部', games: '游戏', mini: '小程序', apps: 'Web 应用', result: '显示 {count} 件作品' },
     breakout: '极简打砖块，专注每一次反弹。',
     youcanup: {
       name: '你行你上啊',
@@ -90,8 +86,6 @@ const originalHomeCopy = {
       templatesAlt: '拼一页模板库，展示搜索与场景分类',
       detailAlt: '拼一页模板详情，展示照片海报与使用模板按钮',
       editorAlt: '拼一页照片海报编辑器，展示背景、图层、比例和导出工具',
-      weekendAlt: '带有纸质相框和胶带的四张照片周末拼图',
-      sunshineAlt: '带有叠放相框的海边照片拼图',
       exportAlt: '拼一页导出界面，提供保存图片与预览大图功能',
     },
     goldenHour: {
@@ -109,7 +103,7 @@ const originalHomeCopy = {
     ],
     statement: '一个人的工作室，不止一种可能',
     privacy: '隐私政策', terms: '服务条款',
-    screenshot: '查看截图', close: '关闭截图', previous: '上一张截图', next: '下一张截图',
+    previous: '上一张截图', next: '下一张截图',
     skip: '跳到主要内容', footerLabel: '页尾导航',
   },
   'zh-tw': {
@@ -119,7 +113,6 @@ const originalHomeCopy = {
     headline: ['做點有用的', '也做點有趣的'],
     intro: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂',
     explore: '探索作品', selected: '精選作品',
-    categories: { label: '依類型篩選作品', all: '全部', games: '遊戲', mini: '小程式', apps: 'Web 應用', result: '顯示 {count} 件作品' },
     breakout: '極簡打磚塊，專注每一次反彈。',
     youcanup: {
       name: '你行你上啊',
@@ -143,8 +136,6 @@ const originalHomeCopy = {
       templatesAlt: '拼一页範本庫，展示搜尋與場景分類',
       detailAlt: '拼一页範本詳情，展示照片海報與使用範本按鈕',
       editorAlt: '拼一页照片海報編輯器，展示背景、圖層、比例和匯出工具',
-      weekendAlt: '帶有紙質相框和膠帶的四張照片週末拼圖',
-      sunshineAlt: '帶有疊放相框的海邊照片拼圖',
       exportAlt: '拼一页匯出介面，提供儲存圖片與預覽大圖功能',
     },
     goldenHour: {
@@ -162,7 +153,7 @@ const originalHomeCopy = {
     ],
     statement: '一個人的工作室，不止一種可能',
     privacy: '隱私政策', terms: '服務條款',
-    screenshot: '查看截圖', close: '關閉截圖', previous: '上一張截圖', next: '下一張截圖',
+    previous: '上一張截圖', next: '下一張截圖',
     skip: '跳到主要內容', footerLabel: '頁尾導覽',
   },
 } as const;

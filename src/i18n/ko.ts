@@ -2,14 +2,14 @@
 export const koHome = {
   title: 'MogooStudio — 쓸모 있는 것. 즐거운 것.', description: '소프트웨어, 앱, 게임을 만드는 독립 스튜디오입니다. 일상에 편리함과 즐거움을 더하는 작품을 만나보세요.',
   works: '작품', about: '소개', support: '지원', headline: ['쓸모 있는 것', '즐거운 것'], intro: '독립적으로 만드는 소프트웨어, 앱, 게임. 일상에 편리함과 즐거움을 조금 더합니다',
-  explore: '작품 둘러보기', selected: '주요 작품', categories: { label: '종류별 작품 보기', all: '전체', games: '게임', mini: '미니앱', apps: '웹 앱', result: '표시된 작품: {count}개' },
+  explore: '작품 둘러보기', selected: '주요 작품',
   breakout: '간결한 벽돌 깨기. 공이 튕기는 순간에 집중하세요.',
   youcanup: { name: 'YouCanUp', description: '길게 눌러 힘을 모으고 손을 떼어 점프하세요. 클레이 세상에서 최고 기록에 도전해 보세요.', menuAlt: '주황색 클레이 캐릭터가 보라색과 초록색 발판 사이를 뛰는 YouCanUp 메뉴', gameplayAlt: '입체 발판, 높이 점수, 길게 누르기 버튼이 표시된 YouCanUp 게임 화면', aimAlt: '알록달록한 아치 사이에서 목표 발판으로 점프하는 YouCanUp 캐릭터', chargeAlt: '손을 떼어 점프하는 버튼이 표시된 YouCanUp 충전 화면', resultsAlt: '11.8미터 신기록을 표시하는 YouCanUp 결과 화면', outfitsAlt: '클레이 캐릭터 여섯 가지를 표시하는 YouCanUp 꾸미기 화면' },
-  pinyiye: { name: '拼一页', description: '사진을 배치하고 글을 더해 콜라주를 한 장의 이미지로 저장하세요.', type: '미니앱', platform: 'WeChat', status: '출시됨', open: '미니앱 열기', codeHint: 'WeChat으로 코드를 스캔해 미니앱을 여세요.', codeAlt: '拼一页의 WeChat 미니앱 코드', closeCode: '미니앱 코드 닫기', homeAlt: '템플릿 표지와 사진 이야기가 표시된 拼一页 홈', templatesAlt: '검색과 장면별 카테고리가 있는 拼一页 템플릿 목록', detailAlt: '사진 포스터와 템플릿 사용 버튼이 있는 拼一页 상세 화면', editorAlt: '배경, 레이어, 비율 및 내보내기 도구가 있는 拼一页 사진 포스터 편집기', weekendAlt: '종이 액자와 테이프로 꾸민 주말 사진 네 장의 콜라주', sunshineAlt: '사진 액자가 겹쳐진 바닷가 콜라주', exportAlt: '이미지 저장 및 미리보기 기능이 있는 拼一页 내보내기 화면' },
+  pinyiye: { name: '拼一页', description: '사진을 배치하고 글을 더해 콜라주를 한 장의 이미지로 저장하세요.', type: '미니앱', platform: 'WeChat', status: '출시됨', open: '미니앱 열기', codeHint: 'WeChat으로 코드를 스캔해 미니앱을 여세요.', codeAlt: '拼一页의 WeChat 미니앱 코드', closeCode: '미니앱 코드 닫기', homeAlt: '템플릿 표지와 사진 이야기가 표시된 拼一页 홈', templatesAlt: '검색과 장면별 카테고리가 있는 拼一页 템플릿 목록', detailAlt: '사진 포스터와 템플릿 사용 버튼이 있는 拼一页 상세 화면', editorAlt: '배경, 레이어, 비율 및 내보내기 도구가 있는 拼一页 사진 포스터 편집기', exportAlt: '이미지 저장 및 미리보기 기능이 있는 拼一页 내보내기 화면' },
   goldenHour: { name: '薪动 · Golden Hour', description: '근무 수입 예상치가 실시간으로 늘어나는 모습을 보고 오늘, 이번 달, 올해의 기록을 돌아보세요.', type: '웹 앱', platform: '브라우저', status: '출시됨', open: '제품 보기', dashboardAlt: '데모 수입 데이터를 표시하는 薪动 메인 화면', monthlyAlt: '데모 수입 데이터를 표시하는 薪动 월간 달력', yearlyAlt: '데모 수입 데이터를 표시하는 薪动 연간 보고서', demo: '데모 데이터' },
   game: '게임', available: '출시됨', coming: '출시 예정', download: '다운로드하기', philosophy: '작은 디테일로 더 나은 경험을.',
   values: [{ title: '더 편리하게', body: '간단하고 직관적으로, 필요한 도움을' }, { title: '더 즐겁게', body: '평범한 일상 속 작은 즐거움을' }, { title: '꾸준한 개선', body: '작은 부분부터 정성껏 다듬습니다' }],
-  statement: '혼자 만드는 스튜디오. 무한한 가능성.', privacy: '개인정보 처리방침', terms: '이용약관', screenshot: '스크린샷 보기', close: '스크린샷 닫기', previous: '이전 스크린샷', next: '다음 스크린샷', skip: '본문으로 이동', footerLabel: '하단 탐색',
+  statement: '혼자 만드는 스튜디오. 무한한 가능성.', privacy: '개인정보 처리방침', terms: '이용약관', previous: '이전 스크린샷', next: '다음 스크린샷', skip: '본문으로 이동', footerLabel: '하단 탐색',
 } as const;
 
 export const koStudio = {
@@ -24,7 +24,7 @@ export const koUi = {
   'nav.games': '게임', 'nav.about': '스튜디오 소개', 'nav.support': '지원', 'nav.playNow': '지금 플레이',
   'footer.games': '게임', 'footer.studio': '스튜디오', 'footer.about': '스튜디오 소개', 'footer.support': '지원', 'footer.privacy': '개인정보 처리방침', 'footer.terms': '이용약관', 'footer.copyright': '모든 권리 보유.',
   'index.hero.h1a': '작은 게임.', 'index.hero.h1b': '큰 즐거움.', 'index.stats.games': '게임', 'index.stats.studio': '스튜디오', 'index.stats.taps': '탭',
-  'game.minimalist.title': 'Minimalist Breakout', 'game.minimalist.desc': '클래식 벽돌 깨기를 깔끔하게 담았습니다. 군더더기 없이 게임에 집중하며, 처음부터 모바일을 위해 만들었습니다.',
+
   'index.philosophy.eyebrow': '우리가 추구하는 것', 'index.philosophy.h2': '게임을 만드는 방법', 'index.philosophy.p': '작은 팀, 확실한 철학. 숫자보다 플레이 경험을 중요하게 생각합니다.',
   'index.card1.num': '01', 'index.card1.title': '나만의 속도로', 'index.card1.body': '잠깐 쉬는 시간에도, 오래 즐기고 싶은 때에도. 원할 때 언제든 시작하세요.',
   'index.card2.num': '02', 'index.card2.title': '간결한 규칙, 세심한 완성도', 'index.card2.body': '평범한 규칙 열 개보다 좋은 규칙 하나를. 자연스럽게 느껴질 때까지 다듬습니다.',
@@ -125,5 +125,5 @@ export const koUi = {
   'terms.s11.h': '11. 적용 법률 및 소비자 권리', 'terms.s11.p1': '본 약관은 적용 법률의 지배를 받습니다. 본 약관은 거주지의 소비자법에 따라 보장되는 강행적 권리나 구제 수단을 제한하지 않습니다.',
   'terms.s12.h': '12. 문의', 'terms.s12.p1': '본 약관에 관한 질문은 다음 주소로 연락해 주세요:',
   'meta.index': 'MogooStudio — 작고 만족스러운 게임을 만드는 독립 모바일 게임 스튜디오.', 'meta.about': 'MogooStudio 소개 — 독립 모바일 게임 스튜디오.', 'meta.support': 'MogooStudio 게임 지원 및 자주 묻는 질문.', 'meta.privacy': 'MogooStudio 개인정보 처리방침.', 'meta.terms': 'MogooStudio 이용약관.',
-  'nav.ariaLanguage': '언어', 'nav.ariaOpenMenu': '메뉴 열기', 'nav.ariaPrimary': '주 탐색', 'nav.ariaMobile': '모바일 탐색', 'game.tag.brickBreaker': '벽돌 깨기', 'game.tag.casual': '캐주얼', 'game.badge.download': '다운로드하기', 'game.badge.comingSoon': '출시 예정',
+  'nav.ariaLanguage': '언어', 'nav.ariaOpenMenu': '메뉴 열기', 'nav.ariaPrimary': '주 탐색', 'nav.ariaMobile': '모바일 탐색',
 } as const;

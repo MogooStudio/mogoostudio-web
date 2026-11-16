@@ -6,7 +6,6 @@ export const jaHome = {
   headline: ['役立つものを', '楽しいものを'],
   intro: 'ソフトウェア、アプリ、ゲームで、毎日を少し便利に、少し楽しく',
   explore: '作品を見る', selected: '主な作品',
-  categories: { label: '作品を種類で絞り込む', all: 'すべて', games: 'ゲーム', mini: 'ミニアプリ', apps: 'Web アプリ', result: '{count} 件の作品を表示' },
   breakout: 'シンプルなブロック崩し。ひとつひとつの反射を楽しもう。',
   youcanup: {
     name: 'YouCanUp', description: '長押しでパワーをため、離してジャンプ。粘土の世界で自己ベストを目指そう。',
@@ -25,7 +24,7 @@ export const jaHome = {
     templatesAlt: '検索とシーン別カテゴリがある拼一页のテンプレート一覧',
     detailAlt: '写真ポスターとテンプレートを使うボタンがある拼一页の詳細画面',
     editorAlt: '背景、レイヤー、比率、書き出しツールがある拼一页の写真ポスターエディター',
-    weekendAlt: '紙のフレームとテープで飾った4枚の週末写真のコラージュ', sunshineAlt: '写真のフレームを重ねた海辺のコラージュ',
+
     exportAlt: '画像の保存とプレビューができる拼一页の書き出し画面',
   },
   goldenHour: { name: '薪動 · Golden Hour', description: '勤務収入の目安が増える様子をリアルタイムで見ながら、今日・今月・今年の記録を振り返れます。', type: 'Web アプリ', platform: 'ブラウザ', status: '公開中', open: '製品を見る', dashboardAlt: 'デモ収入データを表示する薪動のメイン画面', monthlyAlt: 'デモ収入データを表示する薪動の月間カレンダー', yearlyAlt: 'デモ収入データを表示する薪動の年間レポート', demo: 'デモデータ' },
@@ -33,7 +32,7 @@ export const jaHome = {
   philosophy: '細部を大切に。体験をより良く。',
   values: [{ title: 'もっと使いやすく', body: 'シンプルで直感的に、役立つものを' }, { title: 'もっと楽しく', body: '何気ない毎日に、楽しむひとときを' }, { title: '少しずつ改善', body: 'ひとつひとつ、丁寧に磨き続けます' }],
   statement: 'ひとりのスタジオ。広がる可能性。', privacy: 'プライバシー', terms: '利用規約',
-  screenshot: 'スクリーンショットを見る', close: 'スクリーンショットを閉じる', previous: '前の画像', next: '次の画像', skip: '本文へ移動', footerLabel: 'フッターナビゲーション',
+  previous: '前の画像', next: '次の画像', skip: '本文へ移動', footerLabel: 'フッターナビゲーション',
 } as const;
 
 export const jaStudio = {
@@ -54,7 +53,7 @@ export const jaUi = {
   'footer.games': 'ゲーム', 'footer.studio': 'スタジオ', 'footer.about': 'スタジオについて', 'footer.support': 'サポート',
   'footer.privacy': 'プライバシーポリシー', 'footer.terms': '利用規約', 'footer.copyright': '無断転載を禁じます。',
   'index.hero.h1a': '小さなゲーム。', 'index.hero.h1b': '大きな楽しさ。', 'index.stats.games': 'ゲーム', 'index.stats.studio': 'スタジオ', 'index.stats.taps': 'タップ',
-  'game.minimalist.title': 'Minimalist Breakout', 'game.minimalist.desc': '定番のブロック崩しを、すっきりと遊びやすく。余計なものを省き、モバイルのためにつくりました。',
+
   'index.philosophy.eyebrow': '私たちの考え方', 'index.philosophy.h2': 'ゲームづくりで大切にしていること', 'index.philosophy.p': '小さなチーム、大切にするこだわり。数字よりも、遊ぶ体験を。',
   'index.card1.num': '01', 'index.card1.title': '自分のペースで', 'index.card1.body': '短いひと休みにも、じっくり遊ぶときにも。いつでも気軽に始められます。',
   'index.card2.num': '02', 'index.card2.title': 'シンプルな仕組みを丁寧に', 'index.card2.body': '平凡な仕組みを10個並べるより、ひとつの良い仕組みを。心地よくなるまで磨きます。',
@@ -165,5 +164,5 @@ export const jaUi = {
   'terms.s12.h': '12. お問い合わせ', 'terms.s12.p1': '本規約に関するご質問は、次までご連絡ください：',
   'meta.index': 'MogooStudio — 小さく心地よいゲームをつくる個人のモバイルゲームスタジオ。', 'meta.about': 'MogooStudio について — 個人のモバイルゲームスタジオ。', 'meta.support': 'MogooStudio のゲームに関するサポートとよくあるご質問。', 'meta.privacy': 'MogooStudio プライバシーポリシー。', 'meta.terms': 'MogooStudio 利用規約。',
   'nav.ariaLanguage': '言語', 'nav.ariaOpenMenu': 'メニューを開く', 'nav.ariaPrimary': 'メインナビゲーション', 'nav.ariaMobile': 'モバイルナビゲーション',
-  'game.tag.brickBreaker': 'ブロック崩し', 'game.tag.casual': 'カジュアル', 'game.badge.download': 'ダウンロードはこちら', 'game.badge.comingSoon': '近日公開',
+
 } as const;

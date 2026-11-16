@@ -1,4 +1,4 @@
-/** Shared implementation of the selected image/text entrance, used by home and its preview. */
+/** Product image/text entrance used by the studio homepage. */
 type MotionWindow = Window & typeof globalThis;
 
 export function installProductEntrance(win: MotionWindow, doc: Document) {

@@ -28,10 +28,6 @@ const originalUi = {
     'index.stats.studio': 'Studio',
     'index.stats.taps': 'Taps',
 
-    // Index page - Games
-    'game.minimalist.title': 'Minimalist Breakout',
-    'game.minimalist.desc': 'A clean, distraction-free take on the timeless breakout formula. Pure gameplay, zero clutter. Built for mobile from the ground up.',
-
     // Index page - Philosophy
     'index.philosophy.eyebrow': 'Our Philosophy',
     'index.philosophy.h2': 'How we build games',
@@ -203,12 +199,6 @@ const originalUi = {
     'nav.ariaOpenMenu': 'Open menu',
     'nav.ariaPrimary': 'Primary',
     'nav.ariaMobile': 'Mobile',
-
-    // Game tags & badge
-    'game.tag.brickBreaker': 'Brick Breaker',
-    'game.tag.casual': 'Casual',
-    'game.badge.download': 'Download on the',
-    'game.badge.comingSoon': 'Coming Soon',
   },
   'zh-cn': {
     // Nav
@@ -232,10 +222,6 @@ const originalUi = {
     'index.stats.games': '游戏',
     'index.stats.studio': '工作室',
     'index.stats.taps': '点击',
-
-    // Index page - Games
-    'game.minimalist.title': 'Minimalist Breakout',
-    'game.minimalist.desc': '纯粹的打砖块体验，没有干扰，零杂乱。专为移动设备打造，简洁而专注。',
 
     // Index page - Philosophy
     'index.philosophy.eyebrow': '我们的理念',
@@ -408,12 +394,6 @@ const originalUi = {
     'nav.ariaOpenMenu': '打开菜单',
     'nav.ariaPrimary': '主导航',
     'nav.ariaMobile': '移动端菜单',
-
-    // Game tags & badge
-    'game.tag.brickBreaker': '打砖块',
-    'game.tag.casual': '休闲',
-    'game.badge.download': '现在下载',
-    'game.badge.comingSoon': '即将推出',
   },
   'zh-tw': {
     // Nav
@@ -437,10 +417,6 @@ const originalUi = {
     'index.stats.games': '遊戲',
     'index.stats.studio': '工作室',
     'index.stats.taps': '點擊',
-
-    // Index page - Games
-    'game.minimalist.title': 'Minimalist Breakout',
-    'game.minimalist.desc': '純粹的打磚塊體驗，沒有干擾，零雜亂。專為移動裝置打造，簡潔而專注。',
 
     // Index page - Philosophy
     'index.philosophy.eyebrow': '我們的理念',
@@ -613,12 +589,6 @@ const originalUi = {
     'nav.ariaOpenMenu': '開啟選單',
     'nav.ariaPrimary': '主導覽',
     'nav.ariaMobile': '行動選單',
-
-    // Game tags & badge
-    'game.tag.brickBreaker': '打磚塊',
-    'game.tag.casual': '休閒',
-    'game.badge.download': '立即下載',
-    'game.badge.comingSoon': '即將推出',
   },
 } as const;
 
