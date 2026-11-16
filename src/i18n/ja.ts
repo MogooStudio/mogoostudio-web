@@ -13,6 +13,10 @@ export const jaHome = {
     name: 'YouCanUp', description: '長押しでパワーをため、離してジャンプ。粘土の世界で自己ベストを目指そう。',
     menuAlt: '紫と緑の足場の間をオレンジ色の粘土キャラクターが跳ぶ YouCanUp のメニュー',
     gameplayAlt: '立体的な足場、高さのスコア、長押しボタンが表示された YouCanUp のゲーム画面',
+    aimAlt: 'カラフルなアーチの間で目標の足場へジャンプする YouCanUp のキャラクター',
+    chargeAlt: '指を離してジャンプするボタンが表示された YouCanUp のチャージ画面',
+    resultsAlt: '11.8 メートルの新記録を表示する YouCanUp のリザルト画面',
+    outfitsAlt: '6 種類の粘土キャラクターを表示する YouCanUp の着せ替え画面',
   },
   pinyiye: {
     name: '拼一页', description: '写真を並べて文字を添え、コラージュを1枚の画像に書き出せます。',

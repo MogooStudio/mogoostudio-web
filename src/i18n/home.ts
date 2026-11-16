@@ -20,6 +20,10 @@ const originalHomeCopy = {
       description: 'Hold to charge, release to jump, and beat your best in a playful clay world.',
       menuAlt: 'YouCanUp menu with an orange clay character jumping between purple and green platforms',
       gameplayAlt: 'YouCanUp gameplay with 3D platforms, a height counter, and the hold-to-charge button',
+      aimAlt: 'YouCanUp character jumping toward a target platform among colorful arches',
+      chargeAlt: 'YouCanUp charging a jump with the release-to-jump button',
+      resultsAlt: 'YouCanUp new-record results showing 11.8 meters',
+      outfitsAlt: 'YouCanUp appearance screen with six clay character styles',
     },
     pinyiye: {
       name: '拼一页',
@@ -68,6 +72,10 @@ const originalHomeCopy = {
       description: '按住蓄力，松手起跳，在软陶世界里挑战自己的最高纪录。',
       menuAlt: '你行你上啊菜单，橙色软陶角色在紫色与绿色平台之间跳跃',
       gameplayAlt: '你行你上啊实机游戏画面，展示立体平台、高度计分和按住蓄力按钮',
+      aimAlt: '你行你上啊角色在彩色拱门间跳向目标平台',
+      chargeAlt: '你行你上啊蓄力画面，按钮提示松手起跳',
+      resultsAlt: '你行你上啊新纪录结算画面，成绩为 11.8 米',
+      outfitsAlt: '你行你上啊造型页面，展示六款软陶角色',
     },
     pinyiye: {
       name: '拼一页',
@@ -115,6 +123,10 @@ const originalHomeCopy = {
       description: '按住蓄力，鬆手起跳，在軟陶世界裡挑戰自己的最高紀錄。',
       menuAlt: '你行你上啊選單，橙色軟陶角色在紫色與綠色平台之間跳躍',
       gameplayAlt: '你行你上啊實機遊戲畫面，展示立體平台、高度計分和按住蓄力按鈕',
+      aimAlt: '你行你上啊角色在彩色拱門間跳向目標平台',
+      chargeAlt: '你行你上啊蓄力畫面，按鈕提示鬆手起跳',
+      resultsAlt: '你行你上啊新紀錄結算畫面，成績為 11.8 公尺',
+      outfitsAlt: '你行你上啊造型頁面，展示六款軟陶角色',
     },
     pinyiye: {
       name: '拼一页',

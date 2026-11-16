@@ -4,7 +4,7 @@ type MotionWindow = Window & typeof globalThis;
 export function installProductEntrance(win: MotionWindow, doc: Document) {
   const products = [...doc.querySelectorAll<HTMLElement>('.product')];
   const targets = products.flatMap(product => [
-    product.querySelector<HTMLElement>(':scope > button'),
+    product.querySelector<HTMLElement>(':scope > button, :scope > .product-carousel'),
     product.querySelector<HTMLElement>('.product-info'),
   ].filter((target): target is HTMLElement => target !== null));
   const originalStyles = [...products, ...targets].map(element => [element, element.getAttribute('style')] as const);
@@ -16,7 +16,8 @@ export function installProductEntrance(win: MotionWindow, doc: Document) {
   let disposed = false;
 
   products.forEach(product => { product.style.overflow = 'hidden'; });
-  const pose = (target: HTMLElement) => target.tagName === 'BUTTON'
+  const isArtwork = (target: HTMLElement) => target.matches('button, .product-carousel');
+  const pose = (target: HTMLElement) => isArtwork(target)
     ? `translate3d(${win.innerWidth < 768 ? -90 : -140}px,32px,0) rotate(-4deg)`
     : `translate3d(${win.innerWidth < 768 ? 72 : 100}px,20px,0)`;
   const settle = (target: HTMLElement) => {
@@ -26,11 +27,14 @@ export function installProductEntrance(win: MotionWindow, doc: Document) {
   };
   const play = (target: HTMLElement) => {
     if (disposed || played.has(target) || !inView.has(target) || target.closest<HTMLElement>('.product')?.hidden) return;
-    if (target.tagName === 'BUTTON' && !imagesReady.has(target)) {
+    if (isArtwork(target) && !imagesReady.has(target)) {
       if (loading.has(target)) return;
       loading.add(target);
       // Lazy pictures must be visible when their entrance plays, even on a cold load.
-      void Promise.allSettled([...target.querySelectorAll('img')].map(img => img.decode())).then(() => {
+      const images = target.matches('.product-carousel')
+        ? target.querySelectorAll<HTMLImageElement>('.carousel-slide:not([aria-hidden]) img')
+        : target.querySelectorAll('img');
+      void Promise.allSettled([...images].map(img => img.decode())).then(() => {
         imagesReady.add(target);
         loading.delete(target);
         play(target);
