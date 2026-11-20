@@ -27,6 +27,7 @@ html:is([lang=en],[lang=es]) body.playground .display-type{font-family:Nunito,sa
 .selected-work{position:relative;z-index:3;background:var(--cream);padding:calc(26 * var(--u)) calc(34 * var(--u)) 0;scroll-margin-top:24px}
 .selected-work>h2{text-align:center;font-size:calc(49 * var(--u));line-height:1.2;margin-bottom:calc(17 * var(--u))}
 .products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:calc(16 * var(--u))}
+.products>.product[hidden]{display:none}
 .product{position:relative;height:calc(380 * var(--u));border-radius:calc(16 * var(--u));padding:calc(21 * var(--u)) calc(24 * var(--u)) calc(19 * var(--u)) calc(40 * var(--u));display:grid;grid-template-columns:calc(180 * var(--u)) minmax(0,1fr);gap:calc(28 * var(--u));scroll-margin-top:24px}
 .product-breakout{background:radial-gradient(ellipse at 35% 60%,#c7f8fc,#ddfafd)}
 @media(min-width:768px){
@@ -268,6 +269,66 @@ body.mini-program-open{overflow:hidden}
 .product-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;max-width:100%}
 .product-meta .product-type,.product-meta .product-status{margin-top:0;max-width:100%;white-space:normal;text-align:center;overflow-wrap:anywhere}
 .product-breakout .product-meta>span{font-size:13px;padding:8px 12px}
+
+.product-codex-git {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  height: auto;
+  min-height: 0;
+  gap: clamp(24px, 4vw, 48px);
+  padding: clamp(24px, 3.4vw, 44px);
+  background: #e3efe9;
+}
+.product-codex-git .product-artwork {
+  display: block;
+  height: auto;
+  max-width: none;
+  aspect-ratio: auto;
+  border-radius: 16px;
+  box-shadow: 0 14px 30px #1c292433;
+  cursor: zoom-in;
+}
+.product-codex-git .product-artwork img { display: block; width: 100%; height: auto; border-radius: inherit; }
+.codex-git-zoom {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f2faf5;
+  color: #1c2924;
+}
+.product-codex-git .product-artwork:hover .codex-git-zoom,
+.product-codex-git .product-artwork:focus-visible .codex-git-zoom { background: #a6ddc2; }
+.product-codex-git .product-info { padding: 0; gap: 14px; }
+.codex-git-brand { display: flex; align-items: center; gap: 12px; }
+.codex-git-brand img { flex: none; width: clamp(42px, 5vw, 52px); height: auto; }
+.codex-git-brand h3 { margin: 0; font-size: clamp(25px, 3vw, 40px); line-height: 1.12; }
+.product-codex-git .product-description { min-height: 0; max-width: 440px; margin: 0; line-height: 1.65; text-wrap: pretty; }
+.product-codex-git .product-meta > span { padding: 8px 14px; font-size: 14px; }
+.product-codex-git .product-type { background: #cedfd7; color: #263e34; }
+.product-codex-git .product-status.is-available { background: #c0e5cf; color: #214e37; }
+.codex-git-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: #23533d;
+  font-size: 15px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.codex-git-link:hover { color: #143829; }
+@media (max-width: 767px) {
+  .product-codex-git { grid-template-columns: minmax(0, 1fr); padding: 24px 20px; }
+  .product-codex-git .product-artwork { border-radius: 12px; }
+  .product-codex-git .product-meta > span { font-size: 13px; }
+}
 
 /* Use native Japanese/Korean glyphs, and let translated copy determine card height. */
 html[lang=ja] body.playground{font-family:Nunito,"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif}

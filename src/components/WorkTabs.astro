@@ -1,0 +1,123 @@
+---
+const categories = ['all', 'apps', 'games'] as const;
+
+interface Props {
+  labels: Record<(typeof categories)[number], string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<div id="work-tabs" class="work-tabs" role="tablist" aria-labelledby="works-title" hidden>
+  {categories.map(category => (
+    <button
+      id={`work-tab-${category}`}
+      type="button"
+      role="tab"
+      data-category={category}
+      aria-controls={`work-panel-${category}`}
+      aria-selected={category === 'all' ? 'true' : 'false'}
+      tabindex={category === 'all' ? 0 : -1}
+    >{labels[category]}</button>
+  ))}
+</div>
+<div id="work-panel-all"><slot /></div>
+{categories.slice(1).map(category => <div id={`work-panel-${category}`} hidden></div>)}
+
+<script>
+  const tabList = document.querySelector<HTMLElement>('#work-tabs')!;
+  const results = document.querySelector<HTMLElement>('#work-results')!;
+  const products = [...results.querySelectorAll<HTMLElement>(':scope > [data-category]')];
+  const tabs = [...tabList.querySelectorAll<HTMLButtonElement>('[role="tab"]')].map(button => ({
+    button,
+    panel: document.getElementById(button.getAttribute('aria-controls')!)!,
+  }));
+
+  function selectTab(index: number) {
+    const { button, panel } = tabs[index];
+    const category = button.dataset.category;
+    products.forEach(product => {
+      product.hidden = category !== 'all' && product.dataset.category !== category;
+    });
+
+    // Reuse the same product cards and carousel instances in every panel.
+    if (results.parentElement !== panel) panel.append(results);
+    tabs.forEach((tab, position) => {
+      const selected = index === position;
+      tab.button.setAttribute('aria-selected', String(selected));
+      tab.button.tabIndex = selected ? 0 : -1;
+      tab.panel.hidden = !selected;
+    });
+  }
+
+  tabs.forEach(({ button, panel }, index) => {
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', button.id);
+    panel.tabIndex = 0;
+    button.addEventListener('click', () => selectTab(index));
+    button.addEventListener('keydown', event => {
+      let next: number;
+      switch (event.key) {
+        case 'ArrowLeft':
+          next = (index - 1 + tabs.length) % tabs.length;
+          break;
+        case 'ArrowRight':
+          next = (index + 1) % tabs.length;
+          break;
+        case 'Home':
+          next = 0;
+          break;
+        case 'End':
+          next = tabs.length - 1;
+          break;
+        default:
+          return;
+      }
+      event.preventDefault();
+      selectTab(next);
+      tabs[next].button.focus({ preventScroll: true });
+    });
+  });
+
+  tabList.hidden = false;
+</script>
+
+<style>
+  .work-tabs:not([hidden]) {
+    display: flex;
+    gap: 4px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto clamp(20px, 2.2vw, 28px);
+    padding: 4px;
+    border: 1px solid #e8e0d5;
+    border-radius: 99px;
+    background: #f4efe6;
+  }
+
+  .work-tabs button {
+    min-width: clamp(68px, 10vw, 96px);
+    min-height: 44px;
+    padding: 8px clamp(12px, 2.2vw, 22px);
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: #413a33;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+
+  .work-tabs button[aria-selected='true'] {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .work-tabs button:focus-visible { outline-offset: 2px; }
+
+  @media (hover: hover) {
+    .work-tabs button[aria-selected='false']:hover { background: #eae2d6; }
+  }
+</style>

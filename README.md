@@ -7,7 +7,7 @@
 - 展示《你行你上啊 · YouCanUp》和《Minimalist Breakout》的介绍与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；当前标注 iOS、即将推出，产品介绍格式见 `AGENTS.md`
 - YouCanUp 与 Minimalist Breakout 的首页展示图及截图轮播已同步项目现有的新素材，来源与更新日期见下方“内容维护”
-- 首页展示两款游戏、「拼一页」微信小程序和「薪动 · Golden Hour」Web 项目，不提供作品分类筛选
+- 首页精选作品提供「全部 / 应用 / 游戏」标签页，默认展示全部。应用包括薪动、拼一页和 Mogoo Codex Git，游戏包括 YouCanUp 和 Minimalist Breakout
 - 「薪动 · Golden Hour」保留六语独立落地页，分区介绍日常计薪、收入记录与分享、浏览器与安装、数据与隐私。桌面与手机采用对应的真实截图，按原比例显示。
 - 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
@@ -59,7 +59,9 @@ npm run dev
 
 首页采用“图文对向入场”，入口为 `src/scripts/home-motion.ts`，实现位于 `src/scripts/product-entrance.ts`。桌面图片从左侧 140px、文字从右侧 100px 入场，手机分别为 90px 与 72px，时长 760ms。图片完成解码后再播放，图片与介绍分别观察进入视野的时机；滚回时不重复播放。键盘聚焦时立即落位，系统开启“减少动态效果”时展示完整静态内容。禁用 JavaScript 时内容正常显示。
 
-首页精选作品展示薪动、拼一页、YouCanUp 和 Minimalist Breakout，桌面端各占一整行。四款产品共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，截图均不提供弹框预览或放大入口。
+首页精选作品在桌面端各占一整行。薪动、拼一页、YouCanUp 和 Minimalist Breakout 共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`。Mogoo Codex Git 使用一张可点击查看原图的截图，产品链接指向插件官网及其安装说明。
+
+六语作品标签页由 `WorkTabs.astro` 实现，可用左右方向键切换，也可用 Home 或 End 跳至首末标签。禁用 JavaScript 时，首页仍展示所有作品。
 
 YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，各提供六张截图，不自动播放。YouCanUp 第一项为原来的菜单与实机双图组合，向右切换后每次显示一张，向左切回第一项恢复双图，无需刷新；双图与单图可以反复往返切换。Minimalist Breakout 默认只显示第一张。手机可左右滑动，触控板可横向滚动；桌面鼠标移到作品卡片左右内边缘时显示对应箭头，按钮距边缘 8px、垂直居中，单图与双图模式保持相同位置，点击切换。键盘可聚焦箭头或当前截图，用方向键切换，首尾箭头按实际位置禁用；纵向手势仍滚动页面。悬停或点击截图均不打开弹框。未启用 JavaScript 时仍可原生横向浏览截图。
 
@@ -88,6 +90,8 @@ YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro
 - 2026-11-16 清理已移除作品的隐私条目、旧翻译、样式、素材及早期设计档案，六语隐私政策的页面更新时间同步修订
 - 同日按页面入口和素材引用清理未使用的旧图标、拼一页示例图、旧游戏展示组件、滚动动效对比页、分类实验及配套文案和过时实施计划；当前四款产品素材、本地字体及薪动落地页设计规范保留
 - 提交前至少执行一次 `npm run build`
+
+2026-11-20 新增 Mogoo Codex Git 六语首页展示，图标和截图分别来自插件项目的 `codex/assets/icon.svg` 和 `docs/images/mogoo-codex-git-overview.png`。发布状态依据 GitHub Releases，平台根据插件官网标注已验证的 Windows。
 
 2026-11-16 恢复「拼一页」六语首页展示，用户已确认正式发布。使用 `photo-collage-mini-program` 当前 `71d2fae` 代码，在微信开发者工具重新截取首页、模板库、模板详情、编辑器和导出页，保存到 `src/assets/pinyiye/` 的 `home.png`、`templates.png`、`detail.png`、`editor.png`、`export.png`。第一项为编辑器与两张界面的组合，向右逐张切换，返回第一项恢复组合。产品入口打开原有微信小程序码供扫描；小程序码使用原始文件，不做有损转换或裁切，点击截图本身不弹框。
 

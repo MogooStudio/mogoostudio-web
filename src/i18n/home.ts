@@ -12,6 +12,7 @@ const originalHomeCopy = {
     headline: ['Useful things', 'Playful things'],
     intro: 'Independent software, apps and games. A little more ease and joy, every day',
     explore: 'Explore our work', selected: 'Selected work',
+    workTabs: { all: 'All', apps: 'Apps', games: 'Games' },
     breakout: 'Minimalist brick-breaking. Make every bounce count.',
     youcanup: {
       name: 'YouCanUp',
@@ -43,6 +44,11 @@ const originalHomeCopy = {
       dashboardAlt: '薪动 dashboard with demonstration income data', monthlyAlt: '薪动 monthly calendar with demonstration income data', yearlyAlt: '薪动 annual report with demonstration income data',
       demo: 'Demo data',
     },
+    codexGit: {
+      description: 'Open a read-only Git panel beside your Codex chat to review code changes and commit history for the current project.',
+      type: 'Codex Plugin', status: 'Released', website: 'Visit website',
+      screenshotAlt: 'Git panel showing a commit graph and code diff', preview: 'View the Git panel screenshot at full size',
+    },
     game: 'Game', available: 'Available now', coming: 'Coming soon',
     download: 'Download on the',
     philosophy: 'Small details. Better experiences.',
@@ -63,6 +69,7 @@ const originalHomeCopy = {
     headline: ['做点有用的', '也做点有趣的'],
     intro: '独立创造软件、应用与游戏，让日常多一点顺手与快乐',
     explore: '探索作品', selected: '精选作品',
+    workTabs: { all: '全部', apps: '应用', games: '游戏' },
     breakout: '极简打砖块，专注每一次反弹。',
     youcanup: {
       name: '你行你上啊',
@@ -94,6 +101,11 @@ const originalHomeCopy = {
       dashboardAlt: '薪动主界面，展示演示收入数据', monthlyAlt: '薪动月度日历，展示演示收入数据', yearlyAlt: '薪动年度报告，展示演示收入数据',
       demo: '演示数据',
     },
+    codexGit: {
+      description: '在 Codex 聊天旁打开只读 Git 面板，直接查看当前项目的代码差异和提交历史。',
+      type: 'Codex 插件', status: '已发布', website: '访问产品官网',
+      screenshotAlt: 'Git 面板显示提交关系图和代码差异', preview: '查看 Git 面板截图原图',
+    },
     game: '游戏', available: '已上线', coming: '即将推出', download: '下载于',
     philosophy: '认真做小事，让体验更好',
     values: [
@@ -113,6 +125,7 @@ const originalHomeCopy = {
     headline: ['做點有用的', '也做點有趣的'],
     intro: '獨立創造軟體、應用與遊戲，讓日常多一點順手與快樂',
     explore: '探索作品', selected: '精選作品',
+    workTabs: { all: '全部', apps: '應用', games: '遊戲' },
     breakout: '極簡打磚塊，專注每一次反彈。',
     youcanup: {
       name: '你行你上啊',
@@ -143,6 +156,11 @@ const originalHomeCopy = {
       type: 'Web App', platform: '瀏覽器', status: '已發佈', open: '查看產品',
       dashboardAlt: '薪動主畫面，顯示示範收入資料', monthlyAlt: '薪動月度日曆，顯示示範收入資料', yearlyAlt: '薪動年度報告，顯示示範收入資料',
       demo: '示範資料',
+    },
+    codexGit: {
+      description: '在 Codex 聊天旁開啟唯讀 Git 面板，直接查看目前專案的程式碼差異和提交記錄。',
+      type: 'Codex 外掛', status: '已發佈', website: '前往產品官網',
+      screenshotAlt: 'Git 面板顯示提交關係圖和程式碼差異', preview: '檢視 Git 面板截圖原圖',
     },
     game: '遊戲', available: '已上線', coming: '即將推出', download: '下載於',
     philosophy: '認真做小事，讓體驗更好',
