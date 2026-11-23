@@ -1,0 +1,91 @@
+<div class="pointer-light" aria-hidden="true"></div>
+
+<script>
+  import { initializeActionFills } from '../scripts/action-fill';
+  initializeActionFills();
+
+  const light = document.querySelector<HTMLElement>('.pointer-light')!;
+  const enabled = matchMedia('(any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference)');
+  let frame = 0;
+  let restTimer = 0;
+  let x = 0;
+  let y = 0;
+
+  function hide() {
+    cancelAnimationFrame(frame);
+    clearTimeout(restTimer);
+    frame = 0;
+    light.removeAttribute('data-visible');
+    light.removeAttribute('data-following');
+    light.removeAttribute('data-resting');
+  }
+
+  function follow(event: PointerEvent) {
+    if (event.pointerType !== 'mouse' || !enabled.matches) {
+      hide();
+      return;
+    }
+    x = event.clientX;
+    y = event.clientY;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      light.toggleAttribute('data-following', light.hasAttribute('data-visible'));
+      light.style.setProperty('--light-x', `${x}px`);
+      light.style.setProperty('--light-y', `${y}px`);
+      light.setAttribute('data-visible', '');
+      light.removeAttribute('data-resting');
+      clearTimeout(restTimer);
+      restTimer = window.setTimeout(() => light.setAttribute('data-resting', ''), 360);
+    });
+  }
+
+  window.addEventListener('pointermove', follow, { passive: true });
+  document.documentElement.addEventListener('pointerleave', hide);
+  window.addEventListener('blur', hide);
+  window.addEventListener('pagehide', hide);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) hide(); });
+  enabled.addEventListener('change', hide);
+</script>
+
+<style>
+  .pointer-light { display: none; }
+  @media (any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .pointer-light {
+      --radius: clamp(112px, 13vw, 192px);
+      display: block;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 240ms ease;
+    }
+    .pointer-light::before, .pointer-light::after {
+      content: '';
+      position: absolute;
+      left: calc(-1 * var(--radius));
+      top: calc(-1 * var(--radius));
+      width: calc(2 * var(--radius));
+      height: calc(2 * var(--radius));
+      transform: translate3d(var(--light-x, 0px), var(--light-y, 0px), 0);
+    }
+    /* Broad reflected light trails the smaller, warmer highlight. */
+    .pointer-light::before {
+      background: radial-gradient(ellipse 50% 43%, rgb(201 182 139 / 11%), rgb(201 182 139 / 7%) 35%, rgb(201 182 139 / 2%) 72%, transparent);
+    }
+    .pointer-light::after {
+      background: radial-gradient(ellipse 21% 17%, rgb(240 211 157 / 10%), rgb(232 200 143 / 4%) 48%, transparent);
+    }
+    .pointer-light[data-visible] { opacity: 1; }
+    .pointer-light[data-resting] {
+      opacity: .36;
+      transition-duration: 480ms;
+    }
+    .pointer-light[data-following]::before { transition: transform 230ms cubic-bezier(.2,.72,.28,1); }
+    .pointer-light[data-following]::after { transition: transform 95ms ease-out; }
+  }
+</style>

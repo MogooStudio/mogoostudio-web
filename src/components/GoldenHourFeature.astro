@@ -1,0 +1,124 @@
+---
+import handset from '../assets/home/golden-handset.webp';
+import ProductCarousel from './ProductCarousel.astro';
+import { galleryCopy, homeCopy } from '../i18n/home';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
+import dashboard from '../assets/golden-hour/dashboard-demo.png';
+import monthly from '../assets/golden-hour/monthly-demo.png';
+import yearly from '../assets/golden-hour/yearly-demo.png';
+import dashboardMobile from '../assets/golden-hour/dashboard-mobile.png';
+import monthlyMobile from '../assets/golden-hour/monthly-mobile.png';
+import yearlyMobile from '../assets/golden-hour/yearly-mobile.png';
+
+const lang = getLangFromUrl(Astro.url);
+const copy = homeCopy[lang];
+const labels = galleryCopy[lang];
+const product = copy.goldenHour;
+const [name, englishName] = product.name.split(' · ');
+const screenshots = [
+  {src: dashboard, mobileSrc: dashboardMobile, alt: product.dashboardAlt},
+  {src: monthly, mobileSrc: monthlyMobile, alt: product.monthlyAlt},
+  {src: yearly, mobileSrc: yearlyMobile, alt: product.yearlyAlt},
+];
+---
+
+<section class="gallery-opening" aria-labelledby="featured-title">
+  <div class="gallery-heading">
+    <h1 id="featured-title">{copy.selected}</h1>
+    {lang !== 'en' && <span lang="en">SELECTED WORK</span>}
+  </div>
+  <article id="golden-hour" class="gallery-row" aria-labelledby="golden-hour-title">
+    <figure>
+      <a class="dial-stage" href={dashboardMobile.src} data-open-exhibit aria-label={labels.preview} aria-haspopup="dialog" aria-controls="exhibit-preview">
+        <span class="handset"><img src={handset.src} alt={product.dashboardAlt} width={handset.width} height={handset.height} loading="eager" fetchpriority="high" /></span>
+        <span class="enlarge" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" focusable="false">
+            <path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </a>
+      <figcaption><span>{labels.mobile}</span><span>{product.demo}</span></figcaption>
+    </figure>
+    <div class="gallery-info featured-info">
+      <h2 id="golden-hour-title">{name}<span class="separator"> · </span><em lang="en">{englishName}</em></h2>
+      <p>{product.description}</p>
+      <div class="gallery-meta"><span>{product.type} · {product.platform}</span><span class="gallery-status">{product.status}</span></div>
+      <a class="gallery-action" href={getLocalizedPath('/golden-hour/', lang)}>{product.open}<span aria-hidden="true">↗</span></a>
+    </div>
+  </article>
+  <div class="exhibit-credit"><p>{copy.statement}{lang.startsWith('zh-') && '。'}</p><small>© MogooStudio</small></div>
+</section>
+
+<dialog class="exhibit-preview" id="exhibit-preview" aria-label={product.name}>
+  <form method="dialog">
+    <button class="exhibit-close" type="submit" aria-label={labels.close} autofocus>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
+        <circle cx="16" cy="16" r="15.5" stroke="currentColor" stroke-opacity=".48" />
+        <path d="m11 11 10 10m0-10L11 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </svg>
+    </button>
+  </form>
+  <ProductCarousel id="golden-hour" title={product.name} screenshots={screenshots} previous={copy.previous} next={copy.next} paired />
+</dialog>
+
+<script>
+  const trigger = document.querySelector<HTMLAnchorElement>('[data-open-exhibit]')!;
+  const preview = document.querySelector<HTMLDialogElement>('#exhibit-preview')!;
+  trigger.addEventListener('click', event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    preview.showModal();
+  });
+  preview.addEventListener('close', () => trigger.focus({ preventScroll: true }));
+</script>
+
+<style>
+  .gallery-opening { min-height: calc(100svh - var(--gallery-header-height)); padding-top: 55px; }
+  .dial-stage {
+    display: block; position: relative; overflow: hidden; isolation: isolate;
+    aspect-ratio: 1.43; border: 1px solid #383a31; cursor: zoom-in;
+    background: #1b1c16 url('../assets/home/golden-dial.webp') center / cover no-repeat;
+    box-shadow: inset 0 0 100px #0b0c0b22;
+  }
+  .handset {
+    position: absolute; left: 58%; top: 49%; height: 81%; aspect-ratio: 390/844;
+    transform: translate(-50%,-50%) perspective(1000px) rotateY(-13deg) rotateX(6deg) rotateZ(10deg);
+    background: linear-gradient(114deg,#faf1cb,#6e6959 11%,#cac8ae 34%,#252519 58%,#766b51 81%,#d3c5a0 99%);
+    padding: 4px; border: 1px solid #a9a18a; border-radius: 13% / 6%;
+    box-shadow: 2px 2px 0 #a69d86, 5px 4px 0 #5a5343, 8px 6px 0 #353327, 20px 25px 24px #000a, 35px 50px 35px #0009;
+  }
+  .handset img { width: 100%; height: 100%; border-radius: 11% / 5%; object-fit: cover; box-shadow: 0 0 0 1px #10120f; }
+  .enlarge {
+    position: absolute; right: 15px; bottom: 15px;
+    display: grid; place-items: center; width: 36px; height: 36px;
+    border: 1px solid #797354; border-radius: 50%;
+    background: #171914ed; color: var(--gallery-gold);
+  }
+  .dial-stage:focus-visible .enlarge { border-color: currentColor; background: #2a291f; }
+  @media (hover: hover) {
+    .dial-stage:hover .enlarge { border-color: currentColor; background: #2a291f; }
+  }
+  figcaption { display: flex; justify-content: space-between; padding: 12px 1px 0; color: #b6b7a9; font-size: 12px; letter-spacing: .06em; }
+  figcaption span:last-child { color: #a19f91; }
+  .featured-info { padding-bottom: 31px; }
+  .featured-info h2 { font-size: clamp(48px,4.8vw,78px); line-height: 1.12; font-weight: 500; letter-spacing: -.045em; }
+  .featured-info em { display: block; margin-top: 1px; color: var(--gallery-gold); font: italic 400 clamp(43px,4.9vw,82px)/1.12 Georgia,'Times New Roman',serif; letter-spacing: -.062em; }
+  .separator { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
+  .exhibit-credit { display: flex; justify-content: space-between; gap: 12px; margin-top: 43px; border-top: 1px solid var(--gallery-line); padding: 24px 0 29px; color: var(--gallery-muted); font-size: 13px; line-height: 1.7; letter-spacing: .03em; }
+  .exhibit-credit small { white-space: nowrap; font: 11px/1.6 Consolas, monospace; }
+  @media (min-width: 651px) and (max-width: 900px) {
+    .dial-stage { aspect-ratio: 1.06; }
+    .handset { height: 72%; }
+    .featured-info em { font-size: 48px; }
+  }
+  @media (max-width: 650px) {
+    .gallery-opening { padding-top: 27px; }
+    .handset { padding: 2.5px; box-shadow: 1px 1px 0 #aaa28a,3px 2px 0 #625c4d,5px 3px 0 #37362d,12px 16px 15px #000a,20px 30px 24px #0008; }
+    .enlarge { bottom: 10px; right: 10px; width: 32px; height: 32px; }
+    figcaption { font-size: 11px; padding-top: 8px; }
+    .featured-info { padding: 25px 0 0; }
+    .featured-info h2 { font-size: 43px; }
+    .featured-info em { font-size: 42px; line-height: 1.06; margin-top: 2px; }
+    .exhibit-credit { margin-top: 31px; padding-top: 15px; font-size: 11px; }
+  }
+</style>

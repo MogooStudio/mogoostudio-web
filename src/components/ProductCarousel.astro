@@ -1,6 +1,7 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import PhoneScreenshot from './PhoneScreenshot.astro';
 
 interface Props {
   id: string;
@@ -8,9 +9,13 @@ interface Props {
   screenshots: { src: ImageMetadata; alt: string; mobileSrc?: ImageMetadata }[];
   previous: string;
   next: string;
+  paired?: boolean;
+  imageWidth?: number;
+  phoneFrame?: boolean;
 }
 
-const { id, title, screenshots, previous, next } = Astro.props;
+const { id, title, screenshots, previous, next, paired = false, imageWidth = 440, phoneFrame = false } = Astro.props;
+const Slide = paired ? 'div' : 'a';
 const viewportId = `carousel-${id}`;
 const hasIntro = Astro.slots.has('intro');
 const slides = await Promise.all(screenshots.map(async item => ({
@@ -22,16 +27,21 @@ const slides = await Promise.all(screenshots.map(async item => ({
 <div class="product-artwork product-carousel" data-product-carousel data-carousel-intro={hasIntro ? '' : undefined} role="group" aria-label={title}>
   <div id={viewportId} class="carousel-viewport phone-art phone-art-screenshot">
     {slides.map((item, index) => (
-      <div class="carousel-slide" role="group" aria-label={`${title} ${index + 1} / ${screenshots.length}`}
+      <Slide class="carousel-slide" role={paired ? 'group' : undefined} href={paired ? undefined : item.src.src}
+        target={paired ? undefined : '_blank'} rel={paired ? undefined : 'noopener'}
+        aria-label={`${item.alt} · ${index + 1} / ${screenshots.length}`}
         aria-hidden={index !== 0 ? 'true' : undefined} tabindex={index === 0 ? 0 : -1}>
-        <span class="carousel-single">
-          {item.mobileImage ? <picture>
+        <span class:list={['carousel-single', { 'phone-stage': phoneFrame }]}>
+          {phoneFrame ? <PhoneScreenshot src={item.src} alt={item.alt} /> : paired && item.mobileImage ? <span class="gallery-screenshot-pair">
+            <img src={item.mobileImage.src} alt={item.alt} width={item.mobileImage.attributes.width} height={item.mobileImage.attributes.height} loading="lazy" />
+            <Image src={item.src} alt={item.alt} width={1440} format="webp" loading="lazy" />
+          </span> : item.mobileImage ? <picture>
             <source media="(max-width: 767px)" srcset={item.mobileImage.src} width={item.mobileImage.attributes.width} height={item.mobileImage.attributes.height} type="image/webp" />
             <Image src={item.src} alt={item.alt} width={1080} format="webp" loading="lazy" draggable="false" />
-          </picture> : <Image src={item.src} alt={item.alt} width={440} format="webp" loading="lazy" draggable="false" />}
+          </picture> : <Image src={item.src} alt={item.alt} width={imageWidth} format="webp" loading="lazy" draggable="false" />}
         </span>
         {hasIntro && index === 0 && <span class="carousel-intro" aria-hidden="true"><slot name="intro" /></span>}
-      </div>
+      </Slide>
     ))}
   </div>
   <span class="carousel-status" aria-live="polite" aria-atomic="true">1 / {screenshots.length}</span>

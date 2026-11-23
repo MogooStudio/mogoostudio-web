@@ -23,7 +23,7 @@ const reports = [
 ];
 ---
 
-<BaseLayout title={copy.metaTitle} description={copy.metaDescription} rawTitle compactFooter>
+<BaseLayout title={copy.metaTitle} description={copy.metaDescription} rawTitle>
   <main id="main" class="studio-page golden-hour-page">
     <section class="golden-hero" aria-labelledby="golden-title">
       <header>
@@ -31,25 +31,29 @@ const reports = [
         <h1 id="golden-title">{copy.title}</h1>
         <p class="golden-lead">{copy.intro}</p>
         <div class="golden-actions">
-          <a class="pill-link golden-primary" href={productUrl} target="_blank" rel="noopener noreferrer">{copy.open}<span aria-hidden="true">↗</span></a>
+          <a class="gallery-action" href={productUrl} target="_blank" rel="noopener noreferrer">{copy.open}<span aria-hidden="true">↗</span></a>
           <p>{copy.free}</p>
         </div>
       </header>
       <figure class="golden-hero-visual">
         <figcaption class="golden-image-label"><strong>{copy.dashboard}</strong><span>{copy.demo}</span></figcaption>
-        <picture class="golden-frame">
-          <source media={mobileMedia} srcset={mobileDashboard.src} width={mobileDashboard.attributes.width} height={mobileDashboard.attributes.height} type="image/webp" />
-          <Image
-            src={dashboardDemo}
-            alt={copy.dashboardAlt}
-            widths={[720, 1080, 1440]}
-            sizes="(max-width: 1124px) calc(100vw - 64px), 1060px"
-            format="webp"
-            quality={90}
-            loading="eager"
-            fetchpriority="high"
-          />
-        </picture>
+        <div class="golden-display">
+          <a class="golden-frame golden-zoom" href={dashboardDemo.src} target="_blank" rel="noopener noreferrer">
+            <picture>
+              <source media={mobileMedia} srcset={mobileDashboard.src} width={mobileDashboard.attributes.width} height={mobileDashboard.attributes.height} type="image/webp" />
+              <Image
+                src={dashboardDemo}
+                alt={copy.dashboardAlt}
+                widths={[720, 1080, 1440]}
+                sizes="(max-width: 900px) 80vw, 860px"
+                format="webp"
+                quality={90}
+                loading="eager"
+                fetchpriority="high"
+              />
+            </picture>
+          </a>
+        </div>
       </figure>
     </section>
 
@@ -126,165 +130,113 @@ const reports = [
         <h2 id="golden-notes-title">{copy.notes}</h2>
         <p>{copy.estimateNote}</p>
       </div>
-      <a class="pill-link golden-primary" href={productUrl} target="_blank" rel="noopener noreferrer">{copy.open}<span aria-hidden="true">↗</span></a>
+      <a class="gallery-action" href={productUrl} target="_blank" rel="noopener noreferrer">{copy.open}<span aria-hidden="true">↗</span></a>
     </section>
   </main>
 </BaseLayout>
 
 <style>
   .golden-hour-page {
-    --golden-ink: #211e17;
-    --golden-muted: #5f5a4f;
-    --golden-accent: #6e4b11;
-    --golden-highlight: #ffe8a8;
-    --golden-rule: #e9e0d0;
-    --golden-frame-edge: #3c3020;
-    --golden-frame-radius: 16px;
-    --golden-section-gap: clamp(56px, 7vw, 96px);
-    --golden-content: 1060px;
-    --golden-gutter: 32px;
-    max-width: calc(var(--golden-content) + var(--golden-gutter) * 2);
-    padding: 0 var(--golden-gutter) 60px;
-    color: var(--golden-ink);
+    --section-gap: clamp(48px, 6.3vw, 90px);
+    max-width: 1180px;
   }
-
-  .golden-hero { padding-top: 42px; }
   .golden-hero header { text-align: center; }
-  .golden-brand { color: var(--golden-accent); font-size: 14px; font-weight: 800; }
+  .golden-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    color: var(--gallery-gold);
+    font: italic 22px/1.35 Georgia, 'Times New Roman', serif;
+  }
+  .golden-brand::before, .golden-brand::after { content: ''; height: 1px; width: 32px; background: var(--gallery-line); }
   .golden-hero h1 {
+    max-width: 21ch;
     margin: 12px auto 0;
-    font-size: clamp(40px, 5.2vw, 72px);
-    font-weight: 900;
-    letter-spacing: -.055em;
-    line-height: 1.15;
+    font-size: clamp(40px, 4.7vw, 72px);
+    font-weight: 500;
+    letter-spacing: -.045em;
+    line-height: 1.14;
     text-wrap: balance;
   }
-  .golden-lead { margin: 14px auto 0; color: var(--golden-muted); font-size: 17px; line-height: 1.55; text-wrap: pretty; }
-  .golden-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; margin-top: 22px; }
-  .golden-actions p { color: var(--golden-muted); font-size: 13px; }
-  .golden-primary {
-    min-height: 48px;
-    gap: 16px;
-    padding: 0 21px;
-    background: var(--golden-ink);
-    color: var(--golden-highlight);
-    font-size: 15px;
-  }
-  .golden-primary:hover { background: #3a3021; }
-
-  .golden-hero-visual { margin: 25px auto 0; }
+  .golden-lead { margin: 16px auto 0; color: var(--gallery-muted); font-size: 17px; line-height: 1.7; text-wrap: balance; }
+  .golden-actions { display: flex; justify-content: center; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 24px; }
+  .golden-actions p, .golden-section-heading small { font-size: 13px; color: var(--gallery-muted); }
+  .golden-hour-page .gallery-action { margin: 0; }
+  .golden-hero-visual { margin-top: clamp(28px, 3vw, 46px); }
   .golden-image-label, .golden-section-heading {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 8px 16px;
   }
-  .golden-image-label { padding: 0 4px 9px; font-size: 12px; color: var(--golden-muted); }
-  .golden-image-label strong { color: var(--golden-ink); }
+  .golden-image-label { margin-bottom: 10px; font-size: 12px; color: var(--gallery-muted); }
+  .golden-image-label strong { color: var(--gallery-text); font-weight: 500; }
+  .golden-display {
+    display: grid;
+    justify-items: center;
+    border: 1px solid var(--gallery-line);
+    padding: clamp(20px, 4.3vw, 64px);
+    background: var(--gallery-surface) url('../assets/home/golden-dial.webp') center / cover no-repeat;
+  }
   .golden-frame {
     display: block;
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--golden-frame-edge);
-    border-radius: var(--golden-frame-radius);
-    background: #10100d;
+    border: 1px solid var(--gallery-line);
+    background: var(--gallery-bg);
   }
-  .golden-frame picture { display: block; }
-  .golden-frame img { width: 100%; height: auto; }
-  .golden-hero-visual .golden-frame { box-shadow: 0 18px 44px #33250e1c; }
-
-  .golden-section { margin-top: var(--golden-section-gap); scroll-margin-top: 24px; }
-  .golden-section-heading { margin-bottom: 20px; }
-  .golden-section-heading h2 { font-size: clamp(29px, 3.5vw, 44px); line-height: 1.2; font-weight: 900; letter-spacing: -.035em; }
-  .golden-section-heading small { color: var(--golden-muted); font-size: 13px; }
-  .golden-feature-list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    list-style: none;
-    padding-block: 22px;
-    border-block: 1px solid var(--golden-rule);
-  }
-  .golden-feature-list li { padding-inline: 20px; }
-  .golden-feature-list li:first-child { padding-inline-start: 0; }
-  .golden-feature-list li:last-child { padding-inline-end: 0; }
-  .golden-feature-list li + li { border-inline-start: 1px solid var(--golden-rule); }
-  .golden-report-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .golden-report figcaption { margin-bottom: 12px; }
-  .golden-report h3, .golden-feature-list h3 { font-size: 20px; line-height: 1.4; font-weight: 900; }
-  .golden-section p, .golden-notes p { margin-top: 4px; color: var(--golden-muted); font-size: 15px; line-height: 1.65; }
+  .golden-display .golden-frame { width: min(100%, 860px); box-shadow: 0 18px 45px #0009; }
+  .golden-frame picture, .golden-frame img { display: block; width: 100%; height: auto; }
   .golden-zoom { cursor: zoom-in; }
+  .golden-zoom:hover { border-color: var(--gallery-gold); }
   .golden-zoom-icon {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    right: 12px;
+    bottom: 12px;
     display: grid;
     place-items: center;
     width: 34px;
     height: 34px;
-    border: 1px solid #ffe8a85c;
-    border-radius: 8px;
-    background: #211e17;
-    color: var(--golden-highlight);
+    border: 1px solid var(--gallery-muted);
+    border-radius: 50%;
+    background: var(--gallery-surface);
+    color: var(--gallery-gold);
   }
-  .golden-zoom:hover .golden-zoom-icon { background: var(--golden-highlight); color: var(--golden-ink); }
-  .golden-zoom:focus-visible, .golden-primary:focus-visible, .golden-guide a:focus-visible { outline: 2px solid var(--golden-accent); outline-offset: 4px; }
-
-  .golden-guide {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: clamp(20px, 3vw, 34px);
-    background: #f7f1e5;
-    border: 1px solid var(--golden-rule);
-    border-radius: var(--golden-frame-radius);
-  }
-  .golden-guide section:first-child { padding-inline-end: 24px; }
-  .golden-guide section + section { border-inline-start: 1px solid var(--golden-rule); padding-inline-start: 24px; }
-  .golden-guide h2 { margin-bottom: 8px; font-size: clamp(20px, 2.4vw, 28px); font-weight: 900; }
-  .golden-guide a {
-    display: inline-block;
-    margin-top: 10px;
-    color: var(--golden-accent);
-    font-size: 14px;
-    font-weight: 800;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .golden-notes {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px 32px;
-    margin-top: clamp(42px, 6vw, 72px);
-    border-top: 1px solid var(--golden-rule);
-    padding-top: 26px;
-  }
-  .golden-notes h2 { margin-bottom: 7px; font-size: 20px; font-weight: 900; }
-  .golden-notes .pill-link { flex: none; }
+  .golden-section, .golden-notes { margin-top: var(--section-gap); scroll-margin-top: 24px; }
+  .golden-section-heading { margin-bottom: 24px; }
+  .golden-section-heading h2, .golden-guide h2, .golden-notes h2 { font-weight: 500; letter-spacing: -.035em; line-height: 1.25; }
+  .golden-section-heading h2 { font-size: clamp(28px, 3vw, 44px); }
+  .golden-feature-list { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding-block: 25px; border-block: 1px solid var(--gallery-line); }
+  .golden-feature-list li + li { border-inline-start: 1px solid var(--gallery-line); padding-inline-start: clamp(18px, 2.5vw, 36px); }
+  .golden-feature-list li:not(:last-child) { padding-inline-end: clamp(18px, 2.5vw, 36px); }
+  .golden-feature-list h3, .golden-report h3 { font-size: 20px; font-weight: 500; line-height: 1.45; }
+  .golden-section p, .golden-notes p { font-size: 16px; line-height: 1.75; color: var(--gallery-muted); margin-top: 8px; }
+  .golden-report-grid, .golden-guide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
+  .golden-report figcaption { margin-bottom: 14px; }
+  .golden-guide section, .golden-notes { padding-top: 24px; border-top: 1px solid var(--gallery-line); }
+  .golden-guide h2, .golden-notes h2 { font-size: clamp(24px, 2vw, 32px); }
+  .golden-guide a { display: inline-block; margin-top: 16px; color: var(--gallery-gold); text-decoration: underline; text-underline-offset: 4px; }
+  .golden-notes { display: flex; justify-content: space-between; align-items: center; gap: 22px; }
+  .golden-notes a { flex: none; }
 
   @media (max-width: 767px), (max-height: 500px) and (orientation: landscape) and (pointer: coarse) {
-    .golden-hour-page { --golden-gutter: 20px; --golden-section-gap: 48px; padding-bottom: 36px; }
-    .golden-hero { padding-top: 28px; }
-    .golden-hero h1 { margin-top: 10px; font-size: clamp(27px, 8.9vw, 40px); }
-    .golden-lead { margin-top: 10px; font-size: 14px; }
-    .golden-actions { gap: 10px; margin-top: 16px; }
-    .golden-actions p { font-size: 12px; }
-    .golden-primary { min-height: 44px; font-size: 14px; }
-    .golden-hero-visual { max-width: 310px; margin-top: 22px; }
-    .golden-hero-visual .golden-frame { border-radius: 19px; }
-    .golden-section-heading { margin-bottom: 15px; }
-    .golden-feature-list { grid-template-columns: minmax(0, 1fr); padding-block: 0; }
-    .golden-feature-list li { padding: 12px 0; }
-    .golden-feature-list li + li { border-inline-start: 0; border-top: 1px solid var(--golden-rule); }
-    .golden-report-grid { grid-template-columns: minmax(0, 520px); justify-content: center; gap: 27px; }
-    .golden-report h3, .golden-feature-list h3, .golden-notes h2 { font-size: 18px; }
-    .golden-section p, .golden-notes p { font-size: 14px; }
-    .golden-guide { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .golden-guide section:first-child { padding-inline-end: 0; }
-    .golden-guide section + section { border-inline-start: 0; border-top: 1px solid var(--golden-rule); padding: 16px 0 0; }
+    .golden-brand { font-size: 18px; }
+    .golden-hero h1 { font-size: clamp(32px, 8.6vw, 44px); }
+    .golden-lead { font-size: 15px; margin-top: 12px; }
+    .golden-actions { gap: 14px; margin-top: 18px; }
+    .golden-display { padding: 24px 16px; }
+    .golden-display .golden-frame { width: min(78%, 310px); }
+    .golden-section-heading { margin-bottom: 18px; flex-wrap: wrap; }
+    .golden-feature-list, .golden-report-grid, .golden-guide { grid-template-columns: minmax(0, 1fr); }
+    .golden-feature-list { padding: 0; }
+    .golden-feature-list li { padding-block: 16px; }
+    .golden-feature-list li + li { padding-inline-start: 0; border-inline-start: none; border-top: 1px solid var(--gallery-line); }
+    .golden-report-grid { gap: 32px; }
+    .golden-report .golden-frame { max-width: 330px; margin-inline: auto; }
+    .golden-section p, .golden-notes p { font-size: 15px; }
     .golden-notes { flex-direction: column; align-items: flex-start; }
   }
-
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .golden-report:not(:focus-within) {
@@ -292,10 +244,7 @@ const reports = [
         animation-timeline: view();
         animation-range: entry 0% entry 50%;
       }
-      @keyframes golden-report-enter {
-        from { translate: 0 18px; }
-        to { translate: 0 0; }
-      }
+      @keyframes golden-report-enter { from { translate: 0 18px; } to { translate: 0 0; } }
     }
   }
 </style>

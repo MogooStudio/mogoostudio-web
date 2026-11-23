@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#181818"/>
-  <text x="32" y="43" text-anchor="middle" font-family="Nunito, 'Segoe UI Rounded', sans-serif" font-weight="900" font-size="34" fill="#ffffff">M</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -112 688 688">
+  <rect x="-32" y="-112" width="688" height="688" rx="96" fill="#0b0d0d"/>
+  <g fill="#f0eee4">
+    <path d="M0 0h139l98 122-69 91-53-64v315H0Z"/>
+    <path d="M179 246 363 0h96c58 0 106 25 141 62l-74 90c-14-27-36-41-64-41-27 0-43 12-59 33l-74 102Z"/>
+    <path d="M435 179h186v111c0 101-77 175-178 175-65 0-121-34-154-92l91-111c0 53 31 85 72 85 42 0 68-29 69-66h-86Z"/>
+  </g>
+  <path fill="#264bd5" d="M179 246h51v52h49l-46 61h-54Zm100 0h50v52h-50Z"/>
 </svg>

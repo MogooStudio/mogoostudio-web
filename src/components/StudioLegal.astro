@@ -15,17 +15,21 @@ const headings = kind === 'privacy'
 ---
 <BaseLayout title={t(`${kind}.title`)} description={t(`meta.${kind}`)}>
   <main id="main" class="studio-page legal-page">
-    <header class="inner-hero" id="top">
-      <p class="eyebrow">{copy.legalLabel}</p>
-      <h1 class="display-type">{t(`${kind}.title`)}</h1>
+    <header class="inner-hero legal-heading" id="top">
+      <div>
+        <p class="legal-label">{copy.legalLabel}</p>
+        <h1>{t(`${kind}.title`)}</h1>
+      </div>
       <p class="legal-updated">{t(`${kind}.updated`)}</p>
     </header>
     <div class="legal-grid">
       <aside class="legal-sidebar">
-        <nav aria-label={copy.contents}>
-          <h2>{copy.contents}</h2>
-          <ol>{headings.map((key, index) => <li><a href={`#section-${index + 1}`}>{t(key).replace(/^\d+[.、．]?\s*/, '')}</a></li>)}</ol>
-        </nav>
+        <details class="legal-contents" open>
+          <summary>{copy.contents}<span aria-hidden="true"></span></summary>
+          <nav aria-label={copy.contents}>
+            <ol>{headings.map((key, index) => <li><a href={`#section-${index + 1}`}>{t(key).replace(/^\d+[.、．]?\s*/, '')}</a></li>)}</ol>
+          </nav>
+        </details>
       </aside>
       <article class="legal-article">
         {kind === 'privacy' ? <PrivacyContent /> : <TermsContent />}
@@ -34,3 +38,65 @@ const headings = kind === 'privacy'
     </div>
   </main>
 </BaseLayout>
+
+<script>
+  const contents = document.querySelector<HTMLDetailsElement>('.legal-contents')!;
+  const narrow = matchMedia('(max-width: 760px)');
+  const syncContents = () => { contents.open = !narrow.matches; };
+  syncContents();
+  narrow.addEventListener('change', syncContents);
+</script>
+
+<style>
+  .legal-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px 32px;
+    border-bottom: 1px solid var(--gallery-line);
+    padding-bottom: clamp(24px, 3vw, 44px);
+  }
+  .legal-label, .legal-updated { font-size: 13px; line-height: 1.65; letter-spacing: .045em; }
+  .legal-label { margin-bottom: 14px; color: var(--gallery-gold); }
+  .legal-updated { color: var(--gallery-muted); }
+  .legal-grid {
+    display: grid;
+    grid-template-columns: minmax(190px, 270px) minmax(0, 76ch);
+    gap: clamp(38px, 7vw, 120px);
+    align-items: start;
+  }
+  .legal-sidebar { position: sticky; top: 20px; max-height: calc(100dvh - 40px); overflow-y: auto; scrollbar-width: thin; }
+  .legal-contents summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    color: var(--gallery-gold); font-size: 16px; cursor: pointer; list-style: none;
+    padding: 6px 4px 13px;
+  }
+  .legal-contents summary::-webkit-details-marker { display: none; }
+  .legal-contents summary span { width: 8px; height: 8px; border: solid currentColor; border-width: 0 1px 1px 0; transform: rotate(45deg); }
+  .legal-contents[open] summary span { transform: rotate(225deg); }
+  .legal-contents ol { counter-reset: section; list-style: none; margin: 0; padding: 0; }
+  .legal-contents li { counter-increment: section; }
+  .legal-contents li a { display: grid; grid-template-columns: 2em 1fr; gap: 5px; align-items: baseline; padding: 7px 4px; font-size: 14px; line-height: 1.45; }
+  .legal-contents li a::before { content: counter(section, decimal-leading-zero); color: var(--gallery-muted); font: 12px/1.4 Consolas, monospace; }
+  .legal-contents li a:hover { color: var(--gallery-gold); text-decoration: underline; text-underline-offset: .22em; }
+  .legal-article { min-width: 0; font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
+  .legal-article :global(h2) { margin: 32px 0 12px; font-size: clamp(21px, 1.9vw, 29px); font-weight: 500; line-height: 1.45; scroll-margin-top: 22px; }
+  .legal-article :global(h2:first-child) { margin-top: 0; }
+  .legal-article :global(p), .legal-article :global(ul) { margin-bottom: 12px; }
+  .legal-article :global(ul) { padding-inline-start: 1.4em; }
+  .legal-article :global(li + li) { margin-top: 5px; }
+  .legal-article :global(li::marker) { color: var(--gallery-gold); }
+  .legal-article :global(a) { color: var(--gallery-gold); text-decoration: underline; text-underline-offset: .24em; }
+  .legal-article .back-top { display: block; margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--gallery-line); }
+  @media (max-width: 760px) {
+    .legal-heading { display: block; }
+    .legal-updated { margin-top: 16px; }
+    .legal-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .legal-sidebar { position: static; max-height: none; overflow: visible; border-bottom: 1px solid var(--gallery-line); }
+    .legal-contents summary { min-height: 44px; padding: 0 2px 10px; }
+    .legal-contents ol { padding: 0 0 14px; }
+    .legal-contents a { min-height: 42px; }
+    .legal-article { font-size: 15px; }
+  }
+</style>

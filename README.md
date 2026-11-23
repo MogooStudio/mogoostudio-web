@@ -7,13 +7,14 @@
 - 展示《你行你上啊 · YouCanUp》和《Minimalist Breakout》的介绍与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；当前标注 iOS、即将推出，产品介绍格式见 `AGENTS.md`
 - YouCanUp 与 Minimalist Breakout 的首页展示图及截图轮播已同步项目现有的新素材，来源与更新日期见下方“内容维护”
-- 首页精选作品提供「全部 / 应用 / 游戏」标签页，默认展示全部。应用包括薪动、拼一页和 Mogoo Codex Git，游戏包括 YouCanUp 和 Minimalist Breakout
+- 首页以「薪动 · Golden Hour」开场。「更多作品」默认展示拼一页、Mogoo Codex Git、YouCanUp 和 Minimalist Breakout，可按应用或游戏筛选。
 - 「薪动 · Golden Hour」保留六语独立落地页，分区介绍日常计薪、收入记录与分享、浏览器与安装、数据与隐私。桌面与手机采用对应的真实截图，按原比例显示。
 - 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
 - 内置响应式布局、语言切换、SEO 元信息、Canonical、`hreflang`、站点地图与爬虫规则
-- 首页采用原生纵向滚动与 B 方案“图文对向入场”：图片从左侧、文字从右侧进入，各自在进入视野时播放一次；移除首屏固定、拉远及产品随滚动聚拢等旧效果
+- 全站六种语言统一采用 C 方案「夜光展厅」。首页作品采用桌面左图右文、窄屏图上文下。关于、支持、薪动、隐私政策和服务条款共用首页的导航与页尾；在页尾切换语言会保留当前页面。视觉规范见 [DESIGN.md](DESIGN.md)。
 - 提供 `ads.txt` 和 `app-ads.txt` 应用广告验证文件
+- 浏览器标签页、页头和关于页共用 [MG 网站图标](public/favicon.svg)。[工作室标志精修原图](docs/design/brand/mogoostudio-mg-approved.png) 保留了浅底和深底两种版本。
 
 ## 技术栈
 
@@ -57,13 +58,13 @@ npm run dev
 
 语言名称及 HTML、`hreflang`、Open Graph 标记集中维护在 `src/i18n/locales.ts`，语言识别与路径工具位于 `src/i18n/utils.ts`。英语与中文文案分别在 `src/i18n/ui.ts`（通用文案与法律正文）、`src/i18n/home.ts`（首页与共享导航）、`src/i18n/studio.ts`（工作室内页）；薪动落地页六语文案集中在 `src/i18n/golden-hour.ts`；日语、韩语、西班牙语的其他完整文案分别在 `ja.ts`、`ko.ts`、`es.ts`，由上述入口统一导出并检查类型。Astro 语言列表维护在 `astro.config.mjs`。新增页面使用 `src/pages/[locale]/[...page].astro` 生成对应的日语、韩语与西班牙语静态页面，现有英语和中文保留独立路由。新增页面时，需要补齐六种语言的路由，并更新站点地图和验证脚本中的页面列表。
 
-首页采用“图文对向入场”，入口为 `src/scripts/home-motion.ts`，实现位于 `src/scripts/product-entrance.ts`。桌面图片从左侧 140px、文字从右侧 100px 入场，手机分别为 90px 与 72px，时长 760ms。图片完成解码后再播放，图片与介绍分别观察进入视野的时机；滚回时不重复播放。键盘聚焦时立即落位，系统开启“减少动态效果”时展示完整静态内容。禁用 JavaScript 时内容正常显示。
+首页样板为 `GoldenHourFeature.astro` 与 `src/styles/gallery.css`。首屏以墨黑背景、黄铜刻度盘、真实手机界面和衬线英文名呈现薪动。1440×900 桌面视口使用双栏，390 宽手机使用单栏。刻度盘素材位于 `src/assets/home/golden-dial.webp`。
 
-首页精选作品在桌面端各占一整行。薪动、拼一页、YouCanUp 和 Minimalist Breakout 共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`。Mogoo Codex Git 使用一张可点击查看原图的截图，产品链接指向插件官网及其安装说明。
+点击薪动产品图，可在预览中查看主界面、月历和年报。桌面并列展示手机和桌面截图，窄屏展示手机截图。`ProductCarousel.astro` 和 `src/scripts/product-carousel.ts` 提供触控滑动、前后按钮和方向键切换。
 
-六语作品标签页由 `WorkTabs.astro` 实现，可用左右方向键切换，也可用 Home 或 End 跳至首末标签。禁用 JavaScript 时，首页仍展示所有作品。
+「更多作品」保留各产品原有图标、截图、发布状态和产品入口。拼一页、YouCanUp 与 Minimalist Breakout 的截图共用细边手机壳。拼一页与 YouCanUp 第一项展示组合图，Minimalist Breakout 默认显示第一张。点击产品图可查看大图。拼一页的产品入口打开微信小程序码。Mogoo Codex Git 使用同一轮播展示面板总览、浅色提交历史和文件差异，后两张原图取自插件官网的 `docs/site/assets/history-light.webp` 与 `diff-detail.webp`。
 
-YouCanUp 和 Minimalist Breakout 的首页产品图共用 `ProductCarousel.astro` 与 `src/scripts/product-carousel.ts`，各提供六张截图，不自动播放。YouCanUp 第一项为原来的菜单与实机双图组合，向右切换后每次显示一张，向左切回第一项恢复双图，无需刷新；双图与单图可以反复往返切换。Minimalist Breakout 默认只显示第一张。手机可左右滑动，触控板可横向滚动；桌面鼠标移到作品卡片左右内边缘时显示对应箭头，按钮距边缘 8px、垂直居中，单图与双图模式保持相同位置，点击切换。键盘可聚焦箭头或当前截图，用方向键切换，首尾箭头按实际位置禁用；纵向手势仍滚动页面。悬停或点击截图均不打开弹框。未启用 JavaScript 时仍可原生横向浏览截图。
+六语分类标签由 `WorkTabs.astro` 实现，可用左右方向键切换，也可用 Home 或 End 跳至首末标签。禁用 JavaScript 时仍能浏览所有作品及截图。
 
 ## 项目结构
 

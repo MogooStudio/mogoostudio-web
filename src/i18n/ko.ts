@@ -11,7 +11,8 @@ export const koHome = {
   codexGit: {
     description: 'Codex 채팅 옆에 읽기 전용 Git 패널을 열어 현재 프로젝트의 코드 변경 사항과 커밋 기록을 확인하세요.',
     type: 'Codex 플러그인', status: '출시됨', website: '공식 웹사이트 보기',
-    screenshotAlt: '커밋 그래프와 코드 변경 사항이 표시된 Git 패널', preview: 'Git 패널 스크린샷을 원본 크기로 보기',
+    screenshotAlt: '커밋 그래프와 코드 변경 사항이 표시된 Git 패널',
+    historyAlt: '밝은 테마의 커밋 기록과 상세 정보', diffAlt: '추가된 줄과 삭제된 줄을 보여 주는 파일 비교 화면',
   },
   game: '게임', available: '출시됨', coming: '출시 예정', download: '다운로드하기', philosophy: '작은 디테일로 더 나은 경험을.',
   values: [{ title: '더 편리하게', body: '간단하고 직관적으로, 필요한 도움을' }, { title: '더 즐겁게', body: '평범한 일상 속 작은 즐거움을' }, { title: '꾸준한 개선', body: '작은 부분부터 정성껏 다듬습니다' }],

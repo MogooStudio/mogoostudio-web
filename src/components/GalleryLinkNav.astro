@@ -1,0 +1,49 @@
+---
+interface Props { label: string }
+const { label } = Astro.props;
+---
+<nav class="gallery-link-nav" aria-label={label}><slot /></nav>
+<script>
+  document.querySelectorAll<HTMLElement>('.gallery-link-nav').forEach(initLine);
+
+  function initLine(nav: HTMLElement) {
+    const links = Array.from(nav.querySelectorAll('a'));
+    const current = nav.querySelector<HTMLAnchorElement>('[aria-current="page"]');
+    let hovered: HTMLAnchorElement | null = null;
+    let target = current;
+
+    function place(link: HTMLAnchorElement | null) {
+      target = link;
+      if (link) {
+        nav.style.setProperty('--line-x', `${link.offsetLeft}px`);
+        nav.style.setProperty('--line-bottom', `${link.offsetTop + link.offsetHeight}px`);
+        nav.style.setProperty('--line-width', `${link.offsetWidth}px`);
+      }
+      nav.toggleAttribute('data-line-visible', Boolean(link));
+    }
+
+    links.forEach(link => {
+      link.addEventListener('pointerenter', event => {
+        if (event.pointerType === 'touch') return;
+        hovered = link;
+        place(link);
+      });
+      link.addEventListener('focus', () => {
+        if (link.matches(':focus-visible')) place(link);
+      });
+    });
+    nav.addEventListener('pointerleave', () => {
+      hovered = null;
+      place(nav.querySelector<HTMLAnchorElement>('a:focus-visible') ?? current);
+    });
+    nav.addEventListener('focusout', event => {
+      if (!nav.contains(event.relatedTarget as Node | null)) place(hovered ?? current);
+    });
+
+    place(current);
+    nav.setAttribute('data-sliding-line', '');
+    const observer = new ResizeObserver(() => place(target));
+    links.forEach(link => observer.observe(link));
+    observer.observe(nav);
+  }
+</script>

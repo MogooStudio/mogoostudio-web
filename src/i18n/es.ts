@@ -10,7 +10,8 @@ export const esHome = {
   codexGit: {
     description: 'Abre un panel de Git de solo lectura junto al chat de Codex para revisar los cambios de código y el historial de commits del proyecto actual.',
     type: 'Complemento de Codex', status: 'Publicado', website: 'Visitar sitio web',
-    screenshotAlt: 'Panel de Git con un gráfico de commits y las diferencias de código', preview: 'Ver la captura del panel de Git a tamaño completo',
+    screenshotAlt: 'Panel de Git con un gráfico de commits y las diferencias de código',
+    historyAlt: 'Historial y detalles de los commits en el tema claro', diffAlt: 'Diferencias de un archivo con líneas añadidas y eliminadas',
   },
   game: 'Juego', available: 'Disponible', coming: 'Próximamente', download: 'Descárgalo en', philosophy: 'Pequeños detalles. Mejores experiencias.',
   values: [{ title: 'Un poco más fácil', body: 'Sencillo, intuitivo y pensado para ayudar' }, { title: 'Un poco más alegre', body: 'Encuentra diversión en lo cotidiano' }, { title: 'Siempre mejorando', body: 'Cuidamos y pulimos cada detalle' }],

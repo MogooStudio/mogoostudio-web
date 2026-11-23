@@ -1,9 +1,10 @@
 ---
-import '../styles/playground.css';
+import '../styles/gallery.css';
 import '../styles/studio-pages.css';
 import { homeCopy } from '../i18n/home';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import GalleryPointerLight from '../components/GalleryPointerLight.astro';
 import { getLangFromUrl, useTranslations, getLocalizedPath, getPathWithoutLocale } from '../i18n/utils';
 import { languages, localeMetadata, type Locale } from '../i18n/locales';
 
@@ -11,13 +12,11 @@ interface Props {
   title: string;
   description?: string;
   rawTitle?: boolean;
-  playground?: boolean;
-  compactFooter?: boolean;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const { title, description = t('meta.index'), rawTitle = false, playground = true, compactFooter = false } = Astro.props;
+const { title, description = t('meta.index'), rawTitle = false } = Astro.props;
 const pageTitle = rawTitle ? title : `${title} | MogooStudio`;
 const htmlLang = localeMetadata[lang].html;
 
@@ -41,7 +40,7 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{pageTitle}</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=mg" />
   <link rel="canonical" href={canonicalUrl} />
   {locales.map((code) => (
     <link rel="alternate" hreflang={localeMetadata[code].hreflang} href={new URL(getLocalizedPath(pathWithoutLocale, code), Astro.site)} />
@@ -56,47 +55,26 @@ const canonicalUrl = new URL(getLocalizedPath(pathWithoutLocale, lang), Astro.si
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={description} />
-  {playground ? <>
-    <link rel="preload" href="/fonts/nunito-900.ttf" as="font" type="font/ttf" crossorigin />
-    {lang.startsWith('zh-') && <link rel="preload" href="/fonts/playground-display.woff2" as="font" type="font/woff2" crossorigin />}
-  </> : <>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  </>}
+  <meta name="color-scheme" content="dark" />
 </head>
-<body class:list={{ playground }}>
+<body class="playground" data-gallery>
   <a class="skip-link" href="#main">{homeCopy[lang].skip}</a>
-  <Nav currentLang={lang} playground={playground} />
+  <Nav currentLang={lang} />
   <slot />
-  <Footer currentLang={lang} playground={playground} compact={compactFooter} />
+  <Footer currentLang={lang} />
+  <GalleryPointerLight />
 </body>
 </html>
 
 <style is:global>
-  :root {
-    --red: #F2455C;
-    --teal: #29C4D9;
-    --yellow: #FFC93C;
-    --dark: #181818;
-    --text: #222;
-    --muted: #666;
-    --border: #eee;
-    --bg-light: #f8f8f8;
-    --nav-h: 72px;
-  }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: "Nunito", "Segoe UI Rounded", sans-serif;
-    color: var(--text);
-    background: #fff;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    padding-top: var(--nav-h);
-  }
-
+  body { -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
   img { display: block; max-width: 100%; }
+  .skip-link {
+    position: fixed; z-index: 200; top: -100px; left: 20px;
+    background: var(--gallery-text); color: var(--gallery-bg); padding: 12px 18px;
+  }
+  .skip-link:focus { top: 12px; }
 </style>

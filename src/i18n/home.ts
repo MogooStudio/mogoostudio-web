@@ -47,7 +47,8 @@ const originalHomeCopy = {
     codexGit: {
       description: 'Open a read-only Git panel beside your Codex chat to review code changes and commit history for the current project.',
       type: 'Codex Plugin', status: 'Released', website: 'Visit website',
-      screenshotAlt: 'Git panel showing a commit graph and code diff', preview: 'View the Git panel screenshot at full size',
+      screenshotAlt: 'Git panel showing a commit graph and code diff',
+      historyAlt: 'Commit history and details in the light theme', diffAlt: 'File diff with added and removed lines',
     },
     game: 'Game', available: 'Available now', coming: 'Coming soon',
     download: 'Download on the',
@@ -104,7 +105,8 @@ const originalHomeCopy = {
     codexGit: {
       description: '在 Codex 聊天旁打开只读 Git 面板，直接查看当前项目的代码差异和提交历史。',
       type: 'Codex 插件', status: '已发布', website: '访问产品官网',
-      screenshotAlt: 'Git 面板显示提交关系图和代码差异', preview: '查看 Git 面板截图原图',
+      screenshotAlt: 'Git 面板显示提交关系图和代码差异',
+      historyAlt: '浅色主题下的提交历史与详情', diffAlt: '文件差异中的新增行和删除行',
     },
     game: '游戏', available: '已上线', coming: '即将推出', download: '下载于',
     philosophy: '认真做小事，让体验更好',
@@ -160,7 +162,8 @@ const originalHomeCopy = {
     codexGit: {
       description: '在 Codex 聊天旁開啟唯讀 Git 面板，直接查看目前專案的程式碼差異和提交記錄。',
       type: 'Codex 外掛', status: '已發佈', website: '前往產品官網',
-      screenshotAlt: 'Git 面板顯示提交關係圖和程式碼差異', preview: '檢視 Git 面板截圖原圖',
+      screenshotAlt: 'Git 面板顯示提交關係圖和程式碼差異',
+      historyAlt: '淺色主題下的提交記錄與詳細資料', diffAlt: '檔案差異中的新增行與刪除行',
     },
     game: '遊戲', available: '已上線', coming: '即將推出', download: '下載於',
     philosophy: '認真做小事，讓體驗更好',
@@ -179,3 +182,12 @@ const originalHomeCopy = {
 export const homeCopy = {
   ...originalHomeCopy, ja: jaHome, ko: koHome, es: esHome,
 } satisfies Record<Locale, Translation<typeof originalHomeCopy.en>>;
+
+export const galleryCopy = {
+  en: { studio: 'Independent software, apps and games', mobile: 'Mobile interface', more: 'More work', preview: 'Enlarge screenshots', close: 'Close' },
+  'zh-cn': { studio: '独立创造软件、应用与游戏', mobile: '移动端界面', more: '更多作品', preview: '放大产品截图', close: '关闭' },
+  'zh-tw': { studio: '獨立創造軟體、應用與遊戲', mobile: '行動版介面', more: '更多作品', preview: '放大產品截圖', close: '關閉' },
+  ja: { studio: 'ソフトウェア、アプリ、ゲームの個人制作', mobile: 'モバイル画面', more: 'その他の作品', preview: 'スクリーンショットを拡大', close: '閉じる' },
+  ko: { studio: '소프트웨어, 앱, 게임을 독립적으로 만듭니다', mobile: '모바일 화면', more: '다른 작품', preview: '스크린샷 확대', close: '닫기' },
+  es: { studio: 'Software, aplicaciones y juegos independientes', mobile: 'Interfaz móvil', more: 'Más proyectos', preview: 'Ampliar capturas', close: 'Cerrar' },
+} satisfies Record<Locale, { studio: string; mobile: string; more: string; preview: string; close: string }>;

@@ -24,14 +24,14 @@ function loadTranslations(filename) {
 
 const { languages, localeMetadata } = loadTranslations('src/i18n/locales.ts');
 const { ui } = loadTranslations('src/i18n/ui.ts');
-const { homeCopy } = loadTranslations('src/i18n/home.ts');
+const { homeCopy, galleryCopy } = loadTranslations('src/i18n/home.ts');
 const { studioCopy } = loadTranslations('src/i18n/studio.ts');
 const { goldenHourCopy } = loadTranslations('src/i18n/golden-hour.ts');
 const locales = Object.keys(languages);
 const prefix = locale => locale === 'en' ? '' : `/${locale}`;
 const flatten = (value, path = '') => Object.fromEntries(Object.entries(value).flatMap(([key, child]) =>
   typeof child === 'string' ? [[`${path}${key}`, child]] : Object.entries(flatten(child, `${path}${key}.`))));
-for (const [name, dictionary] of Object.entries({ ui, homeCopy, studioCopy, goldenHourCopy })) {
+for (const [name, dictionary] of Object.entries({ ui, homeCopy, galleryCopy, studioCopy, goldenHourCopy })) {
   const source = flatten(dictionary.en);
   for (const locale of locales) {
     const translated = flatten(dictionary[locale]);
@@ -84,7 +84,7 @@ for (const locale of locales) {
     assert.match(html, /<body class="playground"/, `${path}: shared design`);
     assert.equal((html.match(/<h1\b/g) || []).length, 1, `${path}: one main heading`);
     assert.match(html, /<main id="main"/, `${path}: accessible main content`);
-    assert.match(html, /class="playground-footer"/, `${path}: shared footer`);
+    assert.match(html, /class="gallery-footer gallery-shell"/, `${path}: localized footer`);
     assert.match(html, /rel="canonical"/, `${path}: canonical`);
     assert.equal((html.match(/rel="alternate"/g) || []).length, locales.length + 1, `${path}: locale alternatives`);
     assert.ok(html.includes(`<html lang="${localeMetadata[locale].html}"`), `${path}: language`);
@@ -94,7 +94,7 @@ for (const locale of locales) {
     for (const code of locales) {
       const href = `${prefix(code)}${page}/`;
       assert.ok(html.includes(`hreflang="${localeMetadata[code].hreflang}" href="https://mogoostudio.com${href}"`), `${path}: alternate ${code}`);
-      assert.equal((html.match(new RegExp(`href="${href}" lang="${code}"`, 'g')) || []).length, 2, `${path}: desktop and mobile language links`);
+      assert.equal((html.match(new RegExp(`href="${href}" lang="${code}"`, 'g')) || []).length, 1, `${path}: language switcher links`);
     }
     for (const kind of ['privacy', 'terms']) {
       if (page === `/${kind}`) {
@@ -120,7 +120,7 @@ for (const [path, html] of documents) {
     const href = match[1];
     if (!href.startsWith('/') && !href.startsWith('#')) continue;
     const target = new URL(decodeHtml(href), `${base}${path}`);
-    if (target.origin === baseOrigin && target.pathname.endsWith('.png') && !target.hash) {
+    if (target.origin === baseOrigin && /\.(png|webp)$/.test(target.pathname) && !target.hash) {
       imageLinks.add(target.href);
       continue;
     }
@@ -133,7 +133,8 @@ for (const [path, html] of documents) {
 for (const href of imageLinks) {
   const response = await fetch(href, { method: 'HEAD' });
   assert.equal(response.status, 200, `linked screenshot: ${href}`);
-  assert.match(response.headers.get('content-type') || '', /^image\/png\b/, `linked screenshot type: ${href}`);
+  const extension = new URL(href).pathname.split('.').pop();
+  assert.equal(response.headers.get('content-type')?.split(';')[0], `image/${extension}`, `linked screenshot type: ${href}`);
 }
 for (const kind of ['privacy', 'terms']) {
   const component = readFileSync(`src/components/${kind[0].toUpperCase()}${kind.slice(1)}Content.astro`, 'utf8');

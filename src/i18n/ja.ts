@@ -32,7 +32,8 @@ export const jaHome = {
   codexGit: {
     description: 'Codex のチャットの隣に読み取り専用の Git パネルを開き、作業中のプロジェクトの差分やコミット履歴を確認できます。',
     type: 'Codex プラグイン', status: '公開済み', website: '公式サイトを見る',
-    screenshotAlt: 'コミットグラフとコードの差分が表示された Git パネル', preview: 'Git パネルのスクリーンショットを原寸で表示',
+    screenshotAlt: 'コミットグラフとコードの差分が表示された Git パネル',
+    historyAlt: 'ライトテーマで表示したコミット履歴と詳細', diffAlt: '追加行と削除行を示すファイル差分',
   },
   game: 'ゲーム', available: '配信中', coming: '近日公開', download: 'ダウンロード',
   philosophy: '細部を大切に。体験をより良く。',
