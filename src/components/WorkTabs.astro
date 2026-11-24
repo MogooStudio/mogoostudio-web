@@ -1,5 +1,5 @@
 ---
-const categories = ['all', 'apps', 'games'] as const;
+const categories = ['all', 'games', 'apps'] as const;
 
 interface Props {
   labels: Record<(typeof categories)[number], string>;
