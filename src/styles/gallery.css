@@ -102,9 +102,8 @@ body.playground[data-gallery] {
 #youcanup .catalog-art-imprint { --imprint-x: 98%; --imprint-y: 15%; --light-x: 70%; }
 #minimalist-breakout .catalog-art-imprint { --imprint-x: 15%; --imprint-y: 108%; --light-x: 46%; }
 .catalog-art .product-carousel { min-height: 0; width: 78%; max-width: 520px; height: 86%; aspect-ratio: auto; }
-.catalog-art.catalog-art-wide .product-carousel { width: calc(100% - 100px); max-width: none; }
 .catalog-art .carousel-viewport { border-radius: 0; background: transparent; box-shadow: none; }
-.catalog-art-wide .carousel-slide, .catalog-art-imprint .phone-shell { cursor: zoom-in; }
+.catalog-art-imprint .phone-shell { cursor: zoom-in; }
 .catalog-art-imprint, .catalog-art-imprint .carousel-slide, .catalog-art-imprint .carousel-arrow { cursor: default; }
 .catalog-art-imprint .carousel-arrow:enabled .carousel-arrow-icon { cursor: pointer; }
 .catalog-art .carousel-intro { inset: 0 4%; }

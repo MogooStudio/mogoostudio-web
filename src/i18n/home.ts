@@ -44,12 +44,6 @@ const originalHomeCopy = {
       dashboardAlt: '薪动 dashboard with demonstration income data', monthlyAlt: '薪动 monthly calendar with demonstration income data', yearlyAlt: '薪动 annual report with demonstration income data',
       demo: 'Demo data',
     },
-    codexGit: {
-      description: 'Open a read-only Git panel beside your Codex chat to review code changes and commit history for the current project.',
-      type: 'Codex Plugin', status: 'Released', website: 'Visit website',
-      screenshotAlt: 'Git panel showing a commit graph and code diff',
-      historyAlt: 'Commit history and details in the light theme', diffAlt: 'File diff with added and removed lines',
-    },
     game: 'Game', available: 'Available now', coming: 'Coming soon',
     download: 'Download on the',
     philosophy: 'Small details. Better experiences.',
@@ -102,12 +96,6 @@ const originalHomeCopy = {
       dashboardAlt: '薪动主界面，展示演示收入数据', monthlyAlt: '薪动月度日历，展示演示收入数据', yearlyAlt: '薪动年度报告，展示演示收入数据',
       demo: '演示数据',
     },
-    codexGit: {
-      description: '在 Codex 聊天旁打开只读 Git 面板，直接查看当前项目的代码差异和提交历史。',
-      type: 'Codex 插件', status: '已发布', website: '访问产品官网',
-      screenshotAlt: 'Git 面板显示提交关系图和代码差异',
-      historyAlt: '浅色主题下的提交历史与详情', diffAlt: '文件差异中的新增行和删除行',
-    },
     game: '游戏', available: '已上线', coming: '即将推出', download: '下载于',
     philosophy: '认真做小事，让体验更好',
     values: [
@@ -158,12 +146,6 @@ const originalHomeCopy = {
       type: 'Web App', platform: '瀏覽器', status: '已發佈', open: '查看產品',
       dashboardAlt: '薪動主畫面，顯示示範收入資料', monthlyAlt: '薪動月度日曆，顯示示範收入資料', yearlyAlt: '薪動年度報告，顯示示範收入資料',
       demo: '示範資料',
-    },
-    codexGit: {
-      description: '在 Codex 聊天旁開啟唯讀 Git 面板，直接查看目前專案的程式碼差異和提交記錄。',
-      type: 'Codex 外掛', status: '已發佈', website: '前往產品官網',
-      screenshotAlt: 'Git 面板顯示提交關係圖和程式碼差異',
-      historyAlt: '淺色主題下的提交記錄與詳細資料', diffAlt: '檔案差異中的新增行與刪除行',
     },
     game: '遊戲', available: '已上線', coming: '即將推出', download: '下載於',
     philosophy: '認真做小事，讓體驗更好',

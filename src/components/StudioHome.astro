@@ -24,18 +24,9 @@ import pinyiyeHome from '../assets/pinyiye/home.png';
 import pinyiyeTemplates from '../assets/pinyiye/templates.png';
 import pinyiyeDetail from '../assets/pinyiye/detail.png';
 import pinyiyeCode from '../assets/pinyiye/wechat-code.jpg';
-import codexGitIcon from '../assets/codex-git/icon.svg';
-import codexGitScreenshot from '../assets/codex-git/overview.png';
-import codexGitHistory from '../assets/codex-git/history-light.webp';
-import codexGitDiff from '../assets/codex-git/diff-detail.webp';
 
 const lang = getLangFromUrl(Astro.url);
 const copy = homeCopy[lang];
-const codexGitScreenshots = [
-  { src: codexGitScreenshot, alt: copy.codexGit.screenshotAlt },
-  { src: codexGitHistory, alt: copy.codexGit.historyAlt },
-  { src: codexGitDiff, alt: copy.codexGit.diffAlt },
-];
 const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/minimalist-breakout/*.png', { eager: true });
 const games = [
   { id: 'minimalist-breakout', title: 'Minimalist Breakout', description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
@@ -110,23 +101,6 @@ const pinyiyeScreenshots = [
               <p>{copy.pinyiye.description}</p>
               <div class="gallery-meta"><span>{copy.pinyiye.type} · {copy.pinyiye.platform}</span><span class="gallery-status">{copy.pinyiye.status}</span></div>
               <button type="button" class="gallery-action" data-mini-program aria-haspopup="dialog" aria-controls="pinyiye-code">{copy.pinyiye.open}</button>
-            </div>
-          </article>
-          <article id="mogoo-codex-git" class="gallery-row catalog-row" data-category="apps" aria-labelledby="codex-git-title">
-            <div class="catalog-art catalog-art-wide">
-              <ProductCarousel id="mogoo-codex-git" title="Mogoo Codex Git" screenshots={codexGitScreenshots} previous={copy.previous} next={copy.next} imageWidth={1280} />
-            </div>
-            <div class="gallery-info">
-              <div class="gallery-title">
-                <img src={codexGitIcon.src} width="52" height="52" alt="" loading="lazy" />
-                <h3 id="codex-git-title">Mogoo Codex Git</h3>
-              </div>
-              <p>{copy.codexGit.description}</p>
-              <div class="gallery-meta">
-                <span>{copy.codexGit.type} · Windows</span>
-                <span class="gallery-status">{copy.codexGit.status}</span>
-              </div>
-              <a class="gallery-action" href="https://mogoostudio.github.io/mogoo-codex-git/" target="_blank" rel="noopener noreferrer">{copy.codexGit.website}</a>
             </div>
           </article>
         </div>

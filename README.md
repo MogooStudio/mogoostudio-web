@@ -7,7 +7,7 @@
 - 展示《你行你上啊 · YouCanUp》和《Minimalist Breakout》的介绍与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；iOS 版已上线，可从 [App Store 下载](https://apps.apple.com/us/app/youcanup/id6824439324)，产品介绍格式见 `AGENTS.md`
 - YouCanUp 与 Minimalist Breakout 的首页展示图及截图轮播已同步项目现有的新素材，来源与更新日期见下方“内容维护”
-- 首页以「薪动 · Golden Hour」开场。「更多作品」的页签依次为「全部」「游戏」「应用」。「全部」先展示 YouCanUp 和 Minimalist Breakout，再展示拼一页和 Mogoo Codex Git。
+- 首页以「薪动 · Golden Hour」开场。「更多作品」的页签依次为「全部」「游戏」「应用」。「全部」先展示 YouCanUp 和 Minimalist Breakout，再展示拼一页。
 - 「薪动 · Golden Hour」保留六语独立落地页，分区介绍日常计薪、收入记录与分享、浏览器与安装、数据与隐私。桌面与手机采用对应的真实截图，按原比例显示。
 - 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
@@ -62,7 +62,7 @@ npm run dev
 
 点击薪动产品图，可在预览中查看主界面、月历和年报。桌面并列展示手机和桌面截图，窄屏展示手机截图。`ProductCarousel.astro` 和 `src/scripts/product-carousel.ts` 提供触控滑动、前后按钮和方向键切换。
 
-「更多作品」保留各产品原有图标、截图、发布状态和产品入口。拼一页、YouCanUp 与 Minimalist Breakout 的截图共用细边手机壳。拼一页与 YouCanUp 第一项展示组合图，Minimalist Breakout 默认显示第一张。点击产品图可查看大图。拼一页的产品入口打开微信小程序码。Mogoo Codex Git 使用同一轮播展示面板总览、浅色提交历史和文件差异，后两张原图取自插件官网的 `docs/site/assets/history-light.webp` 与 `diff-detail.webp`。
+「更多作品」保留各产品原有图标、截图、发布状态和产品入口。拼一页、YouCanUp 与 Minimalist Breakout 的截图共用细边手机壳。拼一页与 YouCanUp 第一项展示组合图，Minimalist Breakout 默认显示第一张。点击产品图可查看大图。拼一页的产品入口打开微信小程序码。
 
 六语分类标签由 `WorkTabs.astro` 实现，可用左右方向键切换，也可用 Home 或 End 跳至首末标签。禁用 JavaScript 时仍能浏览所有作品及截图。
 
@@ -91,8 +91,6 @@ npm run dev
 - 2026-11-16 清理已移除作品的隐私条目、旧翻译、样式、素材及早期设计档案，六语隐私政策的页面更新时间同步修订
 - 同日按页面入口和素材引用清理未使用的旧图标、拼一页示例图、旧游戏展示组件、滚动动效对比页、分类实验及配套文案和过时实施计划；当前四款产品素材、本地字体及薪动落地页设计规范保留
 - 提交前至少执行一次 `npm run build`
-
-2026-11-20 新增 Mogoo Codex Git 六语首页展示，图标和截图分别来自插件项目的 `codex/assets/icon.svg` 和 `docs/images/mogoo-codex-git-overview.png`。发布状态依据 GitHub Releases，平台根据插件官网标注已验证的 Windows。
 
 2026-11-16 恢复「拼一页」六语首页展示，用户已确认正式发布。使用 `photo-collage-mini-program` 当前 `71d2fae` 代码，在微信开发者工具重新截取首页、模板库、模板详情、编辑器和导出页，保存到 `src/assets/pinyiye/` 的 `home.png`、`templates.png`、`detail.png`、`editor.png`、`export.png`。第一项为编辑器与两张界面的组合，向右逐张切换，返回第一项恢复组合。产品入口打开原有微信小程序码供扫描；小程序码使用原始文件，不做有损转换或裁切，点击截图本身不弹框。
 

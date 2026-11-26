@@ -29,12 +29,6 @@ export const jaHome = {
     exportAlt: '画像の保存とプレビューができる拼一页の書き出し画面',
   },
   goldenHour: { name: '薪動 · Golden Hour', description: '勤務収入の目安が増える様子をリアルタイムで見ながら、今日・今月・今年の記録を振り返れます。', type: 'Web アプリ', platform: 'ブラウザ', status: '公開中', open: '製品を見る', dashboardAlt: 'デモ収入データを表示する薪動のメイン画面', monthlyAlt: 'デモ収入データを表示する薪動の月間カレンダー', yearlyAlt: 'デモ収入データを表示する薪動の年間レポート', demo: 'デモデータ' },
-  codexGit: {
-    description: 'Codex のチャットの隣に読み取り専用の Git パネルを開き、作業中のプロジェクトの差分やコミット履歴を確認できます。',
-    type: 'Codex プラグイン', status: '公開済み', website: '公式サイトを見る',
-    screenshotAlt: 'コミットグラフとコードの差分が表示された Git パネル',
-    historyAlt: 'ライトテーマで表示したコミット履歴と詳細', diffAlt: '追加行と削除行を示すファイル差分',
-  },
   game: 'ゲーム', available: '配信中', coming: '近日公開', download: 'ダウンロード',
   philosophy: '細部を大切に。体験をより良く。',
   values: [{ title: 'もっと使いやすく', body: 'シンプルで直感的に、役立つものを' }, { title: 'もっと楽しく', body: '何気ない毎日に、楽しむひとときを' }, { title: '少しずつ改善', body: 'ひとつひとつ、丁寧に磨き続けます' }],
