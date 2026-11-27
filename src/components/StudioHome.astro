@@ -6,6 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GoldenHourFeature from './GoldenHourFeature.astro';
 import AppStoreLink from './AppStoreLink.astro';
 import ProductCarousel from './ProductCarousel.astro';
+import ScreenshotDialog from './ScreenshotDialog.astro';
 import PhoneScreenshot from './PhoneScreenshot.astro';
 import WorkTabs from './WorkTabs.astro';
 import { getLangFromUrl } from '../i18n/utils';
@@ -69,8 +70,8 @@ const pinyiyeScreenshots = [
             <div class="catalog-art catalog-art-imprint">
               <ProductCarousel id="youcanup" title={copy.youcanup.name} screenshots={youcanupScreenshots} previous={copy.previous} next={copy.next} phoneFrame>
                 <span slot="intro" class="phone-stage phone-duo">
-                  <PhoneScreenshot src={youcanupGameplay} alt="" />
-                  <PhoneScreenshot src={youcanupMenu} alt="" />
+                  <PhoneScreenshot src={youcanupGameplay} alt={copy.youcanup.gameplayAlt} preview />
+                  <PhoneScreenshot src={youcanupMenu} alt={copy.youcanup.menuAlt} preview />
                 </span>
               </ProductCarousel>
             </div>
@@ -101,9 +102,9 @@ const pinyiyeScreenshots = [
             <div class="catalog-art catalog-art-imprint">
               <ProductCarousel id="pinyiye" title={copy.pinyiye.name} screenshots={pinyiyeScreenshots} previous={copy.previous} next={copy.next} phoneFrame>
                 <span slot="intro" class="phone-stage phone-trio">
-                  <PhoneScreenshot src={pinyiyeHome} alt="" />
-                  <PhoneScreenshot src={pinyiyeTemplates} alt="" />
-                  <PhoneScreenshot src={pinyiyeEditor} alt="" />
+                  <PhoneScreenshot src={pinyiyeHome} alt={copy.pinyiye.homeAlt} preview />
+                  <PhoneScreenshot src={pinyiyeTemplates} alt={copy.pinyiye.templatesAlt} preview />
+                  <PhoneScreenshot src={pinyiyeEditor} alt={copy.pinyiye.editorAlt} preview />
                 </span>
               </ProductCarousel>
             </div>
@@ -118,7 +119,7 @@ const pinyiyeScreenshots = [
             const preview = await getImage({ src: plugin.image, format: 'webp', quality: 94 });
             return (
               <article id={plugin.id} class="gallery-row catalog-row" data-category="plugins" aria-labelledby={`${plugin.id}-title`}>
-                <a class="catalog-art plugin-preview" href={preview.src} target="_blank" rel="noopener">
+                <a class="catalog-art plugin-preview" href={preview.src} aria-haspopup="dialog" aria-controls="work-preview">
                   <Image src={plugin.image} alt={plugin.alt} widths={[440, 800, 1100]} sizes="(max-width: 650px) 92vw, 52vw" format="webp" loading="lazy" />
                 </a>
                 <div class="gallery-info">
@@ -135,6 +136,11 @@ const pinyiyeScreenshots = [
           })}
         </div>
       </WorkTabs>
+      <ScreenshotDialog id="work-preview" label={galleryCopy[lang].preview} closeLabel={galleryCopy[lang].close}>
+        <div class="work-preview-viewport">
+          <img alt="" draggable="false" />
+        </div>
+      </ScreenshotDialog>
     </section>
 
   </main>
@@ -148,9 +154,28 @@ const pinyiyeScreenshots = [
 <script>
   import { initializeProductCarousels } from '../scripts/product-carousel';
   import { initializeImprintStrings } from '../scripts/imprint-strings';
+  import { initializeScreenshotZoom } from '../scripts/screenshot-zoom';
 
   initializeProductCarousels();
   initializeImprintStrings();
+
+  const workPreview = document.querySelector<HTMLDialogElement>('#work-preview')!;
+  initializeScreenshotZoom(workPreview);
+  const previewImage = workPreview.querySelector('img')!;
+  document.querySelector('#work-results')!.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>('a[aria-controls="work-preview"]');
+    if (!link) return;
+    event.preventDefault();
+    const phone = event.target.closest<HTMLElement>('[data-preview-src]');
+    previewImage.alt = (phone ?? link).querySelector('img')!.alt;
+    previewImage.src = phone?.dataset.previewSrc ?? link.href;
+    link.focus({ preventScroll: true });
+    workPreview.showModal();
+  });
+  workPreview.addEventListener('click', event => {
+    if (event.target === workPreview) workPreview.close();
+  });
 
   const codeDialog = document.querySelector<HTMLDialogElement>('#pinyiye-code')!;
   const codeTrigger = document.querySelector<HTMLButtonElement>('[data-mini-program]')!;

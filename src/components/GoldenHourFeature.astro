@@ -1,6 +1,7 @@
 ---
 import handset from '../assets/home/golden-handset.webp';
 import ProductCarousel from './ProductCarousel.astro';
+import ScreenshotDialog from './ScreenshotDialog.astro';
 import { galleryCopy, homeCopy } from '../i18n/home';
 import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
 import dashboard from '../assets/golden-hour/dashboard-demo.png';
@@ -49,17 +50,9 @@ const screenshots = [
   <div class="exhibit-credit"><p>{copy.statement}{lang.startsWith('zh-') && '。'}</p><small>© MogooStudio</small></div>
 </section>
 
-<dialog class="exhibit-preview" id="exhibit-preview" aria-label={product.name}>
-  <form method="dialog">
-    <button class="exhibit-close" type="submit" aria-label={labels.close} autofocus>
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false">
-        <circle cx="16" cy="16" r="15.5" stroke="currentColor" stroke-opacity=".48" />
-        <path d="m11 11 10 10m0-10L11 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-      </svg>
-    </button>
-  </form>
+<ScreenshotDialog id="exhibit-preview" label={product.name} closeLabel={labels.close}>
   <ProductCarousel id="golden-hour" title={product.name} screenshots={screenshots} previous={copy.previous} next={copy.next} paired />
-</dialog>
+</ScreenshotDialog>
 
 <script>
   const trigger = document.querySelector<HTMLAnchorElement>('[data-open-exhibit]')!;

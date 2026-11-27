@@ -28,7 +28,7 @@ const slides = await Promise.all(screenshots.map(async item => ({
   <div id={viewportId} class="carousel-viewport phone-art phone-art-screenshot">
     {slides.map((item, index) => (
       <Slide class="carousel-slide" role={paired ? 'group' : undefined} href={paired ? undefined : item.src.src}
-        target={paired ? undefined : '_blank'} rel={paired ? undefined : 'noopener'}
+        aria-haspopup={paired ? undefined : 'dialog'} aria-controls={paired ? undefined : 'work-preview'}
         aria-label={`${item.alt} · ${index + 1} / ${screenshots.length}`}
         aria-hidden={index !== 0 ? 'true' : undefined} tabindex={index === 0 ? 0 : -1}>
         <span class:list={['carousel-single', { 'phone-stage': phoneFrame }]}>

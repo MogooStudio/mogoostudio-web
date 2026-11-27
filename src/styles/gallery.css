@@ -129,7 +129,11 @@ body.playground[data-gallery] {
 [data-gallery] dialog { margin: auto; color: var(--gallery-text); border: 1px solid #6f705f; border-radius: 0; background: var(--gallery-surface); }
 [data-gallery] dialog::backdrop { background: #050604db; }
 body:has(.exhibit-preview[open]) { overflow: hidden; }
-.exhibit-preview { --preview-gutter: 48px; width: min(98vw,1200px); max-height: 96dvh; padding: 10px var(--preview-gutter) 18px; }
+.work-preview-viewport { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; overflow: clip; user-select: none; }
+.work-preview-viewport[data-zoomed] { cursor: grab; touch-action: none; }
+.work-preview-viewport[data-zoomed]:active { cursor: grabbing; }
+.work-preview-viewport img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; }
+.exhibit-preview { --preview-gutter: 48px; width: min(98vw,1200px); max-height: 96dvh; padding: 10px var(--preview-gutter) 18px; overflow: hidden; overscroll-behavior: contain; }
 .exhibit-preview form { display: flex; justify-content: flex-end; margin-inline-end: calc(10px - var(--preview-gutter)); padding-bottom: 4px; }
 .exhibit-close {
   position: relative; z-index: 3;
@@ -140,7 +144,7 @@ body:has(.exhibit-preview[open]) { overflow: hidden; }
 @media (hover: hover) {
   .exhibit-close:hover svg { background: #2a291f; color: var(--gallery-text); }
 }
-.exhibit-preview .product-carousel { max-width: none; height: min(72dvh,740px); aspect-ratio: auto; }
+.exhibit-preview .product-carousel, .exhibit-preview .work-preview-viewport { max-width: none; height: min(72dvh,740px,calc(96dvh - 78px)); aspect-ratio: auto; }
 .exhibit-preview .carousel-viewport { border-radius: 0; background: transparent; box-shadow: none; }
 .gallery-screenshot-pair { display: flex; height: 100%; align-items: center; justify-content: center; gap: 2%; }
 .gallery-screenshot-pair img:first-child { width: 22%; }

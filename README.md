@@ -7,7 +7,7 @@
 - 展示《你行你上啊 · YouCanUp》和《Minimalist Breakout》的介绍与游戏截图
 - 首页展示《你行你上啊》（YouCanUp）的图标、实机截图与简洁玩法介绍；iOS 版已上线，可从 [App Store 下载](https://apps.apple.com/us/app/youcanup/id6824439324)，产品介绍格式见 `AGENTS.md`
 - YouCanUp 与 Minimalist Breakout 的首页展示图及截图轮播已同步项目现有的新素材，来源与更新日期见下方“内容维护”
-- 首页以「薪动 · Golden Hour」开场。「更多作品」可按「全部」「游戏」「应用」「插件」筛选。在「全部」中，YouCanUp、Minimalist Breakout 和拼一页之后依次展示 Mogoo 常用提示词、Mogoo Codex Next 和 Mogoo Codex Git。插件截图可点击放大，产品入口链接到相应官网或 GitHub 项目页。
+- 首页以「薪动 · Golden Hour」开场。「更多作品」可按「全部」「游戏」「应用」「插件」筛选。在「全部」中，YouCanUp、Minimalist Breakout 和拼一页之后依次展示 Mogoo 常用提示词、Mogoo Codex Next 和 Mogoo Codex Git。点击作品截图可在本页预览。滚动鼠标滚轮可缩放截图，放大后可拖动查看细节。按 Esc、点击遮罩或关闭按钮即可返回作品列表。
 - 「薪动 · Golden Hour」保留六语独立落地页，分区介绍日常计薪、收入记录与分享、浏览器与安装、数据与隐私。桌面与手机采用对应的真实截图，按原比例显示。
 - 提供英语、简体中文、繁体中文、日语、韩语和西班牙语页面；英语为默认语言
 - 包含关于我们、技术支持、隐私政策和服务条款页面
