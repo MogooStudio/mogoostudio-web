@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import '../styles/playground.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -24,9 +24,20 @@ import pinyiyeHome from '../assets/pinyiye/home.png';
 import pinyiyeTemplates from '../assets/pinyiye/templates.png';
 import pinyiyeDetail from '../assets/pinyiye/detail.png';
 import pinyiyeCode from '../assets/pinyiye/wechat-code.jpg';
+import promptsPanel from '../assets/codex-plugins/prompts.png';
+import promptsIcon from '../assets/codex-plugins/prompts-icon.svg?url';
+import nextPanel from '../assets/codex-plugins/next.jpg';
+import nextIcon from '../assets/codex-plugins/next-icon.svg?url';
+import gitPanel from '../assets/codex-plugins/git.png';
+import gitIcon from '../assets/codex-plugins/git-icon.svg?url';
 
 const lang = getLangFromUrl(Astro.url);
 const copy = homeCopy[lang];
+const plugins = [
+  { id: 'mogoo-codex-prompts', name: copy.plugins.promptsName, description: copy.plugins.prompts, alt: copy.plugins.promptsAlt, image: promptsPanel, icon: promptsIcon, href: 'https://mogoostudio.github.io/mogoo-codex-prompts/' },
+  { id: 'mogoo-codex-next', name: 'Mogoo Codex Next', description: copy.plugins.next, alt: copy.plugins.nextAlt, image: nextPanel, icon: nextIcon, href: 'https://github.com/MogooStudio/mogoo-codex-next' },
+  { id: 'mogoo-codex-git', name: 'Mogoo Codex Git', description: copy.plugins.git, alt: copy.plugins.gitAlt, image: gitPanel, icon: gitIcon, href: 'https://mogoostudio.github.io/mogoo-codex-git/' },
+];
 const screenshots = import.meta.glob<{ default: ImageMetadata }>('../assets/screenshots/minimalist-breakout/*.png', { eager: true });
 const games = [
   { id: 'minimalist-breakout', title: 'Minimalist Breakout', description: copy.breakout, platform: 'iOS', available: true, screenshots: Object.entries(screenshots).filter(([path]) => path.includes('/minimalist-breakout/')).sort(([a], [b]) => a.localeCompare(b)).map(([, image]) => image.default) },
@@ -103,6 +114,25 @@ const pinyiyeScreenshots = [
               <button type="button" class="gallery-action" data-mini-program aria-haspopup="dialog" aria-controls="pinyiye-code">{copy.pinyiye.open}</button>
             </div>
           </article>
+          {plugins.map(async plugin => {
+            const preview = await getImage({ src: plugin.image, format: 'webp', quality: 94 });
+            return (
+              <article id={plugin.id} class="gallery-row catalog-row" data-category="plugins" aria-labelledby={`${plugin.id}-title`}>
+                <a class="catalog-art plugin-preview" href={preview.src} target="_blank" rel="noopener">
+                  <Image src={plugin.image} alt={plugin.alt} widths={[440, 800, 1100]} sizes="(max-width: 650px) 92vw, 52vw" format="webp" loading="lazy" />
+                </a>
+                <div class="gallery-info">
+                  <div class="gallery-title">
+                    <img src={plugin.icon} width="46" height="46" alt="" loading="lazy" />
+                    <h3 id={`${plugin.id}-title`}>{plugin.name}</h3>
+                  </div>
+                  <p>{plugin.description}</p>
+                  <div class="gallery-meta"><span>{copy.plugins.type} · Codex</span><span class="gallery-status">{copy.available}</span></div>
+                  <a class="gallery-action" href={plugin.href}>{copy.plugins.open}</a>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </WorkTabs>
     </section>

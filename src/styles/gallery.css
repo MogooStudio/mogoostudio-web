@@ -107,6 +107,8 @@ body.playground[data-gallery] {
 .catalog-art-imprint, .catalog-art-imprint .carousel-slide, .catalog-art-imprint .carousel-arrow { cursor: default; }
 .catalog-art-imprint .carousel-arrow:enabled .carousel-arrow-icon { cursor: pointer; }
 .catalog-art .carousel-intro { inset: 0 4%; }
+.catalog-art.plugin-preview { height: auto; aspect-ratio: 16 / 10; padding: 4%; cursor: zoom-in; }
+.plugin-preview img { width: 100%; height: 100%; object-fit: contain; }
 .catalog-art .phone-stage { display: grid; width: 100%; height: 100%; place-items: center; container-type: size; }
 .phone-stage > .phone-shell { grid-area: 1 / 1; }
 .phone-trio > :nth-child(-n+2) { --screen-width: 32cqw; --screen-height: 73cqh; }

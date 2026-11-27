@@ -1,5 +1,5 @@
 ---
-const categories = ['all', 'games', 'apps'] as const;
+const categories = ['all', 'games', 'apps', 'plugins'] as const;
 
 interface Props {
   labels: Record<(typeof categories)[number], string>;
@@ -141,6 +141,13 @@ const { labels } = Astro.props;
   }
 
   .work-tabs button:focus-visible { outline-offset: 2px; }
+
+  @media (max-width: 440px) {
+    .work-tabs button {
+      min-width: 0;
+      padding-inline: clamp(5px, 2vw, 9px);
+    }
+  }
 
   @media (hover: hover) {
     .work-tabs button[aria-selected='false']:hover { background: var(--gallery-surface); color: var(--gallery-text); }
